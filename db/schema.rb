@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171004154050) do
+ActiveRecord::Schema.define(version: 20171005090440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 20171004154050) do
     t.string "street2"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_apartments_on_user_id"
   end
 
   create_table "bookings", force: :cascade do |t|
@@ -81,12 +83,13 @@ ActiveRecord::Schema.define(version: 20171004154050) do
     t.bigint "profile_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.index ["characteristic_id"], name: "index_profile_characteristics_on_characteristic_id"
     t.index ["profile_id"], name: "index_profile_characteristics_on_profile_id"
+    t.index ["user_id"], name: "index_profile_characteristics_on_user_id"
   end
 
   create_table "profiles", force: :cascade do |t|
-    t.string "type"
     t.string "username"
     t.string "first_name"
     t.string "last_name"
@@ -97,6 +100,9 @@ ActiveRecord::Schema.define(version: 20171004154050) do
     t.string "short_description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.string "profile_type"
+    t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -104,6 +110,10 @@ ActiveRecord::Schema.define(version: 20171004154050) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "for_user_id"
+    t.bigint "by_user_id"
+    t.index ["by_user_id"], name: "index_reviews_on_by_user_id"
+    t.index ["for_user_id"], name: "index_reviews_on_for_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -125,10 +135,15 @@ ActiveRecord::Schema.define(version: 20171004154050) do
 
   add_foreign_key "apartment_amenities", "amenities"
   add_foreign_key "apartment_amenities", "apartments"
+  add_foreign_key "apartments", "users"
   add_foreign_key "bookings", "apartments"
   add_foreign_key "bookings", "users"
   add_foreign_key "messages", "bookings"
   add_foreign_key "messages", "users"
   add_foreign_key "profile_characteristics", "characteristics"
   add_foreign_key "profile_characteristics", "profiles"
+  add_foreign_key "profile_characteristics", "users"
+  add_foreign_key "profiles", "users"
+  add_foreign_key "reviews", "users", column: "by_user_id"
+  add_foreign_key "reviews", "users", column: "for_user_id"
 end

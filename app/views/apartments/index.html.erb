@@ -1,0 +1,7 @@
+<h1>Apartments#index</h1>
+<ul>
+  <%= @apartments.each do |apartment| %>
+    <li> <p><%= apartment.name %> in <%= apartment.city %></p></li>
+    <% fail %>
+  <% end %>
+</ul>

@@ -10,7 +10,6 @@ class CreateProfiles < ActiveRecord::Migration[5.1]
       t.string :gender
       t.string :detailed_description
       t.string :short_description
-
       t.timestamps
     end
   end

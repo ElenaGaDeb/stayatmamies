@@ -23,9 +23,11 @@ profile1 = Profile.create!(user: u1,
   detailed_description: "je m'appelle toto, j'habite à Melbourne et j'aime voyager",
   short_description: "Toto cherche appartement"
 )
+
 puts "profile created"
 p profile1
 appart1 = Apartment.create!(
+  user: u1,
   name: 'sunny beedroom in Paris',
   description: 'appartement dans paris cherche jeune fille calme',
   deal: '3 soirs de libres par semaine + marché dimanche',

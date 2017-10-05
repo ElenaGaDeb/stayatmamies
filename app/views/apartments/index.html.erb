@@ -1,0 +1,6 @@
+<h1>Apartments#index</h1>
+<ul>
+  <% @apartments.each do |apartment| %>
+  <%= link_to "#{apartment.name}", apartment_path(apartment) %>
+  <% end %>
+</ul>

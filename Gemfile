@@ -18,6 +18,8 @@ gem 'jquery-rails'
 gem 'sass-rails'
 gem 'simple_form'
 gem 'uglifier'
+# for simple form to render form select
+gem 'country_select'
 
 group :development, :test do
   gem 'pry-byebug'

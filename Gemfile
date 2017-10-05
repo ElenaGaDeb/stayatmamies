@@ -9,6 +9,7 @@ gem 'rails', '5.1.4'
 gem 'redis'
 gem 'webpacker', '~> 3.0'
 gem 'devise'
+gem 'omniauth-facebook'
 
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass'

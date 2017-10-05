@@ -6,12 +6,14 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-u1 = User.new(
+u1 = User.create!(
   email: "mamie@edhec.edu",
   password: "mamieedhec"
 )
-profile1 = Profile.new(user: u1,
-  type: "student",
+puts "user created"
+p u1
+profile1 = Profile.create!(user: u1,
+  profile_type: "student",
   username: "totolebon",
   first_name: "toto",
   last_name: "lebon",
@@ -21,7 +23,12 @@ profile1 = Profile.new(user: u1,
   detailed_description: "je m'appelle toto, j'habite à Melbourne et j'aime voyager",
   short_description: "Toto cherche appartement"
 )
-appart1 = Apartment.new(name: 'sunny beedroom in Paris',
+
+puts "profile created"
+p profile1
+appart1 = Apartment.create!(
+  user: u1,
+  name: 'sunny beedroom in Paris',
   description: 'appartement dans paris cherche jeune fille calme',
   deal: '3 soirs de libres par semaine + marché dimanche',
   street: 'rue Freycinet',

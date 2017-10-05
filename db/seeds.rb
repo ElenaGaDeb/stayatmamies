@@ -18,7 +18,7 @@ profile1 = Profile.new(user: u1,
   age: 23,
   city_from: "Melbourne",
   gender: "male",
-  detailed_description: "je m'appelle toto, j'habite à Melbourne et j'aime voyager"
+  detailed_description: "je m'appelle toto, j'habite à Melbourne et j'aime voyager",
   short_description: "Toto cherche appartement"
 )
 appart1 = Apartment.new(name: 'sunny beedroom in Paris',

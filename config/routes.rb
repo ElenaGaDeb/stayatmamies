@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'profiles/show'
+
   resources :apartments, only: [:show, :index, :new, :create]
 
   devise_for :users,

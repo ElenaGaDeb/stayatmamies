@@ -12,7 +12,7 @@ class ApartmentsController < ApplicationController
   end
 
   def create
-    @apartment = Cocktail.new(cocktail_params)
+    @apartment = Apartment.new(apartment_params)
     if @apartment.save!
       redirect_to apartment_path(@apartment)
     else
@@ -22,6 +22,17 @@ class ApartmentsController < ApplicationController
 
   private
   def apartment_params
-    params.require(:apartment).permit()
+    params.require(:apartment).permit(
+      :user,
+      :name,
+      :description,
+      :deal,
+      :street,
+      :city,
+      :zip_code,
+      :country,
+      :bedrooms,
+      :bathrooms,
+      :street2)
   end
 end

@@ -83,3 +83,4 @@ production:
   database: stayatmamies_production
   username: stayatmamies
   password: <%= ENV['STAYATMAMIES_DATABASE_PASSWORD'] %>
+

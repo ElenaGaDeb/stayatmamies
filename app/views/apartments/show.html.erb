@@ -1,2 +1,4 @@
-<h1>Apartments#show</h1>
-<p>Find me in app/views/apartments/show.html.erb</p>
+<p>apartment name : <%= @apartment.name %></p>
+<p>description: <%= @apartment.description %></p>
+<p>owner: <%= @apartment.user.profile.first_name %></p>
+<%= link_to "back to list", apartments_path %>

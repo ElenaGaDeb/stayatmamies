@@ -1,11 +1,5 @@
 Rails.application.routes.draw do
-  get 'apartments/index'
-
-  get 'apartments/show'
-
-  get 'apartments/new'
-
-  post 'apartments/new'
+  resources :apartments, only: [:show, :index, :new, :create]
 
   devise_for :users,
     controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }

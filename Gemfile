@@ -10,6 +10,7 @@ gem 'redis'
 gem 'webpacker', '~> 3.0'
 gem 'devise'
 gem 'omniauth-facebook'
+gem "geocoder"
 
 gem 'autoprefixer-rails'
 gem 'bootstrap', '~> 4.0.0.beta'

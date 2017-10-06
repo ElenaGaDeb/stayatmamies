@@ -6,11 +6,8 @@ class ApartmentsController < ApplicationController
   end
 
   def show
-    @livingroom_am = @apartment.amenities.where(category:'livingroom')
-    @bedroom_am = @apartment.amenities.where(category:'bedroom')
-    @kitchen_am = @apartment.amenities.where(category:'kitchen')
-    @bathroom_am = @apartment.amenities.where(category:'bathroom')
-    @other_am = @apartment.amenities.where(category:'other')
+    @amentities = @apartment.amenities.group_by { |a| a.category }
+    # need to work on view
   end
 
   def new
@@ -38,10 +35,7 @@ class ApartmentsController < ApplicationController
     end
   end
 
-  def destroy
-    @apartment.destroy
-    redirect_to apartments_path
-  end
+
 
   private
 

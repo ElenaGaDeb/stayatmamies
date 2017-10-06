@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>TODO</title>
   <meta name="description" content="">
   <meta name="author" content="HtmlCoder">
   <meta name="copyright" content="HtmlCoder">
@@ -17,6 +16,9 @@
   <%= csrf_meta_tags %>
   <%= action_cable_meta_tag %>
   <%= stylesheet_link_tag 'application', media: 'all' %>
+
+   <title><%= yield(:title_tag).blank? ? "Stay at Mamie's" : yield(:title_tag) %></title>
+
 </head>
 <body>
 <div class="sticky-wrapper" style="height: 82px;">

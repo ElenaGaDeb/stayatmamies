@@ -7,7 +7,7 @@ class ReviewsController < ApplicationController
   def create
     @review = Review.new(review_params)
     @review.by_user_id = current_user_id
-    @profile = Profile.find(params[profile_id])
+    @profile = Profile.find(params[:profile_id])
     @review.for_user_id = @profile
     @review.save
     redirect_to user_path(@review)

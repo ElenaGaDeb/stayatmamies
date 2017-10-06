@@ -1,24 +1,42 @@
 class ProfilesController < ApplicationController
+  before_action :set_profile, only: [:show, :edit, :update]
+
   def new
+    @user = current_user
     @profile = Profile.new
   end
 
   def create
-    @profile = Profile.new(profile_params)
-    @profile.save
+    @profile = current_user.build_profile(profile_params)
+    if @profile.save
+      redirect_to profile_path(@profile)
+    else
+     render :new
+    end
+  end
+
+  def edit
+
   end
 
   def update
-    @profile = Profile.find(params[:profile_id])
-    @profile.update(profile_params)
+    if @profile.update(profile_params)
+        #redirect_to @profile_path(@profile)
+    else
+      render :edit
+    end
   end
 
   def show
-    @profile = Profile.find(params[:profile_id])
   end
 
   private
+
+  def set_profile
+    @profile = current_user.profile || current_user.build_profile
+  end
+
   def profile_params
-    params.require(:profile).permit(:username, :type, :first_name, :last_name)
+    params.require(:profile).permit(:username, :first_name, :age, :gender, :last_name, :profile_type, :short_description, :detailed_description, :city_from)
   end
 end

@@ -1,5 +1,6 @@
 class ApartmentsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :set_apartment, only: [:show, :edit, :update, :destroy]
   def index
     @apartments = Apartment.all
   end
@@ -14,6 +15,7 @@ class ApartmentsController < ApplicationController
 
   def create
     @apartment = Apartment.new(apartment_params)
+    @apartment.user = current_user
     if @apartment.save!
       redirect_to apartment_path(@apartment)
     else
@@ -21,7 +23,28 @@ class ApartmentsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @apartment.save!
+      redirect_to apartment_path(@apartment)
+    else
+      render :update
+    end
+  end
+
+  def destroy
+    @apartment.destroy
+    redirect_to apartments_path
+  end
+
   private
+
+  def set_apartment
+    @apartment = Apartment.find(params[:id])
+  end
+
   def apartment_params
     params.require(:apartment).permit(
       :user,

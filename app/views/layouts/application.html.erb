@@ -4,16 +4,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>TODO</title>
+  <meta name="description" content="">
+  <meta name="author" content="HtmlCoder">
+  <meta name="copyright" content="HtmlCoder">
+  <meta name="generator" content="Documenter v2.0 http://rxa.li/documenter">
+  <meta name="date" content="2014-07-20T00:00:00+02:00">
+
+  <link rel="stylesheet" href="theme/js/google-code-prettify/prettify.css" media="screen">
+
   <%= csrf_meta_tags %>
   <%= action_cable_meta_tag %>
   <%= stylesheet_link_tag 'application', media: 'all' %>
 </head>
 <body>
-<%= render 'shared/navbar' %>
+  <%= render 'shared/navbar' %>
   <%= render 'shared/flashes' %>
   <%= yield %>
+  <%= render 'shared/footer' %>
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
+
   <%= javascript_include_tag 'application' %>
+  <script src="theme/js/google-code-prettify/prettify.js"></script>
+  <script src="theme/js/jquery.js"></script>
+  <script src="theme/js/jquery.scrollTo.js"></script>
+  <script src="theme/js/jquery.easing.js"></script>
+  <script>document.createElement('section');var duration='500',easing='swing';</script>
+  <script src="theme/js/script.js"></script>
 </body>
 </html>

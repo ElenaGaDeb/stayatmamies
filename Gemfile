@@ -12,12 +12,14 @@ gem 'devise'
 gem 'omniauth-facebook'
 
 gem 'autoprefixer-rails'
-gem 'bootstrap-sass'
+gem 'bootstrap', '~> 4.0.0.beta'
 gem 'font-awesome-sass'
 gem 'jquery-rails'
 gem 'sass-rails'
 gem 'simple_form'
 gem 'uglifier'
+# for simple form to render form select
+gem 'country_select'
 
 group :development, :test do
   gem 'pry-byebug'

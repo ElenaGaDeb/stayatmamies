@@ -12,3 +12,30 @@
 @import "layouts/index";
 @import "components/index";
 @import "pages/index";
+
+html, body {
+    height: 100%;
+}
+body {
+    margin:0px;
+    padding: 0px;
+}
+.sticky-wrapper {
+    height: auto;
+    margin: 0 auto -80px; /* footer height + space */
+    min-height: 100%;
+    padding: 0 0 80px; /* footer height + space */
+    box-sizing: border-box;
+    overflow: auto;
+}
+#footer {
+    height: 60px;  /* footer height */
+    padding-top: 20px;
+    display: block;
+    margin-top: 20px; /* space between content and footer */
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+}
+
+

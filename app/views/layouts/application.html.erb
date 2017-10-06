@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>TODO</title>
   <meta name="description" content="">
   <meta name="author" content="HtmlCoder">
   <meta name="copyright" content="HtmlCoder">
@@ -11,25 +10,32 @@
   <meta name="date" content="2014-07-20T00:00:00+02:00">
 
   <link rel="stylesheet" href="theme/js/google-code-prettify/prettify.css" media="screen">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
 
   <%= csrf_meta_tags %>
   <%= action_cable_meta_tag %>
   <%= stylesheet_link_tag 'application', media: 'all' %>
+
+   <title><%= yield(:title_tag).blank? ? "Stay at Mamie's" : yield(:title_tag) %></title>
+
 </head>
 <body>
+<div class="sticky-wrapper" style="height: 82px;">
   <%= render 'shared/navbar' %>
   <%= render 'shared/flashes' %>
   <%= yield %>
-  <%= render 'shared/footer' %>
+  </div>
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
+  <%= render 'shared/footer' %>
 
   <%= javascript_include_tag 'application' %>
-  <script src="theme/js/google-code-prettify/prettify.js"></script>
-  <script src="theme/js/jquery.js"></script>
-  <script src="theme/js/jquery.scrollTo.js"></script>
-  <script src="theme/js/jquery.easing.js"></script>
+  <script src="/theme/js/google-code-prettify/prettify.js"></script>
+  <script src="/theme/js/jquery.js"></script>
+  <script src="/theme/js/jquery.scrollTo.js"></script>
+  <script src="/theme/js/jquery.easing.js"></script>
   <script>document.createElement('section');var duration='500',easing='swing';</script>
-  <script src="theme/js/script.js"></script>
+  <script src="/theme/js/script.js"></script>
 </body>
 </html>

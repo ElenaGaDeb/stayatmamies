@@ -1,4 +1,4 @@
-<header class="header fixed fixed-desktop clearfix">
+<header class="header fixed fixed-desktop clearfix transparent-header-on">
   <div class="container">
     <div class="row">
       <div class="col-md-auto hidden-md-down pl-3">
@@ -10,10 +10,9 @@
           <div id="logo" class="logo">
             <!--  -->
             <%= link_to root_path do %>
-            <% image_tag "logo.png", :width => 100, :height => 100 %>
+            <% image_tag "logo.png", id: "logo-lg" %>
             <% end %>
           </div>
-
         </div>
         <!-- header-first end -->
 
@@ -34,50 +33,69 @@
           <div class="main-navigation main-navigation--mega-menu  animated">
             <nav class="navbar navbar-expand-lg navbar-light p-0">
               <!-- main-menu -->
-              <ul class="navbar-nav ml-xl-auto">
+              <div class="navbar-brand clearfix hidden-lg-up">
 
-                <!-- mega-menu start -->
-                <li class="nav-item mega-menu mega-menu--wide">
-                  <%= link_to "Home", root_path, class: "nav-link" %>
-                </li>
-
-                <% if user_signed_in? %>
-                <li class="nav-item mega-menu mega-menu--wide">
-                  <%= link_to "Messages", "#", class: "nav-link" %>
-                </li>
-
-                <li class="nav-item mega-menu mega-menu--wide">
-                  <div class="dropdown">
-                    <% avatar_url = current_user.facebook_picture_url || "http://placehold.it/30x30" %>
-                    <%= image_tag avatar_url, class: "nav-link rounded-circle dropdown-toggle", "data-toggle" => "dropdown" %>
-                    <ul class="dropdown-menu dropdown-menu-right">
-                      <li>
-                        <%= link_to "#" do %>
-                        <i class="fa fa-user"></i> <%= t("profile", default: "Profile") %>
-                        <% end %>
-                      </li>
-                      <li>
-                        <%= link_to "#" do %>
-                        <i class="fa fa-home"></i>  <%= t("profile", default: "Home") %>
-                        <% end %>
-                      </li>
-                      <li>
-                        <%= link_to destroy_user_session_path, method: :delete do %>
-                        <i class="fa fa-sign-out"></i>  <%= t("sign_out", default: "Log out") %>
-                        <% end %>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-                <% else %>
-
-                <!-- Login link (when logged out) -->
-                <li class="nav-item mega-menu mega-menu--wide">
-                <%= link_to t("sign_in", default: "Login"), new_user_session_path, class: "nav-link" %>
-                </li>
-                <% end %>
-
-</ul>
+                <!-- logo -->
+                <div id="logo-mobile" class="logo">
+                  <%= link_to root_path do %>
+                  <% image_tag "logo.png", :width => 150, :height => 150 %>
+                  <% end %>
+                </div>
               </div>
-            </header>
+
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse-1" aria-controls="navbar-collapse-1" aria-expanded="true" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+
+
+              <div class="navbar-collapse collapse show" id="navbar-collapse-1" style>
+
+                <ul class="navbar-nav ml-xl-auto">
+
+
+                  <!-- mega-menu start -->
+                  <li class="nav-item mega-menu mega-menu--wide">
+                    <%= link_to "Home", root_path, class: "nav-link" %>
+                  </li>
+
+                  <% if user_signed_in? %>
+                  <li class="nav-item mega-menu mega-menu--wide">
+                    <%= link_to "Messages", "#", class: "nav-link" %>
+                  </li>
+
+                  <li class="nav-item mega-menu mega-menu--wide">
+                    <div class="dropdown">
+                      <% avatar_url = current_user.facebook_picture_url || "http://placehold.it/30x30" %>
+                      <%= image_tag avatar_url, class: "avatar dropdown-toggle", "data-toggle" => "dropdown" %>
+                      <ul class="dropdown-menu dropdown-menu-right">
+                        <li>
+                          <%= link_to "#" do %>
+                          <i class="fa fa-user"></i> <%= t("profile", default: "Profile") %>
+                          <% end %>
+                        </li>
+                        <li>
+                          <%= link_to destroy_user_session_path, method: :delete do %>
+                          <i class="fa fa-sign-out"></i>  <%= t("sign_out", default: "Log out") %>
+                          <% end %>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                  <% else %>
+
+                  <!-- Login link (when logged out) -->
+                  <li class="nav-item mega-menu mega-menu--wide">
+                    <%= link_to "I want to become a host", new_user_registration_path, class: "nav-link" %>
+                  </li>
+                  <li class="nav-item mega-menu mega-menu--wide">
+                    <%= link_to t("sign_in", default: "Login"), new_user_session_path, class: "nav-link" %>
+                  </li>
+                  <% end %>
+
+                </ul>
+              </div>
+            </nav>
+          </div>
+
+        </header>
 

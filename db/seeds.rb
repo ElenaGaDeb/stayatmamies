@@ -40,4 +40,32 @@ appart1 = Apartment.create!(
   street2: 'rdc'
 )
 
+bedroom = ["Bed", "Desk", "Bedside table", "Table lamp", "Pillow", "Blanket" "Window", "Air conditioning" "Heating"]
+bathroom = ["Bath tub", "Shower", "Mirror", "Hair dryer" "Towel"]
+kitchen = ["Electric hobs", "Gas hobs", "Oven", "Microwave", "Coffee machine", 'Dishwasher']
+other = ["iron/iron board" "Internet"]
+["TV", "Sofa", "Fireplace"].each do | amentity |
+  Amenity.new(category: "livingroom", name: amentity)
+end
+
+bedroom.each do | amentity |
+  Amenity.new(category: "bedroom", name: amentity)
+end
+
+bathroom.each do | amentity |
+  Amenity.new(category: "bathroom", name: amentity)
+end
+
+kitchen.each do | amentity |
+  Amenity.new(category: "kitchen", name: amentity)
+end
+
+other.each do | amentity |
+  Amenity.new(category: "other", name: amentity)
+end
+
+
+
+
+
 

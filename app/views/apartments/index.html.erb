@@ -1,4 +1,4 @@
-<h1>Apartments#index</h1>
+<!-- <h1>Apartments#index</h1>
 <ul>
   <% @apartments.each do |apartment| %>
     <li>
@@ -6,4 +6,80 @@
     </li>
   <% end %>
 </ul>
-<%= link_to "add new apartment", new_apartment_path %>
+<%= link_to "add new apartment", new_apartment_path %> -->
+
+<div class="banner banner-big-height dark-translucent-bg padding-bottom-clear" style="background-image:url(https://unsplash.it/1298/550?image=1008);background-position: 50% 32%;">
+  <div class="container">
+    <div class="row justify-content-lg-center">
+      <div class="col-lg-8 text-center pv-20">
+        <h1 class="title">Stay at Mamie's</h1>
+        <div class="separator mt-10"></div>
+        <p class="text-center">All over the world, there are young people who want to travel but are too poor to do so, and older people who just want someone to spend time with them. With Stay At Mamie's, you don't need to pay rent, you just have to spend a little time with an awesome person who will welcome you to their house. Start looking for your next best friend! </p>
+      </div>
+    </div>
+  </div>
+  <!-- section start -->
+  <!-- ================ -->
+  <div class="dark-translucent-bg section">
+    <div class="container">
+      <!-- filters start -->
+      <div class="sorting-filters text-center mb-20 d-flex justify-content-center">
+        <form class="form-inline">
+          <div class="form-group">
+            <label>From:</label>
+            <input type="date" class="form-control">
+          </div>
+          <div class="form-group ml-1">
+            <label>To:</label>
+            <input type="date" class="form-control">
+          </div>
+          <div class="form-group ml-1">
+            <label>City:</label>
+            <input type="string" class="form-control">
+          </div>
+        </form>
+      </div>
+      <!-- filters end -->
+    </div>
+  </div>
+  <!-- section end -->
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <form class="text-center">
+          <button type="submit" class="btn btn-lg btn-gray-transparent btn-animated margin-clear">Search <i class="fa fa-check"></i></button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+<section class="light-gray-bg pv-40 border-clear">
+  <div class="container">
+    <div class="row justify-content-lg-center">
+      <div class="col-lg-8">
+        <h2 class="text-center title">The <strong>Apartments</strong></h2>
+        <div class="separator"></div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+     <% @apartments.each do |apartment| %>
+     <div class="col-md-3">
+      <div class="image-box style-2 mb-20">
+        <div class="overlay-container overlay-visible">
+          <img src="url('https://unsplash.it/1298/550?image=1008')">
+          <%= link_to "#{apartment.name}", apartment_path(apartment) %>
+          <div class="overlay-bottom">
+            <div class="text">
+              <p class="lead margin-clear text-left mobile-visible">apartment.name</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+</section>

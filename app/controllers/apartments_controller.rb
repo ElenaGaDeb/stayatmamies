@@ -27,7 +27,7 @@ class ApartmentsController < ApplicationController
   end
 
   def update
-    if @apartment.save!
+    if @apartment.update!(apartment_params)
       redirect_to apartment_path(@apartment)
     else
       render :update

@@ -1,7 +1,13 @@
+<% content_for(:title_tag) do %>
+<%= @apartment.name %>
+<% end %>
+
+
+
 <p>apartment name : <%= @apartment.name %></p>
 <% if current_user.id == @apartment.user.id %>
-  <%= link_to "update apartment information", edit_apartment_path(@apartment) %>
-  <br>
+<%= link_to "update apartment information", edit_apartment_path(@apartment) %>
+<br>
 <% end %>
 <br>
 <p>description: <%= @apartment.description %></p>

@@ -7,6 +7,9 @@
   <% end %>
 </ul>
 <%= link_to "add new apartment", new_apartment_path %> -->
+<% content_for(:title_tag) do %>
+   <%= "The Apartments" %>
+ <% end %>
 
 <div class="banner banner-big-height dark-translucent-bg padding-bottom-clear" style="background-image:url(https://unsplash.it/1298/550?image=1008);background-position: 50% 32%;">
   <div class="container">

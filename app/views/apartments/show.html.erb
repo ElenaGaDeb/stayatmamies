@@ -1,4 +1,4 @@
-<p>apartment name : <%= @apartment.name %></p>
+<h1>apartment name : <%= @apartment.name %></h1>
 <% if current_user %>
   <% if current_user.id == @apartment.user.id %>
     <%= link_to "update apartment information", edit_apartment_path(@apartment) %>
@@ -6,7 +6,53 @@
   <% end %>
 <% end %>
 <br>
-<p>description: <%= @apartment.description %></p>
-<p>owner: <%= @apartment.user.profile.first_name %></p>
+<h2>description:</h2>
+<p><%= @apartment.description %></p>
+<h2>owner:</h2>
+<p><%= @apartment.user.profile.first_name %></p>
 <%= link_to "back to list", apartments_path %>
-<br>
+
+<div class="room">
+  <h3>Living Room</h3>
+  <ul>
+    <% @livingroom_am.each do |amentity| %>
+      <li><%= amentity.name %></li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="room">
+  <h3>Bedroom</h3>
+  <ul>
+    <% @bedroom_am.each do |amentity| %>
+      <li><%= amentity.name %></li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="room">
+  <h3>Bathroom</h3>
+  <ul>
+    <% @bathroom_am.each do |amentity| %>
+      <li><%= amentity.name %></li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="room">
+  <h3>Kitchen</h3>
+  <ul>
+    <% @kitchen_am.each do |amentity| %>
+      <li><%= amentity.name %></li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="room">
+  <h3>Other</h3>
+  <ul>
+    <% @other_am.each do |amentity| %>
+      <li><%= amentity.name %></li>
+    <% end %>
+  </ul>
+</div>

@@ -6,7 +6,11 @@ class ApartmentsController < ApplicationController
   end
 
   def show
-    @apartment = Apartment.find(params[:id])
+    @livingroom_am = @apartment.amenities.where(category:'livingroom')
+    @bedroom_am = @apartment.amenities.where(category:'bedroom')
+    @kitchen_am = @apartment.amenities.where(category:'kitchen')
+    @bathroom_am = @apartment.amenities.where(category:'bathroom')
+    @other_am = @apartment.amenities.where(category:'other')
   end
 
   def new

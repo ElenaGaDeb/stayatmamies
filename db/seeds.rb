@@ -43,26 +43,33 @@ appart1 = Apartment.create!(
 bedroom = ["Bed", "Desk", "Bedside table", "Table lamp", "Pillow", "Blanket" "Window", "Air conditioning" "Heating"]
 bathroom = ["Bath tub", "Shower", "Mirror", "Hair dryer" "Towel"]
 kitchen = ["Electric hobs", "Gas hobs", "Oven", "Microwave", "Coffee machine", 'Dishwasher']
-other = ["iron/iron board" "Internet"]
-["TV", "Sofa", "Fireplace"].each do | amentity |
-  Amenity.new(category: "livingroom", name: amentity)
+other = ["iron/iron board", "Internet"]
+["TV", "Sofa", "Fireplace"].each do | amenity |
+  Amenity.create!(category: "livingroom", name: amenity)
 end
 
-bedroom.each do | amentity |
-  Amenity.new(category: "bedroom", name: amentity)
+bedroom.each do | amenity |
+  Amenity.create!(category: "bedroom", name: amenity)
 end
 
-bathroom.each do | amentity |
-  Amenity.new(category: "bathroom", name: amentity)
+bathroom.each do | amenity |
+  Amenity.create!(category: "bathroom", name: amenity)
 end
 
-kitchen.each do | amentity |
-  Amenity.new(category: "kitchen", name: amentity)
+kitchen.each do | amenity |
+  Amenity.create!(category: "kitchen", name: amenity)
 end
 
-other.each do | amentity |
-  Amenity.new(category: "other", name: amentity)
+other.each do | amenity |
+  Amenity.create!(category: "other", name: amenity)
 end
+
+time = 1
+22.times do |x|
+  ApartmentAmenity.create!(apartment:appart1, amenity: Amenity.find(time))
+  time += 1
+end
+
 
 
 

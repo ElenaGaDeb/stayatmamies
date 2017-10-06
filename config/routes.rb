@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
-  get 'reviews/index'
-
-  get 'reviews/new'
-
+  resources :profiles, except: [:destroy] do
+    resources :reviews, only: [:index, :create]
+  end
   resources :apartments, only: [:show, :index, :new, :create, :edit, :update]
   devise_for :users,
     controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }

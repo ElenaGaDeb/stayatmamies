@@ -1,12 +1,18 @@
 Rails.application.routes.draw do
+<<<<<<< HEAD
 
 
   resources :profiles, only: [:edit, :new, :show, :update, :create]
 
   resources :apartments, only: [:show, :index, :new, :create]
 
+=======
+  resources :apartments, only: [:show, :index, :new, :create, :edit, :update]
+>>>>>>> master
   devise_for :users,
     controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
-  root to: 'pages#home'
+  root to: 'apartments#index'
+
+  get "test", to: "pages#test"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

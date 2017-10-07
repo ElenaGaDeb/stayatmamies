@@ -6,10 +6,14 @@ class ReviewsController < ApplicationController
 
   def create
     @review = Review.new(review_params)
-    @profile = Profile.find(params[:profile_id])
+    @user = User.find(params[:user_id])
     @review.by_user_id = current_user.id
-    @review.for_user_id = @profile.id
-    @review.save
+    @review.for_user_id = @user.id
+    if @review.save
+      redirect_to profile_path(@user.profile)
+    else
+     render :new
+    end
   end
 
   private
@@ -18,3 +22,5 @@ class ReviewsController < ApplicationController
     params.require(:review).permit(:rating, :content)
   end
 end
+
+# profile.user.reviews

@@ -42,7 +42,13 @@ GEM
     autoprefixer-rails (7.1.4.1)
       execjs
     bcrypt (3.1.11)
+    better_errors (2.3.0)
+      coderay (>= 1.0.0)
+      erubi (>= 1.0.0)
+      rack (>= 0.9.0)
     bindex (0.5.0)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
     bootstrap (4.0.0.beta)
       autoprefixer-rails (>= 6.0.3)
       popper_js (~> 1.11.1)
@@ -60,6 +66,7 @@ GEM
       countries (~> 2.0)
       sort_alphabetical (~> 1.0)
     crass (1.0.2)
+    debug_inspector (0.0.3)
     devise (4.3.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -229,6 +236,8 @@ PLATFORMS
 
 DEPENDENCIES
   autoprefixer-rails
+  better_errors
+  binding_of_caller
   bootstrap (~> 4.0.0.beta)
   country_select
   devise

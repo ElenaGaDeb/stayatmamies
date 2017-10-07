@@ -2,7 +2,12 @@
 <h3><%= @profile.short_description %></h3>
 <p><%= @profile.city_from %></p>
 <p><%= @profile.detailed_description %></p>
-<p><%= @profile.username %></p>
+
+<ul>
+  <% @reviews_for.each do |review| %>
+    <li><%= review.content %> - <%= review.rating %> stars</li>
+  <% end %>
+</ul>
 
 <%= simple_form_for [@user, @review] do |f| %>
   <%= f.input :content %>

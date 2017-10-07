@@ -37,7 +37,9 @@ appart1 = Apartment.create!(
   country: 'France',
   bedrooms: 1,
   bathrooms: 1,
-  street2: 'rdc'
+  street2: 'rdc',
+  latitude: 48.8657932,
+  longitude: 2.297879,
 )
 
 u2 = User.create!(
@@ -70,7 +72,9 @@ appart2 = Apartment.create!(
   zip_code: 75007,
   country: 'France',
   bedrooms: 1,
-  bathrooms: 1
+  bathrooms: 1,
+  latitude: 48.8539424,
+  longitude: 2.3036154,
 )
 
 u3 = User.create!(

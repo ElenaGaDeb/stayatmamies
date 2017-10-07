@@ -17,20 +17,25 @@
   <%= action_cable_meta_tag %>
   <%= stylesheet_link_tag 'application', media: 'all' %>
 
-   <title><%= yield(:title_tag).blank? ? "Stay at Mamie's" : yield(:title_tag) %></title>
+  <title><%= yield(:title_tag).blank? ? "Stay at Mamie's" : yield(:title_tag) %></title>
 
 </head>
 <body>
-<div class="sticky-wrapper" style="height: 82px;">
+  <!--   <div class="sticky-wrapper" style="height: 82px;"> -->
   <%= render 'shared/navbar' %>
+  <!--   </div> -->
   <%= render 'shared/flashes' %>
   <%= yield %>
-  </div>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+  <%= javascript_include_tag "https://maps.google.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_API_BROWSER_KEY']}" %>
+  <%= javascript_include_tag "https://maps.google.com/maps/api/js" %>
+  <%= javascript_include_tag "https://cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/markerclusterer/src/markerclusterer_compiled.js" %>
+  <%= javascript_include_tag "https://cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js" %>
+  <%= javascript_include_tag 'application' %>
+  <%= yield(:after_js) %>
+
   <%= render 'shared/footer' %>
 
-  <%= javascript_include_tag 'application' %>
+
   <script src="/theme/js/google-code-prettify/prettify.js"></script>
   <script src="/theme/js/jquery.js"></script>
   <script src="/theme/js/jquery.scrollTo.js"></script>

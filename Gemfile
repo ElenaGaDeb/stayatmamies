@@ -10,6 +10,7 @@ gem 'redis'
 gem 'webpacker', '~> 3.0'
 gem 'devise'
 gem 'omniauth-facebook'
+gem "geocoder"
 
 gem 'autoprefixer-rails'
 gem 'bootstrap', '~> 4.0.0.beta'
@@ -21,6 +22,14 @@ gem 'country_select'
 gem 'uglifier'
 # for simple form to render form select
 gem 'country_select'
+gem "coffee-rails"
+gem "gmaps4rails"
+
+source 'https://rails-assets.org' do
+  gem "rails-assets-underscore"
+end
+
+
 
 group :development, :test do
   gem 'pry-byebug'

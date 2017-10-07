@@ -17,6 +17,7 @@ gem 'font-awesome-sass'
 gem 'jquery-rails'
 gem 'sass-rails'
 gem 'simple_form'
+gem 'country_select'
 gem 'uglifier'
 # for simple form to render form select
 gem 'country_select'

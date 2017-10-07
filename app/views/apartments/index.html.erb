@@ -7,6 +7,9 @@
   <% end %>
 </ul>
 <%= link_to "add new apartment", new_apartment_path %> -->
+<% content_for(:title_tag) do %>
+   <%= "The Apartments" %>
+ <% end %>
 
 <div class="banner banner-big-height dark-translucent-bg padding-bottom-clear" style="background-image:url(https://unsplash.it/1298/550?image=1008);background-position: 50% 32%;">
   <div class="container">
@@ -37,23 +40,16 @@
             <label>City:</label>
             <input type="string" class="form-control">
           </div>
+          <div class="form-group ml-1">
+          <button type="submit" class="btn btn-lg btn-success btn-animated">Search <i class="fa fa-check"></i></button>
+          </div>
         </form>
       </div>
       <!-- filters end -->
     </div>
   </div>
   <!-- section end -->
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <form class="text-center">
-          <button type="submit" class="btn btn-lg btn-gray-transparent btn-animated margin-clear">Search <i class="fa fa-check"></i></button>
-        </form>
-
-      </div>
-    </div>
   </div>
-</div>
 <section class="light-gray-bg pv-40 border-clear">
   <div class="container">
     <div class="row justify-content-lg-center">

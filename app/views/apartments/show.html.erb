@@ -1,9 +1,13 @@
-<h1>apartment name : <%= @apartment.name %></h1>
-<% if current_user %>
-  <% if current_user.id == @apartment.user.id %>
-    <%= link_to "update apartment information", edit_apartment_path(@apartment) %>
-    <br>
-  <% end %>
+<% content_for(:title_tag) do %>
+<%= @apartment.name %>
+<% end %>
+
+
+
+<p>apartment name : <%= @apartment.name %></p>
+<% if current_user.id == @apartment.user.id %>
+<%= link_to "update apartment information", edit_apartment_path(@apartment) %>
+<br>
 <% end %>
 <br>
 <h2>description:</h2>

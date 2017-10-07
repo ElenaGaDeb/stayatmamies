@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
+
+  resources :profiles, only: [:edit, :new, :show, :update, :create]
+
   resources :apartments, only: [:show, :index, :new, :create, :edit, :update]
+
+
   devise_for :users,
     controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   root to: 'apartments#index'

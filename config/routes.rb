@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :users do
-    resources :reviews, only: [:index, :create]
-  end
 
   resources :profiles, only: [:edit, :new, :show, :update, :create]
 
@@ -10,6 +7,10 @@ Rails.application.routes.draw do
 
   devise_for :users,
     controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+
+  resources :users do
+    resources :reviews, only: [:index, :create]
+  end
 
   root to: 'apartments#index'
 

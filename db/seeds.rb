@@ -10,22 +10,32 @@ u1 = User.create!(
   email: "mamie@edhec.edu",
   password: "mamieedhec"
 )
-puts "user created"
-p u1
+u2 = User.create!(
+  email: "toto@gmail.com",
+  password: "tototata"
+)
 profile1 = Profile.create!(user: u1,
+  profile_type: "host",
+  username: "nanny",
+  first_name: "nannyx",
+  last_name: "x",
+  age: 72,
+  city_from: "Paris",
+  gender: "female",
+  detailed_description: "je m'appelle nanny, j'habite à Melbourne et j'ai une chambre libre",
+  short_description: "nanny cherche student"
+)
+profile2 = Profile.create!(user: u2,
   profile_type: "student",
   username: "totolebon",
   first_name: "toto",
-  last_name: "lebon",
+  last_name: "tata",
   age: 23,
-  city_from: "Melbourne",
+  city_from: "Paris",
   gender: "male",
   detailed_description: "je m'appelle toto, j'habite à Melbourne et j'aime voyager",
   short_description: "Toto cherche appartement"
 )
-
-puts "profile created"
-p profile1
 appart1 = Apartment.create!(
   user: u1,
   name: 'sunny beedroom in Paris',
@@ -39,5 +49,3 @@ appart1 = Apartment.create!(
   bathrooms: 1,
   street2: 'rdc'
 )
-
-

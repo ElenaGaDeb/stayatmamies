@@ -28,6 +28,9 @@ class ProfilesController < ApplicationController
   end
 
   def show
+    @profile = Profile.find(params[:id])
+    @review = Review.new
+    @user = @profile.user
   end
 
   private

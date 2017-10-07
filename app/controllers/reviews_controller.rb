@@ -10,12 +10,6 @@ class ReviewsController < ApplicationController
     @review.by_user_id = current_user.id
     @review.for_user_id = @profile.id
     @review.save
-    # if params[:profile_id]
-    #   redirect_to profile_path(@profile)
-    # # ajouter form du côté student (profile#show)
-    # elsif params[:apartment_id]
-    #   redirect_to apartment_path(@apartment)
-    end
   end
 
   private

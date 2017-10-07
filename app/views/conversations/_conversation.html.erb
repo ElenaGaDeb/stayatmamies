@@ -1,0 +1,22 @@
+<li>
+  <div class='panel panel-default'
+  data-conversation-id='<% conversation_id %>'
+  id='<%= conversation.opposed_user(user).id%>'>
+    <div class= 'panel-heading'>
+      <%= link_to conversation.opposed_user(user).first_name, '', class: 'toggle-window' %>
+    </div>
+
+    <div class='panel-body' style='display: none;' id='pb<%= conversation.opposed_user(user).id%>'>
+      <div class='messages-list'>
+        <ul>
+          <%= render 'conversations/conversation_content', messages: conversation.messages, user: user %>
+        </ul>
+      </div>
+      <%= form_for [conversation, conversation.messages.new], remote: true do |f| %>
+          <%= f.hidden_field :user_id, value: user.id %>
+          <%= f.text_area :content, class: "form-control" %>
+          <%= f.submit "Send", class: "btn buton-profile" %>
+        <% end %>
+    </div>
+  </div>
+</li>

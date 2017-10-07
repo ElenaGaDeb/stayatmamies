@@ -20,7 +20,7 @@ profile1 = Profile.create!(
   age: 88,
   city_from: "Paris",
   gender: "female",
-  phone_number: 0600300040,
+  phone_number: '0600300040',
   country_from: "France",
   detailed_description: "My name is Elise and I love to hang out with young fellows",
   short_description: "Young at heart! "
@@ -54,7 +54,7 @@ profile2 = Profile.create!(
   age: 88,
   city_from: "Paris",
   gender: "female",
-  phone_number: 0610203040,
+  phone_number: '0610203040',
   country_from: "France",
   detailed_description: "Je suis Jeanne, et j'adore jouer au Scrabble!",
   short_description: "Looking for a Scrabble Partner"
@@ -70,7 +70,7 @@ appart2 = Apartment.create!(
   zip_code: 75007,
   country: 'France',
   bedrooms: 1,
-  bathrooms: 1,
+  bathrooms: 1
 )
 
 u3 = User.create!(
@@ -85,7 +85,28 @@ profile3 = Profile.create!(user: u3,
   last_name: "lebon",
   age: 23,
   city_from: "Melbourne",
+  country_from: "Australia",
   gender: "male",
+  phone_number: '0610807050',
   detailed_description: "My name is Toto, Inlive in Melbourne and want to travel the world! ",
   short_description: "Looking for an apartment in France!"
+)
+
+u4 = User.create!(
+  email: "alice@edhec.com",
+  password: "password"
+)
+
+profile3 = Profile.create!(user: u4,
+  profile_type: "student",
+  username: "alicewashington",
+  first_name: "alice",
+  last_name: "washington",
+  age: 21,
+  city_from: "Blacksburg",
+  country_from: "United States",
+  gender: "female",
+  phone_number: '5403851539',
+  detailed_description: "I am Alice from Blacksburg, VA (USA) and looking to live in Europe for a semester ",
+  short_description: "Looking for an apartment in Europe!"
 )

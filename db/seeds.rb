@@ -101,7 +101,7 @@ u4 = User.create!(
   password: "password"
 )
 
-profile3 = Profile.create!(user: u4,
+profile4 = Profile.create!(user: u4,
   profile_type: "student",
   username: "alicewashington",
   first_name: "alice",

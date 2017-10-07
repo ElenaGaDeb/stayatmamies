@@ -57,6 +57,8 @@ class ApartmentsController < ApplicationController
       :country,
       :bedrooms,
       :bathrooms,
-      :street2)
+      :street2,
+      :latitude,
+      :longitude)
   end
 end

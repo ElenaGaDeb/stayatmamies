@@ -8,9 +8,12 @@
         <div class="row">
           <div class="col-lg-8">
             <div class="footer-content">
-              <h2 class="title">More Info</h2>
-              <br>
-              <div class="logo-footer"><img id="logo-footer" src="images/logo_gold.png" alt=""></div>
+              <div class="logo-footer">
+                <!--  -->
+                <%= link_to root_path do %>
+                <% image_tag "logo.png", id: "logo-lg" %>
+                <% end %>
+              </div>
               <div class="row">
                 <div class="col-lg-6">
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus illo vel dolorum soluta consectetur doloribus sit. Delectus non tenetur odit dicta vitae debitis suscipit doloribus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed dolore fugit vitae quia dicta inventore reiciendis. Ipsa, aut voluptas quaerat.</p>

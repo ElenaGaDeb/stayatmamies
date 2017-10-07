@@ -21,6 +21,14 @@ gem 'simple_form'
 gem 'uglifier'
 # for simple form to render form select
 gem 'country_select'
+gem "coffee-rails"
+gem "gmaps4rails"
+
+source 'https://rails-assets.org' do
+  gem "rails-assets-underscore"
+end
+
+
 
 group :development, :test do
   gem 'pry-byebug'

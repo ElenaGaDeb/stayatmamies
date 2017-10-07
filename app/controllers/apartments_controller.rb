@@ -6,15 +6,17 @@ class ApartmentsController < ApplicationController
   end
 
   def show
-    @amentities = @apartment.amenities.group_by { |a| a.category }
+    @amenities = @apartment.amenities.group_by { |a| a.item_slug }
     # need to work on view
   end
 
   def new
     @apartment = Apartment.new
+    @apartment_amenities = ApartmentAmenity.new
   end
 
   def create
+    fail
     @apartment = Apartment.new(apartment_params)
     @apartment.user = current_user
     if @apartment.save!
@@ -25,6 +27,7 @@ class ApartmentsController < ApplicationController
   end
 
   def edit
+    @apartment_amenities = @apartment.amenities
   end
 
   def update
@@ -55,6 +58,7 @@ class ApartmentsController < ApplicationController
       :country,
       :bedrooms,
       :bathrooms,
-      :street2)
+      :street2,
+      :apartment_ids => [])
   end
 end

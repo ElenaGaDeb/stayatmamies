@@ -12,47 +12,17 @@
 <p><%= @apartment.user.profile.first_name %></p>
 <%= link_to "back to list", apartments_path %>
 
-<div class="room">
-  <h3>Living Room</h3>
-  <ul>
-    <% @livingroom_am.each do |amentity| %>
-      <li><%= amentity.name %></li>
-    <% end %>
-  </ul>
-</div>
+<% @amenities.each  do |category| %>
+  <div class="room">
+    <h3><%= category.first %></h3>
+    <ul>
+      <% category.last.each do |amenity| %>
+        <li><%= amenity.name %></li>
+      <%end %>
+    </ul>
+  </div>
+<% end %>
 
-<div class="room">
-  <h3>Bedroom</h3>
-  <ul>
-    <% @bedroom_am.each do |amentity| %>
-      <li><%= amentity.name %></li>
-    <% end %>
-  </ul>
-</div>
 
-<div class="room">
-  <h3>Bathroom</h3>
-  <ul>
-    <% @bathroom_am.each do |amentity| %>
-      <li><%= amentity.name %></li>
-    <% end %>
-  </ul>
-</div>
 
-<div class="room">
-  <h3>Kitchen</h3>
-  <ul>
-    <% @kitchen_am.each do |amentity| %>
-      <li><%= amentity.name %></li>
-    <% end %>
-  </ul>
-</div>
 
-<div class="room">
-  <h3>Other</h3>
-  <ul>
-    <% @other_am.each do |amentity| %>
-      <li><%= amentity.name %></li>
-    <% end %>
-  </ul>
-</div>

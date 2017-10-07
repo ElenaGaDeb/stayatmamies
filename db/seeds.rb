@@ -45,23 +45,23 @@ bathroom = ["Bath tub", "Shower", "Mirror", "Hair dryer" "Towel"]
 kitchen = ["Electric hobs", "Gas hobs", "Oven", "Microwave", "Coffee machine", 'Dishwasher']
 other = ["iron/iron board", "Internet"]
 ["TV", "Sofa", "Fireplace"].each do | amenity |
-  Amenity.create!(category: "livingroom", name: amenity)
+  Amenity.create!(category: "livingroom", name: amenity, item_slug: "Livingroom")
 end
 
 bedroom.each do | amenity |
-  Amenity.create!(category: "bedroom", name: amenity)
+  Amenity.create!(category: "bedroom", name: amenity, item_slug: "Bedroom")
 end
 
 bathroom.each do | amenity |
-  Amenity.create!(category: "bathroom", name: amenity)
+  Amenity.create!(category: "bathroom", name: amenity, item_slug: "Bathroom")
 end
 
 kitchen.each do | amenity |
-  Amenity.create!(category: "kitchen", name: amenity)
+  Amenity.create!(category: "kitchen", name: amenity, item_slug: "Kitchen")
 end
 
 other.each do | amenity |
-  Amenity.create!(category: "other", name: amenity)
+  Amenity.create!(category: "other", name: amenity, item_slug: "Other")
 end
 
 time = 1

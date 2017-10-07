@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row" id="content">
     <div class="col-md-6 col-md-offset-3">
-      <%= simple_form_for(@apartment) do |f| %>
+      <%= simple_form_for (@apartment) do |f| %>
       <!-- render error messages -->
         <% if @apartment.errors.any? %>
           <div id="error_explanation">
@@ -12,6 +12,7 @@
             </ul>
           </div>
         <% end %>
+        <%  amenities = Amenity.all.group_by { |a| a.item_slug } %>
       <!-- new appart form -->
         <%= f.input :name %>
         <%= f.input :description %>
@@ -23,8 +24,26 @@
         <%= f.input :country%>
         <%= f.input :bedrooms %>
         <%= f.input :bathrooms %>
-        <%= f.button :submit, class: "btn btn-primary"  %>
-      <% end %>
+        <div class="room">
+          <% amenities.each  do |category| %>
+            <h3><%= category.first %></h3>
+            <ul>
+              <% category.last.each do |amenity| %>
+                <li><%= f.input :street, label: amenity.name,
+                  default: true,
+                  as: :boolean,
+                  boolean_style: :inline
+                %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      <%= f.button :submit, class: "btn btn-danger"  %>
+     <% end %>
+
+<!-- use collection with checkbox -->
+
+
     </div>
   </div>
 </div>

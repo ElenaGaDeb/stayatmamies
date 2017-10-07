@@ -8,8 +8,8 @@
 </ul>
 <%= link_to "add new apartment", new_apartment_path %> -->
 <% content_for(:title_tag) do %>
-   <%= "The Apartments" %>
- <% end %>
+<%= "The Apartments" %>
+<% end %>
 
 <div class="banner banner-big-height dark-translucent-bg padding-bottom-clear" style="background-image:url(https://unsplash.it/1298/550?image=1008);background-position: 50% 32%;">
   <div class="container">
@@ -41,7 +41,7 @@
             <input type="string" class="form-control">
           </div>
           <div class="form-group ml-1">
-          <button type="submit" class="btn btn-lg btn-success btn-animated">Search <i class="fa fa-check"></i></button>
+            <button type="submit" class="btn btn-lg btn-success btn-animated">Search <i class="fa fa-check"></i></button>
           </div>
         </form>
       </div>
@@ -49,7 +49,7 @@
     </div>
   </div>
   <!-- section end -->
-  </div>
+</div>
 <section class="light-gray-bg pv-40 border-clear">
   <div class="container">
     <div class="row justify-content-lg-center">
@@ -61,40 +61,44 @@
   </div>
   <div class="container-fluid">
     <div class="row">
-     <% @apartments.each do |apartment| %>
-     <div class="col-md-3">
-      <div class="image-box style-2 mb-20">
-        <div class="overlay-container overlay-visible">
-          <img src="url('https://unsplash.it/1298/550?image=1008')">
-          <%= link_to "#{apartment.name}", apartment_path(apartment) %>
-          <div class="overlay-bottom">
-            <div class="text">
-              <p class="lead margin-clear text-left mobile-visible">apartment.name</p>
-            </div>
+        <% @apartments.each do |apartment| %>
+      <div class="col-xs-12 col-sm-4">
+
+        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('https://unsplash.it/430/300?image=946');">
+
+          <div class="card-category"><%= apartment.city %>, <%= apartment.country %> </div>
+          <div class="card-description">
+            <h2><%= apartment.name  %></h2>
+            <p><%= apartment.description %></p>
           </div>
+          <img class="card-user" src="https://kitt.lewagon.com/placeholder/users/tgenaitay">
+        <%= link_to "", apartment_path(apartment), class: "card-link"%>
         </div>
       </div>
-      <% end %>
+          <% end %>
     </div>
   </div>
+</div>
 </div>
 </section>
 <div id="map" style="width: 100%; height: 600px;"></div>
 
 <% content_for(:after_js) do %>
-  <%= javascript_tag do %>
-    $(document).ready(function() {
-      var handler = Gmaps.build('Google');
-      handler.buildMap({ internal: { id: 'map' } }, function() {
-        markers = handler.addMarkers(<%= raw @hash.to_json %>);
-        handler.bounds.extendWith(markers);
-        handler.fitMapToBounds();
-        if (markers.length == 0) {
-          handler.getMap().setZoom(2);
-        } else if (markers.length == 1) {
-          handler.getMap().setZoom(14);
-        }
-      });
-    });
-  <% end %>
+<%= javascript_tag do %>
+$(document).ready(function() {
+var handler = Gmaps.build('Google');
+handler.buildMap({ internal: { id: 'map' } }, function() {
+markers = handler.addMarkers(<%= raw @hash.to_json %>);
+handler.bounds.extendWith(markers);
+handler.fitMapToBounds();
+if (markers.length == 0) {
+handler.getMap().setZoom(2);
+} else if (markers.length == 1) {
+handler.getMap().setZoom(14);
+}
+});
+});
 <% end %>
+<% end %>
+
+

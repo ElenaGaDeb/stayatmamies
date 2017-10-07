@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20171007153717) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "item_slug"
   end
 
   create_table "apartment_amenities", force: :cascade do |t|
@@ -84,14 +85,22 @@ ActiveRecord::Schema.define(version: 20171007153717) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "messages", force: :cascade do |t|
-    t.text "content"
-    t.string "booking_status"
-    t.bigint "user_id"
-    t.bigint "booking_id"
+  create_table "conversations", force: :cascade do |t|
+    t.bigint "sender_id"
+    t.bigint "recipient_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["booking_id"], name: "index_messages_on_booking_id"
+    t.index ["recipient_id"], name: "index_conversations_on_recipient_id"
+    t.index ["sender_id"], name: "index_conversations_on_sender_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "conversation_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "content"
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
@@ -164,7 +173,9 @@ ActiveRecord::Schema.define(version: 20171007153717) do
   add_foreign_key "apartments", "users"
   add_foreign_key "bookings", "apartments"
   add_foreign_key "bookings", "users"
-  add_foreign_key "messages", "bookings"
+  add_foreign_key "conversations", "conversations", column: "recipient_id"
+  add_foreign_key "conversations", "conversations", column: "sender_id"
+  add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"
   add_foreign_key "profile_characteristics", "characteristics"
   add_foreign_key "profile_characteristics", "profiles"

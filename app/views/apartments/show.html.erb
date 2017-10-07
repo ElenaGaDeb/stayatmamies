@@ -15,6 +15,25 @@
     });
   <% end %>
 <% end %>
+<br>
+<h2>description:</h2>
+<p><%= @apartment.description %></p>
+<h2>owner:</h2>
+<p><%= @apartment.user.profile.first_name %></p>
+<%= link_to "back to list", apartments_path %>
+
+<% @amenities.each  do |category| %>
+  <div class="room">
+    <h3><%= category.first %></h3>
+    <ul>
+      <% category.last.each do |amenity| %>
+        <li><%= amenity.name %></li>
+      <%end %>
+    </ul>
+  </div>
+<% end %>
+
+<img src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @apartment.latitude %>,<%= @apartment.longitude %>&key=AIzaSyDT8rAZ6WBaIZiWYB0_9YfTxYLKeq01GY8&zoom=14&size=640x400&markers=color:red%7C<%=@apartment.latitude%>,<%=@apartment.longitude %>" />
 
 
       <img src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @apartment.latitude %>,<%= @apartment.longitude %>&key=AIzaSyDT8rAZ6WBaIZiWYB0_9YfTxYLKeq01GY8&zoom=14&size=640x400&markers=color:red%7C<%=@apartment.latitude%>,<%=@apartment.longitude %>" />
@@ -23,3 +42,4 @@
 <% @apartment.photos.each do |photo| %>
   <%= cl_image_tag photo.path, width: 300, height: 200, crop: :fill %>
 <% end %>
+

@@ -12,7 +12,7 @@ class ApartmentsController < ApplicationController
   end
 
   def show
-    @apartment = Apartment.find(params[:id])
+    @amenities = @apartment.amenities.group_by { |a| a.item_slug }
     @review = Review.new
     @user = @apartment.user
     @apartment_coordinates = { lat: @apartment.latitude, lng: @apartment.longitude }
@@ -34,20 +34,18 @@ class ApartmentsController < ApplicationController
   end
 
   def edit
+    @apartment_amenities = @apartment.amenities
   end
 
   def update
-    if @apartment.save!
+    if @apartment.update!(apartment_params)
       redirect_to apartment_path(@apartment)
     else
       render :update
     end
   end
 
-  def destroy
-    @apartment.destroy
-    redirect_to apartments_path
-  end
+
 
   private
 
@@ -71,5 +69,7 @@ class ApartmentsController < ApplicationController
       :latitude,
       :longitude,
       photos: [])
+
+      :amenity_ids => []
   end
 end

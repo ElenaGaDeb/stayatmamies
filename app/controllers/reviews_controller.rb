@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-  before_action :authenticate_user!, only: [:new]
+  before_action :authenticate_user!, only: [:create]
   def index
     @reviews = Review.all
   end
@@ -12,7 +12,7 @@ class ReviewsController < ApplicationController
     if @review.save
       redirect_to profile_path(@user.profile)
     else
-     render :new
+      redirect_to profile_path(@user.profile)
     end
   end
 

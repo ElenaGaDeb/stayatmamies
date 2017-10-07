@@ -45,6 +45,36 @@ appart1 = Apartment.create!(
   longitude: 2.297879,
 )
 
+bedroom = ["Bed", "Desk", "Bedside table", "Table lamp", "Pillow", "Blanket" "Window", "Air conditioning" "Heating"]
+bathroom = ["Bath tub", "Shower", "Mirror", "Hair dryer" "Towel"]
+kitchen = ["Electric hobs", "Gas hobs", "Oven", "Microwave", "Coffee machine", 'Dishwasher']
+other = ["iron/iron board", "Internet"]
+["TV", "Sofa", "Fireplace"].each do | amenity |
+  Amenity.create!(category: "livingroom", name: amenity, item_slug: "Livingroom")
+end
+
+bedroom.each do | amenity |
+  Amenity.create!(category: "bedroom", name: amenity, item_slug: "Bedroom")
+end
+
+bathroom.each do | amenity |
+  Amenity.create!(category: "bathroom", name: amenity, item_slug: "Bathroom")
+end
+
+kitchen.each do | amenity |
+  Amenity.create!(category: "kitchen", name: amenity, item_slug: "Kitchen")
+end
+
+other.each do | amenity |
+  Amenity.create!(category: "other", name: amenity, item_slug: "Other")
+end
+
+time = 1
+22.times do |x|
+  ApartmentAmenity.create!(apartment:appart1, amenity: Amenity.find(time))
+  time += 1
+end
+
 u2 = User.create!(
   email: "jeanne45@edhec.edu",
   password: "password"

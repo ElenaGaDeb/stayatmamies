@@ -1,9 +1,31 @@
 Rails.application.routes.draw do
 
+
   resources :profiles, only: [:edit, :new, :show, :update, :create]
 
-  resources :apartments, only: [:show, :index, :new, :create, :edit, :update]
+  get 'conversations/index'
 
+  get 'conversations/new'
+
+  get 'conversations/create'
+
+  get 'conversations/show'
+
+  get 'conversations/close'
+
+
+  get 'messages/new'
+
+  get 'messages/create'
+
+  get 'messages/index'
+
+  get 'messages/show'
+
+  get 'messages/delete'
+
+  resources :profiles, only: [:edit, :new, :show, :update, :create]
+  resources :apartments
   devise_for :users,
   controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 

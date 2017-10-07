@@ -61,7 +61,7 @@
   </div>
   <div class="container-fluid">
     <div class="row">
-        <% @apartments.each do |apartment| %>
+      <% @apartments.each do |apartment| %>
       <div class="col-xs-12 col-sm-4">
 
         <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('https://unsplash.it/430/300?image=946');">
@@ -71,11 +71,13 @@
             <h2><%= apartment.name  %></h2>
             <p><%= apartment.description %></p>
           </div>
-          <img class="card-user" src="https://kitt.lewagon.com/placeholder/users/tgenaitay">
-        <%= link_to "", apartment_path(apartment), class: "card-link"%>
+          <% if apartment.user.profile.photo? %>
+          <%= cl_image_tag apartment.user.profile.photo.path, class: "card-user" %>
+          <% end %>
+          <%= link_to "", apartment_path(apartment), class: "card-link"%>
         </div>
       </div>
-          <% end %>
+      <% end %>
     </div>
   </div>
 </div>

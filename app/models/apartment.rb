@@ -2,7 +2,7 @@ class Apartment < ApplicationRecord
   has_many :apartment_amenities
   belongs_to :user
   has_many :bookings
-
+  has_attachments :photos, maximum: 10
 
   geocoded_by :full_address
   after_validation :geocode, if: :street_changed?

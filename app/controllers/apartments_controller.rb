@@ -69,6 +69,7 @@ class ApartmentsController < ApplicationController
       :bathrooms,
       :street2,
       :latitude,
-      :longitude)
+      :longitude,
+      photos: [])
   end
 end

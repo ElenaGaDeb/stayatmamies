@@ -7,6 +7,8 @@ class ApartmentsController < ApplicationController
 
   def show
     @apartment = Apartment.find(params[:id])
+    @review = Review.new
+    @user = @apartment.user
   end
 
   def new

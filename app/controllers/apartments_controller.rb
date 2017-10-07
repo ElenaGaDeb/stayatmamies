@@ -13,6 +13,8 @@ class ApartmentsController < ApplicationController
 
   def show
     @apartment = Apartment.find(params[:id])
+    @review = Review.new
+    @user = @apartment.user
     @apartment_coordinates = { lat: @apartment.latitude, lng: @apartment.longitude }
 
   end

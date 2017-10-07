@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-  before_action :set_profile, only: [:show, :edit, :update]
+  before_action :set_profile, only: [:edit, :update]
 
   def new
     @user = current_user
@@ -28,6 +28,10 @@ class ProfilesController < ApplicationController
   end
 
   def show
+    @profile = Profile.find(params[:id])
+    @review = Review.new
+    @user = @profile.user
+    @reviews_for = Review.reviews_for(@user)
   end
 
   private

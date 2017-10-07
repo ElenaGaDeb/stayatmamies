@@ -117,6 +117,3 @@ profile4 = Profile.create!(user: u4,
   detailed_description: "I am Alice from Blacksburg, VA (USA) and looking to live in Europe for a semester ",
   short_description: "Looking for an apartment in Europe!"
 )
-
-
-

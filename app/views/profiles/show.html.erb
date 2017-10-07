@@ -1,5 +1,14 @@
+
 <%= simple_form_for [@user, @review] do |f| %>
   <%= f.input :content %>
   <%= f.input :rating %>
   <%= f.submit "submit review", class: "btn btn-primary" %>
 <% end %>
+
+
+<h2><%= @profile.username %></h2>
+<h3><%= @profile.short_description %></h3>
+<p><%= @profile.city_from %></p>
+<p><%= @profile.detailed_description %></p>
+<p><%= @profile.username %></p>
+

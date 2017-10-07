@@ -1,0 +1,25 @@
+<%= simple_form_for(@profile) do |f| %>
+<% if @profile.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+      <% @profile.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.input :username, label: 'Your username please', error: 'Username is mandatory, please specify one' %>
+  <%= f.input :profile_type, collection: ["student", "host",] %>
+  <%= f.input :first_name, label: 'Your first name please', error: 'First name is mandatory, please specify one' %>
+  <%= f.input :last_name, label: 'Your last name please', error: 'Last name is mandatory, please specify one'  %>
+  <%= f.input :age, label: 'Your age please', error: 'should be a number ! '  %>
+  <%= f.input :city_from, label: 'Your city please', error: 'City is mandatory, please specify one'%>
+  <%= f.input :gender %>
+  <%= f.input :short_description %>
+  <%= f.input :detailed_description %>
+
+  <%= f.submit "create profile", class: "btn btn-primary" %>
+<% end %>
+
+
+

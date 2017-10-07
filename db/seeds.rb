@@ -7,11 +7,24 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 u1 = User.create!(
-  email: "mamie@edhec.edu",
-  password: "mamieedhec"
+  email: "elise1950@edhec.edu",
+  password: "password"
 )
 
-
+profile1 = Profile.create!(
+  user: u1,
+  profile_type: "host",
+  username: "mamieedhec",
+  first_name: "Elise",
+  last_name: "Francois",
+  age: 88,
+  city_from: "Paris",
+  gender: "female",
+  phone_number: 0600300040,
+  country_from: "France",
+  detailed_description: "My name is Elise and I love to hang out with young fellows",
+  short_description: "Young at heart! "
+)
 
 appart1 = Apartment.create!(
   user: u1,
@@ -27,14 +40,15 @@ appart1 = Apartment.create!(
   street2: 'rdc'
 )
 
-u1 = User.create!(
+u2 = User.create!(
   email: "jeanne45@edhec.edu",
   password: "password"
 )
 
-profile2 = Profile.create!(user: u2,
+profile2 = Profile.create!(
+  user: u2,
   profile_type: "host",
-  username: "mamie45",
+  username: "jeanne45",
   first_name: "Jeanne",
   last_name: "Dupont",
   age: 88,
@@ -59,6 +73,11 @@ appart2 = Apartment.create!(
   bathrooms: 1,
 )
 
+u3 = User.create!(
+  email: "toto@edhec.com",
+  password: "password"
+)
+
 profile3 = Profile.create!(user: u3,
   profile_type: "student",
   username: "totolebon",
@@ -67,6 +86,6 @@ profile3 = Profile.create!(user: u3,
   age: 23,
   city_from: "Melbourne",
   gender: "male",
-  detailed_description: "je m'appelle toto, j'habite à Melbourne et j'aime voyager",
-  short_description: "Toto cherche appartement"
+  detailed_description: "My name is Toto, Inlive in Melbourne and want to travel the world! ",
+  short_description: "Looking for an apartment in France!"
 )

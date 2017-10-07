@@ -33,7 +33,7 @@
   <%= javascript_include_tag 'application' %>
   <%= yield(:after_js) %>
 
-  <%= render 'shared/footer' %>
+  <%= render 'shared/footer' unless @skip_footer %>
 
 
   <script src="/theme/js/google-code-prettify/prettify.js"></script>

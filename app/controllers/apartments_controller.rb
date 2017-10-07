@@ -17,7 +17,6 @@ class ApartmentsController < ApplicationController
     @user = @apartment.user
     @apartment_coordinates = { lat: @apartment.latitude, lng: @apartment.longitude }
 
->>>>>>> 3b2b5c2157153194caf322c077c3977f8228ee3f
   end
 
   def new
@@ -67,9 +66,10 @@ class ApartmentsController < ApplicationController
       :bedrooms,
       :bathrooms,
       :street2,
-      :amenity_ids => [],
       :latitude,
-      :longitude)
+      :longitude,
+      :amenity_ids => []
+      )
 
   end
 end

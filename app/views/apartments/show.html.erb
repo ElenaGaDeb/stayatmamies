@@ -3,11 +3,17 @@
 <% end %>
 
 
-
 <p>apartment name : <%= @apartment.name %></p>
-<% if current_user.id == @apartment.user.id %>
-<%= link_to "update apartment information", edit_apartment_path(@apartment) %>
 <br>
+      <p>Latitude: <%= @apartment.latitude %></p>
+      <p>Longitude: <%= @apartment.longitude %></p>
+
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    $(document).ready(function() {
+      var coord = <%= raw @apartment_coordinates.to_json %>;
+    });
+  <% end %>
 <% end %>
 <br>
 <h2>description:</h2>
@@ -27,6 +33,5 @@
   </div>
 <% end %>
 
-
-
+<img src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @apartment.latitude %>,<%= @apartment.longitude %>&key=AIzaSyDT8rAZ6WBaIZiWYB0_9YfTxYLKeq01GY8&zoom=14&size=640x400&markers=color:red%7C<%=@apartment.latitude%>,<%=@apartment.longitude %>" />
 

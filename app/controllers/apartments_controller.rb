@@ -3,10 +3,21 @@ class ApartmentsController < ApplicationController
   before_action :set_apartment, only: [:show, :edit, :update, :destroy]
   def index
     @apartments = Apartment.all
+    @apartments = Apartment.where.not(latitude: nil, longitude: nil)
+
+    @hash = Gmaps4rails.build_markers(@apartments) do |apartment, marker|
+      marker.lat apartment.latitude
+      marker.lng apartment.longitude
+    end
   end
 
   def show
     @amenities = @apartment.amenities.group_by { |a| a.item_slug }
+    @review = Review.new
+    @user = @apartment.user
+    @apartment_coordinates = { lat: @apartment.latitude, lng: @apartment.longitude }
+
+>>>>>>> 3b2b5c2157153194caf322c077c3977f8228ee3f
   end
 
   def new
@@ -56,6 +67,9 @@ class ApartmentsController < ApplicationController
       :bedrooms,
       :bathrooms,
       :street2,
-      :amenity_ids => [])
+      :amenity_ids => [],
+      :latitude,
+      :longitude)
+
   end
 end

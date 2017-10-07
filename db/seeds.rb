@@ -39,29 +39,3 @@ appart1 = Apartment.create!(
   bathrooms: 1,
   street2: 'rdc'
 )
-
-
-profile2 = Profile.create!(user: u2,
-  profile_type: "host",
-  username: "mamie45",
-  first_name: "Jeanne",
-  last_name: "Dupont",
-  age: 88,
-  city_from: "Paris",
-  gender: "female",
-  detailed_description: "Je suis Jeanne, et j'adore jouer au Scrabble!",
-  short_description: "Looking for a Scrabble Partner"
-)
-
-appart2 = Apartment.create!(
-  user: u2,
-  name: 'Big beedroom in Paris',
-  description: 'Looking for someone to live with me in Paris, next to Champ de Mars',
-  deal: '2 scrabble par semaine',
-  street: '2 Allée Adrienne Lecouvreur',
-  city: 'Paris',
-  zip_code: 75007,
-  country: 'France',
-  bedrooms: 1,
-  bathrooms: 1,
-)

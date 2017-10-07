@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
   resources :profiles, only: [:edit, :new, :show, :update, :create]
 
-  resources :apartments do
-    resources :apartment_amenities , only: [ :create ]
-  end
+  resources :apartments
 
   devise_for :users,
     controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }

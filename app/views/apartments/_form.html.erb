@@ -1,49 +1,57 @@
 <div class="container">
-  <div class="row" id="content">
-    <div class="col-md-6 col-md-offset-3">
-      <%= simple_form_for (@apartment) do |f| %>
-      <!-- render error messages -->
-        <% if @apartment.errors.any? %>
-          <div id="error_explanation">
-            <ul>
-            <% @apartment.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-            </ul>
+  <div class="row justify-content-md-center" id="content">
+    <div class="col col-lg-6">
+      <div class="form_for_apart">
+        <h1>My Apartment</h1>
+        <%= simple_form_for (@apartment) do |f| %>
+          <%= f.input :name, placeholder: "nick name for your apartment"%>
+          <%= f.input :description, placeholder: "Describe what is interesting in your apartment"%>
+          <%= f.input :deal, placeholder: "what will you provide as the host? what should the visitor do in exchange"%>
+          <%= f.input :street, placeholder: "Street number, street name" %>
+          <%= f.input :street2 %>
+          <div class="row">
+            <div class="col col-lg-6">
+              <%= f.input :city %>
+            </div>
+            <div class="col col-lg-6">
+              <%= f.input :zip_code %>
+            </div>
           </div>
-        <% end %>
-        <%  amenities = Amenity.all.group_by { |a| a.item_slug } %>
-      <!-- new appart form -->
-        <%= f.input :name %>
-        <%= f.input :description %>
-        <%= f.input :deal %>
-        <%= f.input :street %>
-        <%= f.input :street2 %>
-        <%= f.input :city %>
-        <%= f.input :zip_code %>
-        <%= f.input :country%>
-        <%= f.input :bedrooms %>
-        <%= f.input :bathrooms %>
-        <div class="room">
-          <% amenities.each  do |category| %>
-            <h3><%= category.first %></h3>
-            <ul>
-              <% category.last.each do |amenity| %>
-                <li><%= f.input :street, label: amenity.name,
-                  default: true,
-                  as: :boolean,
-                  boolean_style: :inline
-                %></li>
+          <%= f.input :country%>
+          <div class="row">
+            <div class="col col-lg-6">
+              <%= f.input :bedrooms, collection: 1..6, prompt: "Number of bedrooms available for the guest" %>
+            </div>
+            <div class="col col-lg-6">
+              <%= f.input :bathrooms, collection: 1..6, prompt: "Number of bathrooms available for the guest" %>
+            </div>
+          </div>
+            <% Amenity.all.group_by { |a| a.item_slug }.each do |category| %>
+              <div class="category">
+                <h3><%= category.first %></h3>
+                <div class="category-item-list">
+                  <% category.last.each do |amenity| %>
+                    <% available_id = @apartment.amenities.ids %>
+                    <div class="form-group check_boxes optional apartment_amenities">
+                      <label class="control-label check_boxes optional"></label>
+                      <input type="hidden" name="apartment[amenity_ids][]" value="" />
+                        <label for="apartment_amenity_ids_<%= amenity.id %>">
+                          <% if available_id.include? amenity.id  %>
+                            <input class="check_boxes optional" type="checkbox" value="<%= amenity.id %>" checked="checked"  name="apartment[amenity_ids][]" id="apartment_amenity_ids_<% amenity.id %>" />
+                          <% else %>
+                            <input class="check_boxes optional" type="checkbox" value="<%= amenity.id %>" name="apartment[amenity_ids][]" id="apartment_amenity_ids_<% amenity.id %>" />
+                          <% end %>
+                          <%= amenity.name %>
+                        </label>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
               <% end %>
-            </ul>
-          </div>
-        <% end %>
-      <%= f.button :submit, class: "btn btn-danger"  %>
-     <% end %>
-
-<!-- use collection with checkbox -->
-
-
+            <%= f.submit "Save my apartment", class: "btn btn-primary"  %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

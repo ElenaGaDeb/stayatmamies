@@ -3,4 +3,5 @@ class Apartment < ApplicationRecord
   belongs_to :user
   has_many :bookings
   has_many :amenities, through: :apartment_amenities
+  accepts_nested_attributes_for :amenities
 end

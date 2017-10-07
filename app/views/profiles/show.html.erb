@@ -1,8 +1,16 @@
-
 <h2><%= @profile.username %></h2>
 <h3><%= @profile.short_description %></h3>
 <p><%= @profile.city_from %></p>
 <p><%= @profile.detailed_description %></p>
-<p><%= @profile.username %></p>
 
+<ul>
+  <% @reviews_for.each do |review| %>
+    <li><%= review.content %> - <%= review.rating %> stars</li>
+  <% end %>
+</ul>
 
+<%= simple_form_for [@user, @review] do |f| %>
+  <%= f.input :content, label: "My review", placeholder: 'A detailed review will help future students find the best hosts!', error: 'Your review should be 50 characters minimum' %>
+  <%= f.input :rating, label: "My rating", placeholder: '0-5', error: 'Rating should be between 0-5' %>
+  <%= f.submit "submit my review", class: "btn btn-primary" %>
+<% end %>

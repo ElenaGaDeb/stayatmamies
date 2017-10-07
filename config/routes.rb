@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   get 'conversations/index'
 
   get 'conversations/new'
@@ -21,12 +22,14 @@ Rails.application.routes.draw do
   get 'messages/delete'
 
   resources :profiles, only: [:edit, :new, :show, :update, :create]
-
-  resources :apartments, only: [:show, :index, :new, :create, :edit, :update]
-
-
+  resources :apartments
   devise_for :users,
     controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+
+  resources :users do
+    resources :reviews, only: [:index, :create]
+  end
+
   root to: 'apartments#index'
 
   get "test", to: "pages#test"

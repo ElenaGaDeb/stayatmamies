@@ -1,4 +1,33 @@
 <div class="container">
+
+  <div class="row" id="content">
+    <div class="col-md-6 col-md-offset-3">
+      <%= simple_form_for(@apartment) do |f| %>
+      <!-- render error messages -->
+      <% if @apartment.errors.any? %>
+      <div id="error_explanation">
+        <ul>
+          <% @apartment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+      <% end %>
+      <!-- new appart form -->
+      <%= f.input :name %>
+      <%= f.input :description %>
+      <%= f.input :deal %>
+      <%= f.input :street %>
+      <%= f.input :street2 %>
+      <%= f.input :city %>
+      <%= f.input :zip_code %>
+      <%= f.input :country%>
+      <%= f.input :bedrooms %>
+      <%= f.input :bathrooms %>
+      <%= f.input :photos, as: :attachinary %>
+      <%= f.button :submit, class: "btn btn-primary"  %>
+      <% end %>
+
   <div class="row justify-content-md-center" id="content">
     <div class="col col-lg-6">
       <div class="form_for_apart">

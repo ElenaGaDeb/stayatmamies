@@ -35,3 +35,11 @@
 
 <img src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @apartment.latitude %>,<%= @apartment.longitude %>&key=AIzaSyDT8rAZ6WBaIZiWYB0_9YfTxYLKeq01GY8&zoom=14&size=640x400&markers=color:red%7C<%=@apartment.latitude%>,<%=@apartment.longitude %>" />
 
+
+      <img src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @apartment.latitude %>,<%= @apartment.longitude %>&key=AIzaSyDT8rAZ6WBaIZiWYB0_9YfTxYLKeq01GY8&zoom=14&size=640x400&markers=color:red%7C<%=@apartment.latitude%>,<%=@apartment.longitude %>" />
+
+
+<% @apartment.photos.each do |photo| %>
+  <%= cl_image_tag photo.path, width: 300, height: 200, crop: :fill %>
+<% end %>
+

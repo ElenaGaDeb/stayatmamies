@@ -68,8 +68,8 @@ class ApartmentsController < ApplicationController
       :street2,
       :latitude,
       :longitude,
-      :amenity_ids => []
-      )
+      photos: [])
 
+      :amenity_ids => []
   end
 end

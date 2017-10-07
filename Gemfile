@@ -11,6 +11,9 @@ gem 'webpacker', '~> 3.0'
 gem 'devise'
 gem 'omniauth-facebook'
 gem "geocoder"
+gem 'cloudinary', '1.1.7'
+gem 'attachinary', github: 'assembler/attachinary'
+gem 'jquery-fileupload-rails'
 
 gem 'autoprefixer-rails'
 gem 'bootstrap', '~> 4.0.0.beta'

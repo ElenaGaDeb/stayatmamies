@@ -3,12 +3,6 @@
 <% end %>
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
-  <!-- Indicators -->
-  <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
-  </ol>
 
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
@@ -78,8 +72,12 @@
         <div class="main col-lg-6">
           <h1 class="title">About <%= @apartment.user.profile.first_name.capitalize %></h1>
           <div class="separator-2"></div>
+<%= cl_image_tag @apartment.user.profile.photo.path, width: 400, height: 400, crop: :fill %>
+          <h5><%= @apartment.user.profile.age%> years old, originally from <%= @apartment.user.profile.city_from%> </h5>
           <h3>What you'll have to do in exchange for housing</h3>
           <p><%= @apartment.deal %></p>
+
+
 
         </div>
       </div>
@@ -117,9 +115,6 @@
   <p><%= @apartment.user.profile.first_name %></p>
   <%= link_to "back to list", apartments_path %>
 
-
-
-  <img src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @apartment.latitude %>,<%= @apartment.longitude %>&key=AIzaSyDT8rAZ6WBaIZiWYB0_9YfTxYLKeq01GY8&zoom=14&size=640x400&markers=color:red%7C<%=@apartment.latitude%>,<%=@apartment.longitude %>" />
 
 
   <img src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @apartment.latitude %>,<%= @apartment.longitude %>&key=AIzaSyDT8rAZ6WBaIZiWYB0_9YfTxYLKeq01GY8&zoom=14&size=640x400&markers=color:red%7C<%=@apartment.latitude%>,<%=@apartment.longitude %>" />

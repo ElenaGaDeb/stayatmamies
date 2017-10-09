@@ -5,9 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Reviews.destroy_all
 Apartment.destroy_all
 Profile.destroy_all
 User.destroy_all
+Amenities.destroy_all
 
 u1 = User.create!(
   email: "elise1950@edhec.edu",
@@ -45,10 +47,10 @@ appart1 = Apartment.create!(
   longitude: 2.297879,
 )
 
-bedroom = ["Bed", "Desk", "Bedside table", "Table lamp", "Pillow", "Blanket" "Window", "Air conditioning" "Heating"]
-bathroom = ["Bath tub", "Shower", "Mirror", "Hair dryer" "Towel"]
+bedroom = ["Bed", "Desk", "Bedside table", "Bedside Lamp", "Pillow", "Comforter", "Window", "Air conditioning", "Heating", "Dresser"]
+bathroom = ["Bath tub", "Shower", "Mirror", "Hair dryer", "Towels", "Towels rack"]
 kitchen = ["Electric hobs", "Gas hobs", "Oven", "Microwave", "Coffee machine", 'Dishwasher']
-other = ["iron/iron board", "Internet"]
+other = ["Iron/Iron Board", "Wifi", 'Washing Machine', 'Drier', 'Plasma TV', 'Swimming Pool', 'Jacuzzi', 'Garden']
 ["TV", "Sofa", "Fireplace"].each do | amenity |
   Amenity.create!(category: "livingroom", name: amenity, item_slug: "Livingroom")
 end

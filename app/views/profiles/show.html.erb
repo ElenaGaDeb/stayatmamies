@@ -8,11 +8,9 @@
   <% if @reviews_for.blank? %>
     Be the first to leave a review on <%= @profile.first_name %>'s profile :)
   <% else %>
-    <ul>
       <% @reviews_for.each do |review| %>
-        <li><%= review.content %> - <%= review.rating %> stars</li>
+        <%= render 'reviews/show', review: review %>
       <% end %>
-    </ul>
   <% end %>
 </div>
 

@@ -3,6 +3,10 @@
 <p><%= @profile.city_from %></p>
 <p><%= @profile.detailed_description %></p>
 
+<% if policy(@profile).edit? %>
+    <%= link_to "Update", edit_profile_path(current_user) %>
+  <% end %>
+
 <ul>
   <% @reviews_for.each do |review| %>
     <li><%= review.content %> - <%= review.rating %> stars</li>

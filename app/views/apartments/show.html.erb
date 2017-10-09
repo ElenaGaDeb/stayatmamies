@@ -5,8 +5,15 @@
 
 <p>apartment name : <%= @apartment.name %></p>
 <br>
-      <p>Latitude: <%= @apartment.latitude %></p>
-      <p>Longitude: <%= @apartment.longitude %></p>
+<% if policy(@apartment).edit? %>
+    <%= link_to "Update Apartment", edit_apartment_path(@apartment) %>
+  <% end %>
+
+<% if policy(@apartment).destroy? %>
+        <%= link_to "Delete", apartment_path(@apartment),
+        method: :delete,
+        data: { confirm: "Are you sure?" } %>
+  <% end %>
 
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>

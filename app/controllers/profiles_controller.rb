@@ -3,6 +3,12 @@ class ProfilesController < ApplicationController
   include Pundit
   after_action :verify_authorized, except: :index, unless: :skip_pundit?
 
+   # Uncomment when you *really understand* Pundit!
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  def user_not_authorized
+    flash[:alert] = "You are not authorized to perform this action."
+    redirect_to(root_path)
+  end
 
   def new
     @user = current_user
@@ -21,12 +27,12 @@ class ProfilesController < ApplicationController
   end
 
   def edit
-
+    authorize @profile
   end
 
   def update
+    authorize @profile
     if @profile.update(profile_params)
-      authorize @profile
         #redirect_to @profile_path(@profile)
     else
       render :edit

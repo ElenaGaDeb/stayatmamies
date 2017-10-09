@@ -22,8 +22,4 @@
   <% end %>
 </div>
 
-<%= simple_form_for [@profile, @review] do |f| %>
-  <%= f.input :content, label: "My review", placeholder: 'A detailed review will help future students find the best hosts!' %>
-  <%= f.input :rating, label: "My rating", placeholder: '0-5' %>
-  <%= f.submit "submit my review", class: "btn btn-primary" %>
-<% end %>
+<%= render 'reviews/form', profile: @profile, review: @review %>

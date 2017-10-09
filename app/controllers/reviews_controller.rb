@@ -1,18 +1,21 @@
 class ReviewsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
-  def index
-    @reviews = Review.all
-  end
 
   def create
     @review = Review.new(review_params)
-    @user = User.find(params[:user_id])
+    @profile = Profile.find(params[:profile_id])
     @review.by_user_id = current_user.id
-    @review.for_user_id = @user.id
+    @review.for_user_id = @profile.user.id
     if @review.save
-      redirect_to profile_path(@user.profile)
+      respond_to do |format|
+        format.html { redirect_to profile_path(@profile) }
+        format.js  # <-- will render `app/views/reviews/create.js.erb`
+      end
     else
-      redirect_to profile_path(@user.profile)
+      respond_to do |format|
+        format.html { redirect_to profile_path(@profile) }
+        format.js
+      end
     end
   end
 
@@ -22,5 +25,3 @@ class ReviewsController < ApplicationController
     params.require(:review).permit(:rating, :content)
   end
 end
-
-# profile.user.reviews

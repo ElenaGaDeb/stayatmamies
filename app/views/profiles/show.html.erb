@@ -3,14 +3,29 @@
 <p><%= @profile.city_from %></p>
 <p><%= @profile.detailed_description %></p>
 
-<ul>
-  <% @reviews_for.each do |review| %>
-    <li><%= review.content %> - <%= review.rating %> stars</li>
-  <% end %>
-</ul>
-
-<%= simple_form_for [@user, @review] do |f| %>
-  <%= f.input :content, label: "My review", placeholder: 'A detailed review will help future students find the best hosts!', error: 'Your review should be 50 characters minimum' %>
-  <%= f.input :rating, label: "My rating", placeholder: '0-5', error: 'Rating should be between 0-5' %>
-  <%= f.submit "submit my review", class: "btn btn-primary" %>
+<% if policy(@profile).edit? %>
+<%= link_to "Update", edit_profile_path(@profile) %>
 <% end %>
+
+
+<%= link_to "Add your apartment", new_apartment_path %>
+
+
+<div class="container" id="reviews">
+  <h3><%= @reviews_for.count %> reviews</h3>
+  <% if @reviews_for.blank? %>
+    Be the first to leave a review on <%= @profile.first_name %>'s profile :)
+  <% else %>
+    <div class="row">
+      <% @reviews_for.each do |review| %>
+        <%= render 'reviews/show', review: review %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<%= render 'reviews/form', profile: @profile, review: @review %>
+
+
+
+

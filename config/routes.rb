@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :profiles, only: [:edit, :new, :show, :update, :create]
+  resources :profiles, only: [:edit, :new, :show, :update, :create] do
+    resources :reviews, only: [:create]
+  end
 
   get 'conversations/index'
 
@@ -28,12 +30,9 @@ Rails.application.routes.draw do
   resources :apartments do
     resources :bookings, only: [:create, :new, :show]
   end
+
   devise_for :users,
   controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
-
-  resources :users do
-    resources :reviews, only: [:index, :create]
-  end
 
   root to: 'apartments#index'
   mount Attachinary::Engine => "/attachinary"

@@ -5,8 +5,14 @@ class ApartmentPolicy < ApplicationPolicy
     end
   end
     def create?
-      record.user == user && user.profile_type == 'host'
+      record.user == user && user.profile.profile_type == 'host'
     end
+
+    def new?
+      user.profile.profile_type == 'host' && user.apartment == nil
+
+    end
+
 
     def show?
       return true

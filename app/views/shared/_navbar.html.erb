@@ -68,11 +68,19 @@
                       <% avatar_url = current_user.facebook_picture_url || "http://placehold.it/30x30" %>
                       <%= image_tag avatar_url, class: "avatar dropdown-toggle", "data-toggle" => "dropdown" %>
                       <ul class="dropdown-menu dropdown-menu-right">
+                        <% if current_user.profile %>
                         <li>
-                          <%= link_to profile_path(current_user) do %>
+                          <%= link_to profile_path(current_user.profile) do %>
                           <i class="fa fa-user"></i> <%= t("profile", default: "Profile") %>
                           <% end %>
+                          </li>
+                          <% else %>
+                          <li>
+                          <%= link_to new_profile_path do %>
+                          <i class="fa fa-user"></i> <%= t("profile", default: "Create Profile") %>
+                          <% end %>
                         </li>
+                        <% end %>
                         <li>
                           <%= link_to destroy_user_session_path, method: :delete do %>
                           <i class="fa fa-sign-out"></i>  <%= t("sign_out", default: "Log out") %>

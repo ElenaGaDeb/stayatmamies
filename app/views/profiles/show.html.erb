@@ -4,8 +4,11 @@
 <p><%= @profile.detailed_description %></p>
 
 <% if policy(@profile).edit? %>
-    <%= link_to "Update", edit_profile_path(current_user) %>
+    <%= link_to "Update", edit_profile_path(@profile) %>
   <% end %>
+
+
+    <%= link_to "Add your apartment", new_apartment_path %>
 
 
 <div id="reviews">

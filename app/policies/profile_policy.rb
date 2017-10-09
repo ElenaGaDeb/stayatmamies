@@ -4,6 +4,10 @@ class ProfilePolicy < ApplicationPolicy
     record.user == user
   end
 
+  def new?
+    return true
+  end
+
   def show?
     return true
   end

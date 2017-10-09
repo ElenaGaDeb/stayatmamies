@@ -5,6 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Review.destroy_all
+ApartmentAmenity.destroy_all
+Amenity.destroy_all
 Apartment.destroy_all
 Profile.destroy_all
 User.destroy_all
@@ -45,12 +48,14 @@ appart1 = Apartment.create!(
   longitude: 2.297879,
 )
 
-bedroom = ["Bed", "Desk", "Bedside table", "Table lamp", "Pillow", "Blanket" "Window", "Air conditioning" "Heating"]
-bathroom = ["Bath tub", "Shower", "Mirror", "Hair dryer" "Towel"]
+bedroom = ["Bed", "Desk", "Bedside table", "Bedside Lamp", "Pillow", "Comforter", "Window", "Air conditioning", "Heating", "Dresser"]
+bathroom = ["Bath tub", "Shower", "Mirror", "Hair dryer", "Towels", "Towels rack"]
 kitchen = ["Electric hobs", "Gas hobs", "Oven", "Microwave", "Coffee machine", 'Dishwasher']
-other = ["iron/iron board", "Internet"]
-["TV", "Sofa", "Fireplace"].each do | amenity |
-  Amenity.create!(category: "livingroom", name: amenity, item_slug: "Livingroom")
+other = ["Iron/Iron Board", "Wifi", 'Washing Machine', 'Drier', 'Swimming Pool', 'Jacuzzi', 'Garden']
+livingroom = ["TV", "Sofa", "Fireplace", "Plasma TV", "Video Games Console"]
+
+livingroom.each do | amenity |
+  Amenity.create!(category: "livingroom", name: amenity, item_slug: "Living Room")
 end
 
 bedroom.each do | amenity |
@@ -69,11 +74,11 @@ other.each do | amenity |
   Amenity.create!(category: "other", name: amenity, item_slug: "Other")
 end
 
-time = 1
-22.times do |x|
-  ApartmentAmenity.create!(apartment:appart1, amenity: Amenity.find(time))
-  time += 1
-end
+# time = 1
+# 22.times do |x|
+#   ApartmentAmenity.create!(apartment:appart1, amenity: Amenity.find(time))
+#   time += 1
+# end
 
 u2 = User.create!(
   email: "jeanne45@edhec.edu",

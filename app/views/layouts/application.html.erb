@@ -32,7 +32,6 @@
   <%= javascript_include_tag "https://cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js" %>
   <%= javascript_include_tag 'application' %>
   <%= cloudinary_js_config %>
-  <%= yield(:after_js) %>
 
   <%= render 'shared/footer' unless @skip_footer %>
 
@@ -43,5 +42,6 @@
   <script src="/theme/js/jquery.easing.js"></script>
   <script>document.createElement('section');var duration='500',easing='swing';</script>
   <script src="/theme/js/script.js"></script>
+  <%= yield(:after_js) %>
 </body>
 </html>

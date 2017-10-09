@@ -4,22 +4,28 @@
 <p><%= @profile.detailed_description %></p>
 
 <% if policy(@profile).edit? %>
-    <%= link_to "Update", edit_profile_path(@profile) %>
-  <% end %>
+<%= link_to "Update", edit_profile_path(@profile) %>
+<% end %>
 
 
-    <%= link_to "Add your apartment", new_apartment_path %>
+<%= link_to "Add your apartment", new_apartment_path %>
 
 
-<div id="reviews">
-  <h3>Reviews</h3>
+<div class="container" id="reviews">
+  <h3><%= @reviews_for.count %> reviews</h3>
   <% if @reviews_for.blank? %>
     Be the first to leave a review on <%= @profile.first_name %>'s profile :)
   <% else %>
+    <div class="row">
       <% @reviews_for.each do |review| %>
         <%= render 'reviews/show', review: review %>
       <% end %>
+    </div>
   <% end %>
 </div>
 
 <%= render 'reviews/form', profile: @profile, review: @review %>
+
+
+
+

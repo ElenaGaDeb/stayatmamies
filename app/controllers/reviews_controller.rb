@@ -9,7 +9,7 @@ class ReviewsController < ApplicationController
     if @review.save
       redirect_to profile_path(@profile)
     else
-      render 'profiles/show'
+      redirect_to profile_path(@profile), notice: 'review must contain 50 char and rating in 0-5'
     end
   end
 

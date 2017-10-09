@@ -25,7 +25,12 @@ Rails.application.routes.draw do
 
   get 'messages/delete'
 
-  resources :apartments
+  resources :profiles, only: [:edit, :new, :show, :update, :create]
+
+  resources :apartments do
+    resources :bookings, only: [:create, :new, :show]
+  end
+
   devise_for :users,
   controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 

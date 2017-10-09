@@ -3,6 +3,11 @@
 <p><%= @profile.city_from %></p>
 <p><%= @profile.detailed_description %></p>
 
+<% if policy(@profile).edit? %>
+    <%= link_to "Update", edit_profile_path(current_user) %>
+  <% end %>
+
+
 <div id="reviews">
   <h3>Reviews</h3>
   <% if @reviews_for.blank? %>

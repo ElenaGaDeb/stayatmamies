@@ -1,10 +1,6 @@
 class BookingsController < ApplicationController
+  before_action :set_apartment, only: [:new, :create]
 
-  def show
-    @booking = Booking.find(params[:id])
-    @user = current_user
-    @apartment = Apartment.find(@apartment.id)
-  end
 
   def new
     @booking = Booking.new
@@ -13,11 +9,24 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params)
     @booking.user = current_user
+    @booking.apartment = @apartment
+    @host = @apartment.user
     if @booking.save
-      redirect_to profile_path(@booking)
+      redirect_to apartment_booking_path(@apartment, @booking)
     else
      render :new
     end
+  end
+
+  def show
+    @booking = Booking.find(params[:id])
+    @user = current_user
+    @apartment = @booking.apartment
+    @host = @apartment.user
+  end
+
+  def set_apartment
+    @apartment = Apartment.find(params[:apartment_id])
   end
 
   private

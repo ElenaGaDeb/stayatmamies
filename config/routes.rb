@@ -1,14 +1,5 @@
 Rails.application.routes.draw do
 
-
-
-
-  get 'bookings/show'
-
-  get 'bookings/new'
-
-  get 'bookings/create'
-
   resources :profiles, only: [:edit, :new, :show, :update, :create]
 
   get 'conversations/index'
@@ -33,7 +24,10 @@ Rails.application.routes.draw do
   get 'messages/delete'
 
   resources :profiles, only: [:edit, :new, :show, :update, :create]
-  resources :apartments
+
+  resources :apartments do
+    resources :bookings, only: [:create, :new, :show]
+  end
   devise_for :users,
   controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 

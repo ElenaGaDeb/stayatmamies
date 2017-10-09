@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
 
 
+
+
+  get 'bookings/show'
+
+  get 'bookings/new'
+
+  get 'bookings/create'
+
   resources :profiles, only: [:edit, :new, :show, :update, :create]
 
   get 'conversations/index'

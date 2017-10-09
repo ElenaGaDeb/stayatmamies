@@ -2,51 +2,129 @@
 <%= @apartment.name %>
 <% end %>
 
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+  </ol>
 
-<p>apartment name : <%= @apartment.name %></p>
-<br>
-<% if policy(@apartment).edit? %>
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <% @apartment.photos.each do |photo| %>
+      <%if photo == @apartment.photos[0] %>
+          <div class="carousel-item active">
+             <%= cl_image_tag photo.path, width: 1840, height: 500, crop: :fill, class: "d-block img-fluid" %>
+      <div class="carousel-caption d-none d-md-block"">
+        <h3><%= @apartment.name %></h3>
+        <p><%= @apartment.description %></p>
+      </div>
+    </div>
+    <% else %>
+    <div class="carousel-item">
+             <%= cl_image_tag photo.path, width: 1840, height: 500, crop: :fill, class: "d-block img-fluid" %>
+      <div class="carousel-caption d-none d-md-block"">
+        <h3><%= @apartment.name %></h3>
+        <p><%= @apartment.description %></p>
+      </div>
+    </div>
+    <% end %>
+
+    <% end %>
+
+<!-- Left and right controls -->
+<a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+  <span class="sr-only">Previous</span>
+</a>
+<a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+  <span class="sr-only">Next</span>
+</a>
+</div>
+</div>
+
+<section class="main-container padding-ver-clear">
+  <div class="container pv-40">
+    <div class="row">
+
+      <!-- main start -->
+      <!-- ================ -->
+      <div class="main col-lg-6">
+        <h1 class="title"><%= @apartment.user.profile.first_name.capitalize %>'s Apartment</h1>
+        <div class="separator-2"></div>
+        <h3 class="title">Basic Info</h3>
+        <p><%= @apartment.city %>, <%= @apartment.country %>
+
+
+
+
+          <h3 class="title">Amenities</h3>
+          <ul>
+           <li><%= @apartment.bedrooms %> Bedrooms</li>
+           <li><%= @apartment.bathrooms %> Bathrooms</li>
+           <% @amenities.each  do |category| %>
+           <div class="room">
+            <h3><%= category.first %></h3>
+            <ul>
+              <% category.last.each do |amenity| %>
+              <li><%= amenity.name %></li>
+              <%end %>
+            </ul>
+          </div>
+          <% end %>
+        </div>
+        <div class="main col-lg-6">
+          <h1 class="title">About <%= @apartment.user.profile.first_name.capitalize %></h1>
+          <div class="separator-2"></div>
+          <h3>What you'll have to do in exchange for housing</h3>
+          <p><%= @apartment.deal %></p>
+
+        </div>
+      </div>
+    </section>
+
+
+
+
+
+
+
+
+
+    <% if policy(@apartment).edit? %>
     <%= link_to "Update Apartment", edit_apartment_path(@apartment) %>
-  <% end %>
+    <% end %>
 
-<% if policy(@apartment).destroy? %>
-        <%= link_to "Delete", apartment_path(@apartment),
-        method: :delete,
-        data: { confirm: "Are you sure?" } %>
-  <% end %>
+    <% if policy(@apartment).destroy? %>
+    <%= link_to "Delete Appartment", apartment_path(@apartment),
+    method: :delete,
+    data: { confirm: "Are you sure?" } %>
+    <% end %>
 
-<% content_for(:after_js) do %>
-  <%= javascript_tag do %>
+    <% content_for(:after_js) do %>
+    <%= javascript_tag do %>
     $(document).ready(function() {
-      var coord = <%= raw @apartment_coordinates.to_json %>;
-    });
+    var coord = <%= raw @apartment_coordinates.to_json %>;
+  });
   <% end %>
-<% end %>
-<br>
-<h2>description:</h2>
-<p><%= @apartment.description %></p>
-<h2>owner:</h2>
-<p><%= @apartment.user.profile.first_name %></p>
-<%= link_to "back to list", apartments_path %>
-
-<% @amenities.each  do |category| %>
-  <div class="room">
-    <h3><%= category.first %></h3>
-    <ul>
-      <% category.last.each do |amenity| %>
-        <li><%= amenity.name %></li>
-      <%end %>
-    </ul>
-  </div>
-<% end %>
-
-<img src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @apartment.latitude %>,<%= @apartment.longitude %>&key=AIzaSyDT8rAZ6WBaIZiWYB0_9YfTxYLKeq01GY8&zoom=14&size=640x400&markers=color:red%7C<%=@apartment.latitude%>,<%=@apartment.longitude %>" />
+  <% end %>
+  <br>
+  <h2>description:</h2>
+  <p><%= @apartment.description %></p>
+  <h2>owner:</h2>
+  <p><%= @apartment.user.profile.first_name %></p>
+  <%= link_to "back to list", apartments_path %>
 
 
-      <img src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @apartment.latitude %>,<%= @apartment.longitude %>&key=AIzaSyDT8rAZ6WBaIZiWYB0_9YfTxYLKeq01GY8&zoom=14&size=640x400&markers=color:red%7C<%=@apartment.latitude%>,<%=@apartment.longitude %>" />
+
+  <img src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @apartment.latitude %>,<%= @apartment.longitude %>&key=AIzaSyDT8rAZ6WBaIZiWYB0_9YfTxYLKeq01GY8&zoom=14&size=640x400&markers=color:red%7C<%=@apartment.latitude%>,<%=@apartment.longitude %>" />
 
 
-<% @apartment.photos.each do |photo| %>
-  <%= cl_image_tag photo.path, width: 300, height: 200, crop: :fill %>
-<% end %>
+  <img src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @apartment.latitude %>,<%= @apartment.longitude %>&key=AIzaSyDT8rAZ6WBaIZiWYB0_9YfTxYLKeq01GY8&zoom=14&size=640x400&markers=color:red%7C<%=@apartment.latitude%>,<%=@apartment.longitude %>" />
+
+
+
+
 

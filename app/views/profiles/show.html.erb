@@ -16,16 +16,7 @@
   <% end %>
 </div>
 
-<%= simple_form_for [@user, @review] do |f| %>
-  <% if @review.errors.any? %>
-    <div id="error_explanation">
-      <ul>
-      <% @review.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= simple_form_for [@profile, @review] do |f| %>
   <%= f.input :content, label: "My review", placeholder: 'A detailed review will help future students find the best hosts!' %>
   <%= f.input :rating, label: "My rating", placeholder: '0-5' %>
   <%= f.submit "submit my review", class: "btn btn-primary" %>

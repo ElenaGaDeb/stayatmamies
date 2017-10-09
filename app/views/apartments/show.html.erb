@@ -66,8 +66,9 @@
 
         <div class="row">
           <div class="col-lg-4">
+          <% if  @apartment.user.profile.photo? do%>
             <%= cl_image_tag @apartment.user.profile.photo.path, width: 400, height: 400, crop: :fill %>
-            <!-- pills end -->
+            <% end %>
           </div>
           <div class="col-lg-8">
             <h5><%= @apartment.user.profile.first_name.capitalize %> - <%= @apartment.user.profile.age%> years old - Originally from <%= @apartment.user.profile.city_from%> </h5>

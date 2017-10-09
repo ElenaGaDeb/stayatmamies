@@ -7,14 +7,23 @@
     <%= link_to "Update", edit_profile_path(current_user) %>
   <% end %>
 
-<ul>
-  <% @reviews_for.each do |review| %>
-    <li><%= review.content %> - <%= review.rating %> stars</li>
-  <% end %>
-</ul>
 
-<%= simple_form_for [@user, @review] do |f| %>
-  <%= f.input :content, label: "My review", placeholder: 'A detailed review will help future students find the best hosts!', error: 'Your review should be 50 characters minimum' %>
-  <%= f.input :rating, label: "My rating", placeholder: '0-5', error: 'Rating should be between 0-5' %>
+<div id="reviews">
+  <h3>Reviews</h3>
+  <% if @reviews_for.blank? %>
+    Be the first to leave a review on <%= @profile.first_name %>'s profile :)
+  <% else %>
+    <ul>
+      <% @reviews_for.each do |review| %>
+        <li><%= review.content %> - <%= review.rating %> stars</li>
+      <% end %>
+    </ul>
+
+  <% end %>
+</div>
+
+<%= simple_form_for [@profile, @review] do |f| %>
+  <%= f.input :content, label: "My review", placeholder: 'A detailed review will help future students find the best hosts!' %>
+  <%= f.input :rating, label: "My rating", placeholder: '0-5' %>
   <%= f.submit "submit my review", class: "btn btn-primary" %>
 <% end %>

@@ -6,5 +6,5 @@ class Review < ApplicationRecord
   scope :reviews_by, ->(user) { where("by_user_id= ?", user.id) }
 
   validates :content, presence: true, length: { minimum: 50 }
-  validates :rating, presence: true, inclusion: { in: 0..5, allow_nil: false }
+  validates :rating, presence: true, inclusion: { in: (0..5), allow_nil: false }
 end

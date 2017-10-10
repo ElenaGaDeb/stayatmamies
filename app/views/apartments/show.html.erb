@@ -103,9 +103,9 @@
   </div>
 </section>
 <section class="pv-30 light-gray-bg">
-  <div class="container">
+  <div class="container-show">
     <div class="row">
-      <div class="col-lg-8">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
         <h3 class="title">More info</h3>
         <div class="separator-2"></div>
         <!-- Nav tabs -->
@@ -230,12 +230,12 @@
 
       <!-- sidebar start -->
       <!-- ================ -->
-      <aside class="col-lg-4 col-xl-3 ml-xl-auto">
+      <aside class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
         <div class="sidebar">
           <!-- <div class="block clearfix"> -->
           <h3 class="title">Map</h3>
           <div class="separator-2"></div>
-          <img id="map" src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @apartment.latitude %>,<%= @apartment.longitude %>&key=AIzaSyDT8rAZ6WBaIZiWYB0_9YfTxYLKeq01GY8&zoom=14&size=600x400&markers=color:red%7C<%=@apartment.latitude%>,<%=@apartment.longitude %>" />
+          <img id="map-index" src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @apartment.latitude %>,<%= @apartment.longitude %>&key=AIzaSyDT8rAZ6WBaIZiWYB0_9YfTxYLKeq01GY8&zoom=14&size=600x400&markers=color:red%7C<%=@apartment.latitude%>,<%=@apartment.longitude %>" />
         </div>
       </aside>
       <!-- sidebar end -->

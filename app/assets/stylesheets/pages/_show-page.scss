@@ -1,6 +1,17 @@
 #map {
   max-width: none;
 }
+.sidebar {
+  width: 100%;
+  #map-index {
+    width: 100%;
+  }
+}
+
+.container-show {
+  margin: 0 5%;
+}
+
 .nav {
   .nav-item {
     .nav-link {
@@ -23,3 +34,8 @@
  font-family: 'Roboto Condensed', sans-serif;
 }
 
+// @media screen and (min-width: 965px) {
+//   #map-index {
+//     max-width: 100%;
+//   }
+// }

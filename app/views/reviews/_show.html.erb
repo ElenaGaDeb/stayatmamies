@@ -1,1 +1,17 @@
-<p><%= review.content %></p>
+<div class="col-lg-4">
+  <div class="testimonial">
+    <%= image_tag "fb_pic.png", {class: "img-circle", id: "logo"} %>
+      <span>
+        <% review.rating.times do %>
+        <i class="fa fa-star text-default"></i>
+        <% end %>
+      </span>
+    <div class="testimonial-body">
+      <blockquote>
+        <p><%= review.content %></p>
+      </blockquote>
+      <div class="testimonial-info-1">- <%= review.by_user.profile.first_name %></div>
+      <div class="testimonial-info-2"><%= review.created_at.strftime("%d %b. %Y") %></div>
+    </div>
+  </div>
+</div>

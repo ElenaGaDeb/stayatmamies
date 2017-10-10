@@ -1,0 +1,30 @@
+<% content_for(:title_tag) do %>
+  Your booking
+<% end %>
+
+
+<p>apartment name : <%= @apartment.name %></p>
+<br>
+<p> apartment booked between <%= @booking.start_date %> and <%= @booking.end_date %> </p>
+
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    $(document).ready(function() {
+      var coord = <%= raw @apartment_coordinates.to_json %>;
+    });
+  <% end %>
+<% end %>
+<br>
+<h2>description:</h2>
+<p><%= @apartment.description %></p>
+<h2>owner:</h2>
+<p><%= @apartment.user.profile.first_name %></p>
+<%= link_to "Back to homepage", apartments_path %>
+
+
+<img src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @apartment.latitude %>,<%= @apartment.longitude %>&key=AIzaSyDT8rAZ6WBaIZiWYB0_9YfTxYLKeq01GY8&zoom=14&size=640x400&markers=color:red%7C<%=@apartment.latitude%>,<%=@apartment.longitude %>" />
+
+<% @apartment.photos.each do |photo| %>
+  <%= cl_image_tag photo.path, width: 300, height: 200, crop: :fill %>
+<% end %>
+

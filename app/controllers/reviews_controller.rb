@@ -7,9 +7,15 @@ class ReviewsController < ApplicationController
     @review.by_user_id = current_user.id
     @review.for_user_id = @profile.user.id
     if @review.save
-      redirect_to profile_path(@profile)
+      respond_to do |format|
+        format.html { redirect_to profile_path(@profile) }
+        format.js  # <-- will render `app/views/reviews/create.js.erb`
+      end
     else
-      redirect_to profile_path(@profile), notice: 'review must contain 50 char and rating in 0-5'
+      respond_to do |format|
+        format.html { redirect_to profile_path(@profile) }
+        format.js
+      end
     end
   end
 

@@ -37,8 +37,8 @@ include Pundit
   def create
     @apartment = Apartment.new(apartment_params)
     @apartment.user = current_user
+    if @apartment.save
   authorize @apartment
-    if @apartment.save!
       redirect_to apartment_path(@apartment)
     else
       render :new

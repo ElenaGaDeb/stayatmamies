@@ -1,19 +1,32 @@
 #map {
   max-width: none;
 }
-
-.show-nav-link{
-  .nav-link {
-  &:hover {
-  background-color: #6F97A2 !important;
-  }
-
+.nav {
+  .nav-item {
+    .nav-link {
+      &:hover {
+        background-color: #6F97A2 !important;
+        border-color: #6F97A2 !important;
+      }
+    }
+    .show-nav-link.active{
+      background-color: #50808E !important;
+      border-color: #50808E !important;
+      color: black !important;
+    }
   }
 }
 
-
-.show-nav-link.active{
-  background-color: #50808E !important;
-  border-color: #50808E !important;
-  color: black !important;
+// .show-nav-link{
+//   .nav-link {
+    // &:hover {
+    //   background-color: #6F97A2 !important;
+    // }
+//   }
+// }
+.carousel-caption {
+ text-shadow: 1px 1px 1px black;
+ font-size: 25px;
+ font-family: 'Roboto Condensed', sans-serif;
 }
+

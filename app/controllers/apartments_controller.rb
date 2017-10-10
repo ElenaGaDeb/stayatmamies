@@ -2,22 +2,35 @@ class ApartmentsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update]
   before_action :set_apartment, only: [:show, :edit, :update, :destroy]
 
-include Pundit
+  include Pundit
   after_action :verify_authorized, except: :index, unless: :skip_pundit?
 
    # Uncomment when you *really understand* Pundit!
-  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-  def user_not_authorized
+   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+   def user_not_authorized
     flash[:alert] = "You are not authorized to perform this action."
     redirect_to(root_path)
   end
 
   def index
     @apartments = policy_scope(Apartment).order(created_at: :desc)
-                                         .where.not(latitude: nil, longitude: nil)
+    .where.not(latitude: nil, longitude: nil)
+
+    if params['date-from'] != '' && params['date-from'] != nil && params['date-to'] != '' && params['date-to'] != nil
+      @apartments = @apartments.select do |apartment|
+        apartment.bookings.first == nil
+        if apartment.bookings.first != nil
+          next if (apartment.bookings.first.start_date .. apartment.bookings.first.end_date).cover?(Date.parse(params['date-from']))
+          next if (apartment.bookings.first.start_date .. apartment.bookings.first.end_date).cover?(Date.parse(params['date-to']))
+          (apartment.bookings.first.start_date .. apartment.bookings.first.end_date).cover?(Date.parse(params['date-from'])) == false
+          (apartment.bookings.first.start_date .. apartment.bookings.first.end_date).cover?(Date.parse(params['date-to'])) == false
+        end
+        next(true)
+      end
+    end
 
     if params['city'] != '' && params['city'] != nil
-      @apartments = @apartments.select {|apartment| apartment.city.downcase == params['city'].downcase }
+      @apartments = @apartments.select  {|apartment| apartment.city.downcase == params['city'].downcase }
     end
 
     @hash = Gmaps4rails.build_markers(@apartments) do |apartment, marker|
@@ -43,7 +56,7 @@ include Pundit
     @apartment = Apartment.new(apartment_params)
     @apartment.user = current_user
     if @apartment.save
-  authorize @apartment
+      authorize @apartment
       redirect_to apartment_path(@apartment)
     else
       render :new
@@ -97,7 +110,7 @@ include Pundit
       amenity_ids: [])
   end
 
-    def skip_pundit?
+  def skip_pundit?
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/
   end
 end

@@ -1,3 +1,25 @@
+<!-- old code below -->
+<!-- ================ -->
+
+<!--
+
+<div class="container" id="reviews">
+  <h3><%= @reviews_for.count %> reviews</h3>
+  <% if @reviews_for.blank? %>
+  Be the first to leave a review on <%= @profile.first_name %>'s profile :)
+  <% else %>
+  <div class="row">
+    <% @reviews_for.each do |review| %>
+    <%= render 'reviews/show', review: review %>
+    <% end %>
+  </div>
+  <% end %>
+</div>
+
+<%= render 'reviews/form', profile: @profile, review: @review %>
+
+
+
 <div class="col-lg-4">
   <div class="testimonial">
     <%= image_tag "fb_pic.png", {class: "img-circle", id: "logo"} %>
@@ -15,3 +37,5 @@
     </div>
   </div>
 </div>
+
+-->

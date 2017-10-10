@@ -2,20 +2,20 @@
 
   <div class="container">
     <div class="row">
-   <% if policy(@profile).edit? %>
-    <aside class="col-lg-4 col-xl-3 ml-xl-auto">
-        <div class="sidebar">
-          <!-- <div class="block clearfix"> -->
+     <% if policy(@profile).edit? %>
+     <aside class="col-lg-4 col-xl-3 ml-xl-auto">
+      <div class="sidebar">
+        <!-- <div class="block clearfix"> -->
           <h3 class="title">My tools</h3>
           <div class="separator-2"></div>
-    <%= link_to "Update my profile's info", edit_profile_path(@profile) %>
-    <br>
-  <% if @profile.user.apartment == nil && @profile.profile_type == "host" %>
-            <%= link_to "Add your apartment", new_apartment_path %>
-  <% end %>
+          <%= link_to "Update my profile's info", edit_profile_path(@profile) %>
+          <br>
+          <% if @profile.user.apartment == nil && @profile.profile_type == "host" %>
+          <%= link_to "Add your apartment", new_apartment_path %>
+          <% end %>
         </div>
       </aside>
-  <% end %>
+      <% end %>
       <!-- main start -->
       <!-- ================ -->
       <div class="main col-12">
@@ -37,7 +37,7 @@
 
         <div class="row">
           <div class="col-lg-4">
-          <% if  @profile.photo? %>
+            <% if  @profile.photo? %>
             <%= cl_image_tag @profile.photo.path, width: 400, height: 400, crop: :fill %>
             <% else %>
             <%= image_tag "no-photo.png", width: 400, height: 400, crop: :fill %>
@@ -53,7 +53,7 @@
           </div>
         </div>
       </div>
-<section class="pv-30 light-gray-bg">
+      <section class="pv-30 light-gray-bg">
         <div class="container">
           <div class="row">
             <div class="col-lg-8">
@@ -61,59 +61,27 @@
               <div class="separator-2"></div>
               <!-- comments start -->
               <div class="comments margin-clear space-top">
-                <!-- comment start -->
-                <div class="comment clearfix">
-                  <div class="comment-avatar">
-                    <img class="img-circle" src="images/avatar.jpg" alt="avatar">
-                  </div>
-                  <header>
-                    <h3>Amazing!</h3>
-                    <div class="comment-meta"> <i class="fa fa-star text-default"></i> <i class="fa fa-star text-default"></i> <i class="fa fa-star text-default"></i> <i class="fa fa-star text-default"></i> <i class="fa fa-star"></i> | Today, 12:31</div>
-                  </header>
-                  <div class="comment-content">
-                    <div class="comment-body clearfix">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </p>
-                      <a href="blog-post.html" class="btn-sm-link link-dark pull-right"><i class="fa fa-reply"></i> Reply</a>
-                    </div>
-                  </div>
-                </div>
-                <!-- comment end -->
+                <% @reviews_for.each do |review| %>
 
-                <!-- comment start -->
-                <div class="comment clearfix">
-                  <div class="comment-avatar">
-                    <img class="img-circle" src="images/avatar.jpg" alt="avatar">
-                  </div>
-                  <header>
-                    <h3>Really Nice!</h3>
-                    <div class="comment-meta"> <i class="fa fa-star text-default"></i> <i class="fa fa-star text-default"></i> <i class="fa fa-star text-default"></i> <i class="fa fa-star text-default"></i> <i class="fa fa-star"></i> | Today, 10:31</div>
-                  </header>
-                  <div class="comment-content">
-                    <div class="comment-body clearfix">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </p>
-                      <a href="blog-post.html" class="btn-sm-link link-dark pull-right"><i class="fa fa-reply"></i> Reply</a>
+                  <!-- comment start -->
+                  <div class="comment clearfix">
+                    <div class="comment-avatar">
+                      <img class="img-circle" src="images/avatar.jpg" alt="avatar">
+                    </div>
+                    <header>
+                      <h3>Amazing!</h3>
+                      <div class="comment-meta"> <i class="fa fa-star text-default"></i> <i class="fa fa-star text-default"></i> <i class="fa fa-star text-default"></i> <i class="fa fa-star text-default"></i> <i class="fa fa-star"></i> | Today, 12:31</div>
+                    </header>
+                    <div class="comment-content">
+                      <div class="comment-body clearfix">
+                        <p><%= review.content %></p>
+                        <a href="blog-post.html" class="btn-sm-link link-dark pull-right"><i class="fa fa-reply"></i> Reply</a>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <!-- comment end -->
+                  <!-- comment end -->
 
-                <!-- comment start -->
-                <div class="comment clearfix">
-                  <div class="comment-avatar">
-                    <img class="img-circle" src="images/avatar.jpg" alt="avatar">
-                  </div>
-                  <header>
-                    <h3>Worth to Buy!</h3>
-                    <div class="comment-meta"> <i class="fa fa-star text-default"></i> <i class="fa fa-star text-default"></i> <i class="fa fa-star text-default"></i> <i class="fa fa-star text-default"></i> <i class="fa fa-star"></i> | Today, 09:31</div>
-                  </header>
-                  <div class="comment-content">
-                    <div class="comment-body clearfix">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </p>
-                      <a href="blog-post.html" class="btn-sm-link link-dark pull-right"><i class="fa fa-reply"></i> Reply</a>
-                    </div>
-                  </div>
-                </div>
-                <!-- comment end -->
+                <% end %>
 
                 <nav aria-label="Page navigation">
                   <ul class="pagination justify-content-center">
@@ -186,18 +154,19 @@
   </div>
 </section>
 
-
+<!-- old code below -->
+<!-- ================ -->
 
 <div class="container" id="reviews">
   <h3><%= @reviews_for.count %> reviews</h3>
   <% if @reviews_for.blank? %>
-    Be the first to leave a review on <%= @profile.first_name %>'s profile :)
+  Be the first to leave a review on <%= @profile.first_name %>'s profile :)
   <% else %>
-    <div class="row">
-      <% @reviews_for.each do |review| %>
-        <%= render 'reviews/show', review: review %>
-      <% end %>
-    </div>
+  <div class="row">
+    <% @reviews_for.each do |review| %>
+    <%= render 'reviews/show', review: review %>
+    <% end %>
+  </div>
   <% end %>
 </div>
 

@@ -1,2 +1,7 @@
-<h1>Conversations#index</h1>
-<p>Find me in app/views/conversations/index.html.erb</p>
+<h1>My conversations</h1>
+
+<p class="lead"><%= link_to 'New conversation', new_conversation_path, class: 'btn btn-primary' %></p>
+
+<ul>
+  <%= render @conversations %>
+</ul>

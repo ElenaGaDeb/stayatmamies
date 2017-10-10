@@ -1,37 +1,41 @@
 class ConversationsController < ApplicationController
   def index
+    @conversations = Conversation.all
+    # only conversations with current user
   end
 
   def show
-    @user = current_user
-    @users = User.all.where.not(id: current_user)
-    @conversations = policy_scope(Conversation)
-    authorize(@conversations)
+    # shwo one conversation selected/ on seperate page
     @conversation = Conversation.find(params[:id])
+    @messages = @conversation.messages
+    @new_message = Message.new
   end
 
   def new
+    # start new conversation with someone
+    @conversation = Conversation.new
   end
 
   def create
-    @conversation = Conversation.get(current_user.id, params[:user_id])
-    authorize(@conversation)
-    add_to_conversations
-
-    respond_to do |format|
-      format.html {redirect_to conversation_path(current_user.conversations.last)}
-      format.js
+    # create a new conversation with someone/
+    # should only validate when a message is created
+    @sender = current_user
+    @recipient = User.find(params[:recipient_id])
+    @apartment = Apartment.find(params[:apartment_id])
+    @conversation = Conversation.new(sender: @sender, recipient: @recipient, apartment: @apartment)
+    if @conversation.save
+      redirect_to conversation_path(@conversation)
+    else
+      @conversation = current_user.conversations.where(recipient: @recipient).first
+      redirect_to conversation_path(@conversation.id)
     end
+    add_to_conversations
   end
 
   def close
-     @conversation = Conversation.find(params[:id])
-
-    session[:conversations].delete(@conversation.id)
-
-    respond_to do |format|
-      format.js
-    end
+    # destroy the conversation and all messages inside
+    @conversation = Conversation.find(params[:id])
+    @conversation.destroy
   end
 
   private
@@ -42,6 +46,8 @@ class ConversationsController < ApplicationController
   end
 
   def conversated?
+
     session[:conversations].include?(@conversation.id)
+
   end
 end

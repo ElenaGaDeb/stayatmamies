@@ -1,30 +1,59 @@
 class MessagesController < ApplicationController
-  before_action :logged_in_user
-  before_action :get_messages
+  before_action :authenticate_user!
 
-  def new
-  end
+  # def new
+  # end
 
   def create
-    @conversation = Conversation.includes(:recipient).find(params[:conversation_id])
-    @message = @conversation.messages.build(message_params)
+    @conversation = Conversation.find(params[:conversation_id])
+
+
+    @message  = Message.new(message_params)
+    set_sender
+    @message.conversation = @conversation
+    @message.user = current_user
+    @message.save!
     if @message.save
       ActionCable.server.broadcast "conversation_#{@conversation.id}_channel",
-                                   content:  @message.content,
-                                   user_id: @message.user_id,
-                                   conversation_id: @message.conversation_id
+        content:  @message.content,
+        by_user_id: @message.by_user_id,
+        conversation_id: @message.conversation_id
+      respond_to do |format|
+        format.html { redirect_to conversation_path(@conversation) }
+        format.js  # <-- will render `app/views/messages/create.js.erb`
+      end
+    else
+      respond_to do |format|
+        format.html { render 'conversation/show' }
+        format.js  # <-- idem
+      end
     end
-    authorize(@message)
 
-    respond_to do |format|
-      format.js
-    end
+
   end
+
+
+  #   authorize(@message)
+
+  #   respond_to do |format|
+  #     format.js
+  #   end
+  # end
 
   private
 
+  def set_sender
+    if @conversation.sender == current_user
+      @message.by_user = current_user
+      @message.for_user = @conversation.recipient
+    else
+      @message.by_user = current_user
+      @message.for_user = @conversation.sender
+    end
+  end
+
   def message_params
-    params.require(:message).permit(:user_id, :content)
+    params.require(:message).permit(:content)
   end
 
 end

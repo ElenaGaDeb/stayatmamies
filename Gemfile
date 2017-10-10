@@ -22,6 +22,7 @@ gem 'country_select'
 gem 'uglifier'
 # for simple form to render form select
 gem 'country_select'
+gem 'coffee-script'
 gem "coffee-rails"
 gem "gmaps4rails"
 

@@ -12,9 +12,9 @@ ul {
   height: 385px;
   overflow-y: auto;
   overflow-x: hidden;
-  border: 1px solid $my-lightgrey;
-  // box-shadow: 3px 3px 3px $my-lightgrey;
-  border-radius: 15px;
+  border: 1px solid lightgrey;
+  // box-shadow: 3px 3px 3px lightgrey;
+  border-radius: 5px;
 }
 .new_message {
   margin-top: 20px;
@@ -52,16 +52,16 @@ textarea.form-control {
 }
 .toggle-window {
   &:hover{
-    color: $my-pink;
+    color: red;
   }
 }
 .panel{
-  border-radius: 10px;
+  border-radius: 5px;
   .panel-heading {
-    border-radius: 10px;
+    border-radius: 5px;
   }
   #message_content {
-    border-radius: 10px;
+    border-radius: 5px;
     margin: 10px 0;
   }
 }
@@ -72,13 +72,13 @@ textarea.form-control {
 .user-list {
   min-height: 400px;
   padding: 20px;
-  border: 1px solid $my-lightgrey;
-  border-radius: 15px;
-  // box-shadow: 3px 3px 3px $my-lightgrey;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  // box-shadow: 3px 3px 3px lightgrey;
 }
 .user-list a {
   padding-left: 20px;
-  color: $my-pink;
+  color: red;
   font-weight: bold;
 }
 .opposed_user {
@@ -91,18 +91,19 @@ textarea.form-control {
 .current-conversation {
 }
 .current-conversation h3 {
-  border: 1px solid $my-lightgrey;
-  // box-shadow: 3px 3px 3px $my-lightgrey;
-  border-radius: 15px;
+  border: 1px solid lightgrey;
+  // box-shadow: 3px 3px 3px lightgrey;
+  border-radius: 5px;
   font-size: 1.2em;
-  color: $my-darkgrey
+  color: darkgrey;
+  padding: 20px;
 }
 .inbox-card {
   margin-bottom: 10px;
-  border: 1px solid $my-lightgrey;
-  // box-shadow: 3px 3px 3px $my-lightgrey;
+  border: 1px solid lightgrey;
+  // box-shadow: 3px 3px 3px lightgrey;
   padding: 15px 30px;
-  border-radius: 15px;
+  border-radius: 5px;
   position: relative;
 }
 
@@ -124,7 +125,7 @@ textarea.form-control {
   z-index: 2;
   background: black;
   opacity: 0;
-  border-radius: 15px;
+  border-radius: 5px;
   &:hover {
     opacity: 0.1;
   }

@@ -19,7 +19,10 @@
 <h2>description:</h2>
 <p><%= @apartment.description %></p>
 <h2>owner:</h2>
-<p><%= @apartment.user.profile.first_name %></p>
+<p><%= link_to @apartment.user.profile.first_name,
+  conversations_path(apartment_id: @apartment.id,recipient_id: @apartment.user.id),
+  method: :POST
+   %></p>
 <%= link_to "back to list", apartments_path %>
 
 <% @amenities.each  do |category| %>

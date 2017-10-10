@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20171007105536) do
+ActiveRecord::Schema.define(version: 20171009093618) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +75,8 @@ ActiveRecord::Schema.define(version: 20171007105536) do
     t.bigint "recipient_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "apartment_id"
+    t.index ["apartment_id"], name: "index_conversations_on_apartment_id"
     t.index ["recipient_id"], name: "index_conversations_on_recipient_id"
     t.index ["sender_id"], name: "index_conversations_on_sender_id"
   end
@@ -86,7 +87,11 @@ ActiveRecord::Schema.define(version: 20171007105536) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "content"
+    t.bigint "for_user_id"
+    t.bigint "by_user_id"
+    t.index ["by_user_id"], name: "index_messages_on_by_user_id"
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["for_user_id"], name: "index_messages_on_for_user_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
@@ -159,10 +164,13 @@ ActiveRecord::Schema.define(version: 20171007105536) do
   add_foreign_key "apartments", "users"
   add_foreign_key "bookings", "apartments"
   add_foreign_key "bookings", "users"
+  add_foreign_key "conversations", "apartments"
   add_foreign_key "conversations", "conversations", column: "recipient_id"
   add_foreign_key "conversations", "conversations", column: "sender_id"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"
+  add_foreign_key "messages", "users", column: "by_user_id"
+  add_foreign_key "messages", "users", column: "for_user_id"
   add_foreign_key "profile_characteristics", "characteristics"
   add_foreign_key "profile_characteristics", "profiles"
   add_foreign_key "profile_characteristics", "users"

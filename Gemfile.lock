@@ -251,6 +251,7 @@ DEPENDENCIES
   binding_of_caller
   bootstrap (~> 4.0.0.beta)
   coffee-rails
+  coffee-script
   country_select
   devise
   figaro

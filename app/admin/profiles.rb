@@ -9,5 +9,6 @@ ActiveAdmin.register Profile do
     :short_description,
     :profile_type,
     :phone_number,
-    :country_from
+    :country_from,
+    :user_id
 end

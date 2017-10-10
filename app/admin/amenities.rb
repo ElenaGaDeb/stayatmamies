@@ -1,4 +1,5 @@
 ActiveAdmin.register Amenity do
   permit_params :category,
-    :name
+    :name,
+    :item_slug
 end

@@ -16,6 +16,7 @@ ActiveAdmin.register User do
       f.input :first_name
       f.input :last_name
       f.input :email
+      f.input :encrypted_password
     end
     f.inputs "Admin" do
       f.input :admin
@@ -23,5 +24,9 @@ ActiveAdmin.register User do
     f.actions
   end
 
-  permit_params :first_name, :last_name, :email
+  permit_params :first_name,
+    :last_name,
+    :email,
+    :encrypted_password,
+    :admin
 end

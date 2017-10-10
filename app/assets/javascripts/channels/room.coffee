@@ -1,7 +1,4 @@
-
-console.log 'hellow'
 $(document).on 'ready', ->
-  console.log 'test 2';
   messages = $('#messages-list')
   App.messages = App.cable.subscriptions.create {
       channel: "RoomChannel"

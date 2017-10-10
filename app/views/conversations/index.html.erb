@@ -3,5 +3,9 @@
 <p class="lead"><%= link_to 'New conversation', new_conversation_path, class: 'btn btn-primary' %></p>
 
 <ul>
-  <%= render @conversations %>
+  <%= @current %>
+  <% @conversations.each do |conversation| %>
+    <li><%= link_to "Chat with #{conversation.opposed_user(current_user).profile.first_name}", conversation_path(conversation)  %></li>
+  <% end %>
+
 </ul>

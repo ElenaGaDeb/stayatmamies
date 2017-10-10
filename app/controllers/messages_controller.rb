@@ -12,7 +12,6 @@ class MessagesController < ApplicationController
     set_sender
     @message.conversation = @conversation
     @message.user = current_user
-    @message.save!
     if @message.save
       ActionCable.server.broadcast "conversation_#{@conversation.id}_channel",
         content:  @message.content,
@@ -34,11 +33,6 @@ class MessagesController < ApplicationController
 
 
   #   authorize(@message)
-
-  #   respond_to do |format|
-  #     format.js
-  #   end
-  # end
 
   private
 

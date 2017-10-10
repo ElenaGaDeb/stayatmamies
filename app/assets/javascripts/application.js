@@ -4,4 +4,6 @@
 //= require bootstrap-sprockets
 //= require underscore
 //= require gmaps/google
+//= turbolinks
+//= require cable
 //= require_tree .

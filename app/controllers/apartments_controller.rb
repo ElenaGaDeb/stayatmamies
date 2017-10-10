@@ -16,8 +16,13 @@ include Pundit
     @apartments = policy_scope(Apartment).order(created_at: :desc)
                                          .where.not(latitude: nil, longitude: nil)
     @hash = Gmaps4rails.build_markers(@apartments) do |apartment, marker|
+      html = ""
+      #html += "<img src='<%= cl_image_path apartment.photos[0].path'>"
+      html += "#{apartment.name} --> "
+      html += "<a href='#{apartment_path(apartment)}'>Go to this apartment</a>"
       marker.lat apartment.latitude
       marker.lng apartment.longitude
+      marker.infowindow html
     end
   end
 

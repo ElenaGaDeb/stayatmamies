@@ -1,4 +1,4 @@
 ActiveAdmin.register ApartmentAmenity do
-  :amenity_id,
+  permit_params :amenity_id,
   :apartment_id
 end

@@ -10,5 +10,6 @@ ActiveAdmin.register Apartment do
     :bathrooms,
     :street2,
     :latitude,
-    :longitude
+    :longitude,
+    :user_id
 end

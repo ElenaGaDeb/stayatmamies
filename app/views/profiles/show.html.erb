@@ -7,8 +7,9 @@
     <%= link_to "Update", edit_profile_path(@profile) %>
   <% end %>
 
-
+<% if policy(@profile.user.apartment).new? %>
     <%= link_to "Add your apartment", new_apartment_path %>
+  <% end %>
 
 
 <div id="reviews">

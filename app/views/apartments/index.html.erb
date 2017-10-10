@@ -63,9 +63,11 @@
     <div class="row">
       <% @apartments.each do |apartment| %>
       <div class="col-xs-12 col-sm-4">
-
+        <% if apartment.photos? %>
+        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path apartment.photos[0].path, height: 430, width: 300, crop: :fill %>')">
+<% else %>
         <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('https://unsplash.it/430/300?image=946');">
-
+<% end %>
           <div class="card-category"><%= apartment.city %>, <%= apartment.country %> </div>
           <div class="card-description">
             <h2><%= apartment.name  %></h2>

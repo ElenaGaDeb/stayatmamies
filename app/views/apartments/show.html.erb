@@ -44,7 +44,22 @@
 
   <div class="container">
     <div class="row">
-
+<% if policy(@apartment).edit? %>
+    <aside class="col-lg-4 col-xl-3 ml-xl-auto">
+        <div class="sidebar">
+          <!-- <div class="block clearfix"> -->
+          <h3 class="title">My tools</h3>
+          <div class="separator-2"></div>
+    <%= link_to "Update my apartment's infos", edit_apartment_path(@apartment) %>
+    <br>
+    <% if policy(@apartment).destroy? %>
+        <%= link_to "Delete my apartment", apartment_path(@apartment),
+        method: :delete,
+        data: { confirm: "Are you sure?" } %>
+<% end %>
+        </div>
+      </aside>
+  <% end %>
       <!-- main start -->
       <!-- ================ -->
       <div class="main col-12">
@@ -96,8 +111,8 @@
         <div class="separator-2"></div>
         <!-- Nav tabs -->
         <ul class="nav nav-tabs style-4" id="myTab" role="tablist">
-          <li class="nav-item"><a class="nav-link active" href="#h2tab2" role="tab" data-toggle="tab"><i class="fa fa-files-o pr-1"></i>More about the housing</a></li>
-          <li class="nav-item"><a class="nav-link" href="#h2tab3" role="tab" data-toggle="tab"><i class="fa fa-star pr-1"></i>Reviews</a></li>
+          <li class="nav-item"><a class="show-nav-link nav-link active" href="#h2tab2" role="tab" data-toggle="tab"><i class="fa fa-files-o pr-1"></i>More about the housing</a></li>
+          <li class="nav-item"><a class="show-nav-link nav-link" href="#h2tab3" role="tab" data-toggle="tab"><i class="fa fa-star pr-1"></i>Reviews</a></li>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content padding-top-clear padding-bottom-clear">

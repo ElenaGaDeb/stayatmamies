@@ -65,14 +65,31 @@
 
                   <li class="nav-item mega-menu mega-menu--wide">
                     <div class="dropdown">
+                    <% if current_user.profile %>
+                      <% if current_user.profile.photo? %>
+                        <%= cl_image_tag current_user.profile.photo.path, class: "avatar dropdown-toggle", "data-toggle" => "dropdown" %>
+                        <% else %>
+                       <% avatar_url = current_user.facebook_picture_url || "http://placehold.it/30x30" %>
+                      <%= image_tag avatar_url, class: "avatar dropdown-toggle", "data-toggle" => "dropdown" %>
+                      <% end %>
+                    <% else %>
                       <% avatar_url = current_user.facebook_picture_url || "http://placehold.it/30x30" %>
                       <%= image_tag avatar_url, class: "avatar dropdown-toggle", "data-toggle" => "dropdown" %>
+                    <% end %>
                       <ul class="dropdown-menu dropdown-menu-right">
+                        <% if current_user.profile %>
                         <li>
-                          <%= link_to "#" do %>
+                          <%= link_to profile_path(current_user.profile) do %>
                           <i class="fa fa-user"></i> <%= t("profile", default: "Profile") %>
                           <% end %>
+                          </li>
+                          <% else %>
+                          <li>
+                          <%= link_to new_profile_path do %>
+                          <i class="fa fa-user"></i> <%= t("profile", default: "Create Profile") %>
+                          <% end %>
                         </li>
+                        <% end %>
                         <li>
                           <%= link_to destroy_user_session_path, method: :delete do %>
                           <i class="fa fa-sign-out"></i>  <%= t("sign_out", default: "Log out") %>

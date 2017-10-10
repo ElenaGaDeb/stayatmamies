@@ -1,18 +1,23 @@
 Rails.application.routes.draw do
-  resources :profiles, only: [:edit, :new, :show, :update, :create]
-  resources :apartments
   resources :conversations do
     resources :messages, only: [:create]
   end
 
-  devise_for :users,
-    controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  ActiveAdmin.routes(self)
+  resources :profiles, only: [:edit, :new, :show, :update, :create] do
+    resources :reviews, only: [:create]
+  end
+  resources :profiles, only: [:edit, :new, :show, :update, :create]
 
-  resources :users do
-    resources :reviews, only: [:index, :create]
+  resources :apartments do
+    resources :bookings, only: [:create, :new, :show]
   end
 
+  devise_for :users,
+  controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+
   root to: 'apartments#index'
+  mount Attachinary::Engine => "/attachinary"
 
   get "test", to: "pages#test"
 

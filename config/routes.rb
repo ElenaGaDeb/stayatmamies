@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  ActiveAdmin.routes(self)
   resources :profiles, only: [:edit, :new, :show, :update, :create] do
     resources :reviews, only: [:create]
   end

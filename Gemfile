@@ -28,6 +28,10 @@ gem 'country_select'
 gem "coffee-rails"
 gem "gmaps4rails"
 gem "pundit"
+# active-admin
+gem 'activeadmin', github: 'activeadmin/activeadmin'
+gem 'inherited_resources', github: 'activeadmin/inherited_resources'
+
 
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"

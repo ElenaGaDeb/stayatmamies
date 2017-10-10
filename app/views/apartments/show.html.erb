@@ -68,15 +68,16 @@
           <div class="col-lg-4">
           <% if  @apartment.user.profile.photo? %>
             <%= cl_image_tag @apartment.user.profile.photo.path, width: 400, height: 400, crop: :fill %>
+            <% else %>
+            <%= image_tag "no-photo.png", width: 400, height: 400, crop: :fill %>
             <% end %>
           </div>
           <div class="col-lg-8">
+            <h4>About Me</h4>
             <h5><%= @apartment.user.profile.first_name.capitalize %> - <%= @apartment.user.profile.age%> years old - Originally from <%= @apartment.user.profile.city_from%> </h5>
-            <h2>Description</h2>
+            <p><%= @apartment.user.profile.detailed_description %></p>
             <h4>What you'll have to do in exchange for free housing</h4>
             <p><%= @apartment.deal %></p>
-            <h4>About Me</h4>
-            <p><%= @apartment.user.profile.detailed_description %></p>
 
 
           </div>
@@ -102,13 +103,17 @@
         <div class="tab-content padding-top-clear padding-bottom-clear">
           <div class="tab-pane active" id="h2tab2">
             <dl class="row">
+            <% if @amenities.count != 0 %>
               <% @amenities.each  do |category| %>
-              <dt class="col-sm-3 text-sm-right"><%= category.first %></dt>
-              <dd class="col-sm-9">
-                <% category.last.each do |amenity| %>
-                - <%= amenity.name %>
-                <%end %>
-              </dd>
+                <dt class="col-sm-3 text-sm-right"><%= category.first %></dt>
+                <dd class="col-sm-9">
+                  <% category.last.each do |amenity| %>
+                    - <%= amenity.name %>
+                  <%end %>
+                </dd>
+              <% end %>
+            <% else %>
+              <dt>This user hasn't added any more info yet</dt>
             <% end %>
             </dl>
             <hr>

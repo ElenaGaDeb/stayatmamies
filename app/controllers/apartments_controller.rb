@@ -15,6 +15,10 @@ include Pundit
   def index
     @apartments = policy_scope(Apartment).order(created_at: :desc)
                                          .where.not(latitude: nil, longitude: nil)
+
+    if params['city'] != ''
+      @apartments = @apartments.select {|apartment|   apartment.city.downcase== params['city'].downcase   }
+    end
     @hash = Gmaps4rails.build_markers(@apartments) do |apartment, marker|
       marker.lat apartment.latitude
       marker.lng apartment.longitude

@@ -27,7 +27,8 @@
     <div class="container">
       <!-- filters start -->
       <div class="sorting-filters text-center mb-20 d-flex justify-content-center">
-        <form class="form-inline">
+
+        <form class="form-inline" action='/'>
           <div class="form-group">
             <label>From:</label>
             <input type="date" class="form-control">
@@ -38,12 +39,13 @@
           </div>
           <div class="form-group ml-1">
             <label>City:</label>
-            <input type="string" class="form-control">
+            <input type="string" name='city' class="form-control" id="form-city">
           </div>
           <div class="form-group ml-1">
             <button type="submit" class="btn btn-lg btn-success btn-animated">Search <i class="fa fa-check"></i></button>
           </div>
         </form>
+
       </div>
       <!-- filters end -->
     </div>

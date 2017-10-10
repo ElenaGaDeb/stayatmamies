@@ -10,7 +10,7 @@
           <div class="separator-2"></div>
     <%= link_to "Update my profile's info", edit_profile_path(@profile) %>
     <br>
-  <% if policy(@profile.user.apartment).new? %>
+  <% if @profile.user.apartment == nil && @profile.profile_type == "host" %>
             <%= link_to "Add your apartment", new_apartment_path %>
   <% end %>
         </div>
@@ -45,14 +45,11 @@
           </div>
           <div class="col-lg-8">
             <h4>About Me</h4>
-            @<%= @profile.username %>
+            my username: @<%= @profile.username %>
             <h5><%= @profile.first_name.capitalize %> - <%= @profile.age%> years old - Originally from <%= @profile.city_from%> </h5>
             <h3><%= @profile.short_description %></h3>
 
             <p><%= @profile.detailed_description %></p>
-
-
-
           </div>
         </div>
       </div>
@@ -191,45 +188,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <div class="container" id="reviews">
   <h3><%= @reviews_for.count %> reviews</h3>
   <% if @reviews_for.blank? %>
@@ -244,6 +202,45 @@
 </div>
 
 <%= render 'reviews/form', profile: @profile, review: @review %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

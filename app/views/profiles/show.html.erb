@@ -57,7 +57,7 @@
         <div class="container">
           <div class="row">
             <div class="col-lg-8">
-              <h2 class="title">Reviews</h2>
+              <h2 class="title"><%= @reviews_for.count %> reviews</h2>
               <div class="separator-2"></div>
               <!-- comments start -->
               <div class="comments margin-clear space-top">
@@ -65,17 +65,23 @@
 
                   <!-- comment start -->
                   <div class="comment clearfix">
+                    <!-- AVATAR PICTURE -->
                     <div class="comment-avatar">
                       <img class="img-circle" src="images/avatar.jpg" alt="avatar">
                     </div>
                     <header>
-                      <h3>Amazing!</h3>
-                      <div class="comment-meta"> <i class="fa fa-star text-default"></i> <i class="fa fa-star text-default"></i> <i class="fa fa-star text-default"></i> <i class="fa fa-star text-default"></i> <i class="fa fa-star"></i> | Today, 12:31</div>
+                      <div class="comment-meta">
+                        <%= review.by_user.profile.first_name.capitalize %>
+                         | <%= review.created_at.strftime("%d %b. %Y") %> |
+                        <% review.rating.times do %>
+                        <i class="fa fa-star text-default"></i>
+                        <% end %>
+                      </div>
                     </header>
                     <div class="comment-content">
                       <div class="comment-body clearfix">
                         <p><%= review.content %></p>
-                        <a href="blog-post.html" class="btn-sm-link link-dark pull-right"><i class="fa fa-reply"></i> Reply</a>
+                        <!-- <a href="blog-post.html" class="btn-sm-link link-dark pull-right"><i class="fa fa-reply"></i>Reply</a> -->
                       </div>
                     </div>
                   </div>
@@ -153,64 +159,3 @@
     </div>
   </div>
 </section>
-
-<!-- old code below -->
-<!-- ================ -->
-
-<div class="container" id="reviews">
-  <h3><%= @reviews_for.count %> reviews</h3>
-  <% if @reviews_for.blank? %>
-  Be the first to leave a review on <%= @profile.first_name %>'s profile :)
-  <% else %>
-  <div class="row">
-    <% @reviews_for.each do |review| %>
-    <%= render 'reviews/show', review: review %>
-    <% end %>
-  </div>
-  <% end %>
-</div>
-
-<%= render 'reviews/form', profile: @profile, review: @review %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -44,7 +44,22 @@
 
   <div class="container">
     <div class="row">
-
+<% if policy(@apartment).edit? %>
+    <aside class="col-lg-4 col-xl-3 ml-xl-auto">
+        <div class="sidebar">
+          <!-- <div class="block clearfix"> -->
+          <h3 class="title">My tools</h3>
+          <div class="separator-2"></div>
+    <%= link_to "Update my apartment's infos", edit_apartment_path(@apartment) %>
+    <br>
+    <% if policy(@apartment).destroy? %>
+        <%= link_to "Delete my apartment", apartment_path(@apartment),
+        method: :delete,
+        data: { confirm: "Are you sure?" } %>
+<% end %>
+        </div>
+      </aside>
+  <% end %>
       <!-- main start -->
       <!-- ================ -->
       <div class="main col-12">
@@ -68,15 +83,16 @@
           <div class="col-lg-4">
           <% if  @apartment.user.profile.photo? %>
             <%= cl_image_tag @apartment.user.profile.photo.path, width: 400, height: 400, crop: :fill %>
+            <% else %>
+            <%= image_tag "no-photo.png", width: 400, height: 400, crop: :fill %>
             <% end %>
           </div>
           <div class="col-lg-8">
+            <h4>About Me</h4>
             <h5><%= @apartment.user.profile.first_name.capitalize %> - <%= @apartment.user.profile.age%> years old - Originally from <%= @apartment.user.profile.city_from%> </h5>
-            <h2>Description</h2>
+            <p><%= @apartment.user.profile.detailed_description %></p>
             <h4>What you'll have to do in exchange for free housing</h4>
             <p><%= @apartment.deal %></p>
-            <h4>About Me</h4>
-            <p><%= @apartment.user.profile.detailed_description %></p>
 
 
           </div>
@@ -95,20 +111,24 @@
         <div class="separator-2"></div>
         <!-- Nav tabs -->
         <ul class="nav nav-tabs style-4" id="myTab" role="tablist">
-          <li class="nav-item"><a class="nav-link active" href="#h2tab2" role="tab" data-toggle="tab"><i class="fa fa-files-o pr-1"></i>More about the housing</a></li>
-          <li class="nav-item"><a class="nav-link" href="#h2tab3" role="tab" data-toggle="tab"><i class="fa fa-star pr-1"></i>Reviews</a></li>
+          <li class="nav-item"><a class="show-nav-link nav-link active" href="#h2tab2" role="tab" data-toggle="tab"><i class="fa fa-files-o pr-1"></i>More about the housing</a></li>
+          <li class="nav-item"><a class="show-nav-link nav-link" href="#h2tab3" role="tab" data-toggle="tab"><i class="fa fa-star pr-1"></i>Reviews</a></li>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content padding-top-clear padding-bottom-clear">
           <div class="tab-pane active" id="h2tab2">
             <dl class="row">
+            <% if @amenities.count != 0 %>
               <% @amenities.each  do |category| %>
-              <dt class="col-sm-3 text-sm-right"><%= category.first %></dt>
-              <dd class="col-sm-9">
-                <% category.last.each do |amenity| %>
-                - <%= amenity.name %>
-                <%end %>
-              </dd>
+                <dt class="col-sm-3 text-sm-right"><%= category.first %></dt>
+                <dd class="col-sm-9">
+                  <% category.last.each do |amenity| %>
+                    - <%= amenity.name %>
+                  <%end %>
+                </dd>
+              <% end %>
+            <% else %>
+              <dt>This user hasn't added any more info yet</dt>
             <% end %>
             </dl>
             <hr>

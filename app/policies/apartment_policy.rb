@@ -10,7 +10,6 @@ class ApartmentPolicy < ApplicationPolicy
 
     def new?
       user.profile.profile_type == 'host' && user.apartment == nil
-
     end
 
 

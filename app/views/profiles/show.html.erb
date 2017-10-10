@@ -8,7 +8,12 @@
 <% end %>
 
 
-<%= link_to "Add your apartment", new_apartment_path %>
+<% if policy(@profile.user.apartment).new? %>
+    <%= link_to "Add your apartment", new_apartment_path %>
+  <% end %>
+
+
+
 
 
 <div class="container" id="reviews">

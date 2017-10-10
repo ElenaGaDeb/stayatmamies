@@ -65,7 +65,7 @@
 
                   <li class="nav-item mega-menu mega-menu--wide">
                     <div class="dropdown">
-                    <% if current_user.profile.photo? != nil %>
+                    <% if current_user.profile.photo? %>
                       <%= cl_image_tag current_user.profile.photo.path, class: "avatar dropdown-toggle", "data-toggle" => "dropdown" %>
                     <% else %>
                       <% avatar_url = current_user.facebook_picture_url || "http://placehold.it/30x30" %>

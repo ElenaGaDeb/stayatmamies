@@ -30,7 +30,7 @@ class ApartmentsController < ApplicationController
     end
 
     if params['city'] != '' && params['city'] != nil
-      @apartments = @apartments.select  {|apartment| apartment.city.downcase == params['city'].downcase }
+      @apartments = @apartments.select  {|apartment| apartment.city.strip.downcase == params['city'].strip.downcase }
     end
 
     @hash = Gmaps4rails.build_markers(@apartments) do |apartment, marker|

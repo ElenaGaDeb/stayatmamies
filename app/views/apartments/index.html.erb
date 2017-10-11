@@ -11,81 +11,82 @@
 <%= "The Apartments" %>
 <% end %>
 
-<div class="banner banner-big-height dark-translucent-bg padding-bottom-clear" style="background-image:url(https://unsplash.it/1298/550?image=1008);background-position: 50% 32%;">
-  <div class="container">
-    <div class="row justify-content-lg-center">
-      <div class="col-lg-8 text-center pv-20">
-        <h1 class="title">Stay at Mamie's</h1>
-        <div class="separator mt-10"></div>
-        <p class="text-center">All over the world, there are young people who want to travel but are too poor to do so, and older people who just want someone to spend time with them. With Stay At Mamie's, you don't need to pay rent, you just have to spend a little time with an awesome person who will welcome you to their house. Start looking for your next best friend! </p>
-      </div>
-    </div>
-  </div>
-  <!-- section start -->
-  <!-- ================ -->
-  <div class="dark-translucent-bg section">
+  <div class="banner banner-big-height dark-translucent-bg padding-bottom-clear" style="background-image:url(https://unsplash.it/1298/550?image=1008);background-position: 50% 32%;">
     <div class="container">
-      <!-- filters start -->
-      <div class="sorting-filters text-center mb-20 d-flex justify-content-center">
-
-        <form class="form-inline" action='/'>
-          <div class="form-group">
-            <label>From:</label>
-            <input type="date" name='date-from' class="form-control">
-          </div>
-          <div class="form-group ml-1">
-            <label>To:</label>
-            <input type="date" name='date-to' class="form-control">
-          </div>
-          <div class="form-group ml-1">
-            <label>City:</label>
-            <input type="string" name='city' class="form-control">
-          </div>
-          <div class="form-group ml-1">
-            <button type="submit" class="btn btn-lg btn-success btn-animated">Search <i class="fa fa-check"></i></button>
-          </div>
-        </form>
-
-      </div>
-      <!-- filters end -->
-    </div>
-  </div>
-  <!-- section end -->
-</div>
-<section class="light-gray-bg pv-40 border-clear">
-  <div class="container">
-    <div class="row justify-content-lg-center">
-      <div class="col-lg-8">
-        <h2 class="text-center title">The <strong>Apartments</strong></h2>
-        <div class="separator"></div>
-      </div>
-    </div>
-  </div>
-  <div class="container-fluid">
-    <div class="row">
-      <% @apartments.each do |apartment| %>
-      <div class="col-xs-12 col-sm-4">
-        <% if apartment.photos? %>
-        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path apartment.photos[0].path, height: 430, width: 300, crop: :fill %>')">
-<% else %>
-        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('https://unsplash.it/430/300?image=946');">
-<% end %>
-          <div class="card-category"><%= apartment.city %>, <%= apartment.country %> </div>
-          <div class="card-description">
-            <h2><%= apartment.name  %></h2>
-            <p><%= apartment.description %></p>
-          </div>
-          <% if apartment.user.profile.photo? %>
-          <%= cl_image_tag apartment.user.profile.photo.path, class: "card-user" %>
-          <% end %>
-          <%= link_to "", apartment_path(apartment), class: "card-link"%>
+      <div class="row justify-content-lg-center">
+        <div class="col-lg-8 text-center pv-20">
+          <h1 class="title">Stay at Mamie's</h1>
+          <div class="separator mt-10"></div>
+          <p class="text-center">All over the world, there are young people who want to travel but are too poor to do so, and older people who just want someone to spend time with them. With Stay At Mamie's, you don't need to pay rent, you just have to spend a little time with an awesome person who will welcome you to their house. Start looking for your next best friend! </p>
         </div>
       </div>
-      <% end %>
+    </div>
+    <!-- section start -->
+    <!-- ================ -->
+    <div class="dark-translucent-bg section">
+      <div class="container">
+        <!-- filters start -->
+        <div class="sorting-filters text-center mb-20 d-flex justify-content-center">
+
+          <form class="form-inline" action='/'>
+            <div class="form-group">
+              <label>From:</label>
+              <input type="date" name='date-from' class="form-control">
+            </div>
+            <div class="form-group ml-1">
+              <label>To:</label>
+              <input type="date" name='date-to' class="form-control">
+            </div>
+            <div class="form-group ml-1">
+              <label>City:</label>
+              <input type="string" name='city' class="form-control">
+            </div>
+            <div class="form-group ml-1">
+              <button type="submit" class="btn btn-lg btn-success btn-animated">Search <i class="fa fa-check"></i></button>
+            </div>
+          </form>
+
+        </div>
+        <!-- filters end -->
+      </div>
+    </div>
+    <!-- section end -->
+  </div>
+
+  <section class="light-gray-bg pv-40 border-clear">
+    <div class="container">
+      <div class="row justify-content-lg-center">
+        <div class="col-lg-8">
+          <h2 class="text-center title">The <strong>Apartments</strong></h2>
+          <div class="separator"></div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <% @apartments.each do |apartment| %>
+        <div class="col-xs-12 col-sm-4">
+          <% if apartment.photos? %>
+          <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path apartment.photos[0].path, height: 430, width: 300, crop: :fill %>')">
+            <% else %>
+            <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('https://unsplash.it/430/300?image=946');">
+              <% end %>
+              <div class="card-category"><%= apartment.city %>, <%= apartment.country %> </div>
+              <div class="card-description">
+                <h2><%= apartment.name  %></h2>
+                <p><%= apartment.description %></p>
+              </div>
+              <% if apartment.user.profile.photo? %>
+              <%= cl_image_tag apartment.user.profile.photo.path, class: "card-user" %>
+              <% end %>
+              <%= link_to "", apartment_path(apartment), class: "card-link"%>
+            </div>
+          </div>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-</div>
 </section>
 <div id="map" style="width: 100%; height: 600px;"></div>
 
@@ -107,5 +108,4 @@ handler.getMap().setZoom(14);
 });
 <% end %>
 <% end %>
-
 

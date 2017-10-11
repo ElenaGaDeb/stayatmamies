@@ -1,41 +1,21 @@
-<!-- old code below -->
-<!-- ================ -->
-
-<!--
-
-<div class="container" id="reviews">
-  <h3><%= @reviews_for.count %> reviews</h3>
-  <% if @reviews_for.blank? %>
-  Be the first to leave a review on <%= @profile.first_name %>'s profile :)
-  <% else %>
-  <div class="row">
-    <% @reviews_for.each do |review| %>
-    <%= render 'reviews/show', review: review %>
-    <% end %>
+<div class="comment clearfix">
+  <!-- AVATAR PICTURE -->
+  <div class="comment-avatar">
+    <img class="img-circle" src="images/avatar.jpg" alt="avatar">
   </div>
-  <% end %>
-</div>
-
-<%= render 'reviews/form', profile: @profile, review: @review %>
-
-
-
-<div class="col-lg-4">
-  <div class="testimonial">
-    <%= image_tag "fb_pic.png", {class: "img-circle", id: "logo"} %>
-      <span>
-        <% review.rating.times do %>
+  <header>
+    <div class="comment-meta">
+      <%= review.by_user.profile.first_name.capitalize %>
+      | <%= review.created_at.strftime("%d %b. %Y") %> |
+      <% review.rating.times do %>
         <i class="fa fa-star text-default"></i>
-        <% end %>
-      </span>
-    <div class="testimonial-body">
-      <blockquote>
-        <p><%= review.content %></p>
-      </blockquote>
-      <div class="testimonial-info-1">- <%= review.by_user.profile.first_name %></div>
-      <div class="testimonial-info-2"><%= review.created_at.strftime("%d %b. %Y") %></div>
+      <% end %>
+    </div>
+  </header>
+  <div class="comment-content">
+    <div class="comment-body clearfix">
+      <p><%= review.content %></p>
+      <!-- <a href="blog-post.html" class="btn-sm-link link-dark pull-right"><i class="fa fa-reply"></i>Reply</a> -->
     </div>
   </div>
 </div>
-
--->

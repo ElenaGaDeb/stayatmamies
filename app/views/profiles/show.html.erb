@@ -60,32 +60,14 @@
               <div class="separator-2"></div>
               <!-- comments start -->
               <div class="comments margin-clear space-top">
-                <% @reviews_for.each do |review| %>
-
+                <% if @reviews_for.blank? %>
+                  Be the first to leave a review on <%= @profile.first_name %>'s profile :)
+                <% else %>
+                  <% @reviews_for.each do |review| %>
                   <!-- comment start -->
-                  <div class="comment clearfix">
-                    <!-- AVATAR PICTURE -->
-                    <div class="comment-avatar">
-                      <img class="img-circle" src="images/avatar.jpg" alt="avatar">
-                    </div>
-                    <header>
-                      <div class="comment-meta">
-                        <%= review.by_user.profile.first_name.capitalize %>
-                         | <%= review.created_at.strftime("%d %b. %Y") %> |
-                        <% review.rating.times do %>
-                        <i class="fa fa-star text-default"></i>
-                        <% end %>
-                      </div>
-                    </header>
-                    <div class="comment-content">
-                      <div class="comment-body clearfix">
-                        <p><%= review.content %></p>
-                        <!-- <a href="blog-post.html" class="btn-sm-link link-dark pull-right"><i class="fa fa-reply"></i>Reply</a> -->
-                      </div>
-                    </div>
-                  </div>
+                  <%= render 'reviews/show', review: review %>
                   <!-- comment end -->
-
+                  <% end %>
                 <% end %>
 
                 <nav aria-label="Page navigation">
@@ -113,37 +95,7 @@
               <!-- comments end -->
 
               <!-- comments form start -->
-              <div class="comments-form">
-                <h2 class="title">Add your Review</h2>
-                <form id="comment-form">
-                  <div class="form-group has-feedback">
-                    <label for="name4">Name</label>
-                    <input type="text" class="form-control" id="name4" placeholder="" name="name4" required="">
-                    <i class="fa fa-user form-control-feedback"></i>
-                  </div>
-                  <div class="form-group has-feedback">
-                    <label for="subject4">Subject</label>
-                    <input type="text" class="form-control" id="subject4" placeholder="" name="subject4" required="">
-                    <i class="fa fa-pencil form-control-feedback"></i>
-                  </div>
-                  <div class="form-group">
-                    <label>Rating</label>
-                    <select class="form-control" id="review">
-                      <option value="five">5</option>
-                      <option value="four">4</option>
-                      <option value="three">3</option>
-                      <option value="two">2</option>
-                      <option value="one">1</option>
-                    </select>
-                  </div>
-                  <div class="form-group has-feedback">
-                    <label for="message4">Message</label>
-                    <textarea class="form-control" rows="8" id="message4" placeholder="" name="message4" required=""></textarea>
-                    <i class="fa fa-envelope-o form-control-feedback"></i>
-                  </div>
-                  <input type="submit" value="Submit" class="btn btn-default">
-                </form>
-              </div>
+              <%= render 'reviews/form', profile: @profile, review: @review %>
               <!-- comments form end -->
             </div>
 

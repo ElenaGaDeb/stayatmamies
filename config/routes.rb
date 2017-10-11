@@ -1,31 +1,12 @@
 Rails.application.routes.draw do
+  resources :conversations do
+    resources :messages, only: [:create]
+  end
 
   ActiveAdmin.routes(self)
   resources :profiles, only: [:edit, :new, :show, :update, :create] do
     resources :reviews, only: [:create]
   end
-
-  get 'conversations/index'
-
-  get 'conversations/new'
-
-  get 'conversations/create'
-
-  get 'conversations/show'
-
-  get 'conversations/close'
-
-
-  get 'messages/new'
-
-  get 'messages/create'
-
-  get 'messages/index'
-
-  get 'messages/show'
-
-  get 'messages/delete'
-
   resources :profiles, only: [:edit, :new, :show, :update, :create]
 
   resources :apartments do
@@ -39,5 +20,7 @@ Rails.application.routes.draw do
   mount Attachinary::Engine => "/attachinary"
 
   get "test", to: "pages#test"
+
+  mount ActionCable.server, at: '/cable'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

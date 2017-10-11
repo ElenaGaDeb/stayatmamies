@@ -1,6 +1,7 @@
 class Apartment < ApplicationRecord
   has_many :apartment_amenities
   belongs_to :user
+  has_many :conversations
   has_many :bookings
 
   has_attachments :photos, maximum: 10

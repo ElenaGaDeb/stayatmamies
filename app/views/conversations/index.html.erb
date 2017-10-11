@@ -1,2 +1,8 @@
-<h1>Conversations#index</h1>
-<p>Find me in app/views/conversations/index.html.erb</p>
+<h1>My conversations</h1>
+
+<ul>
+  <% @conversations.each do |conversation| %>
+    <li><%= link_to "Chat with #{conversation.opposed_user(current_user).profile.first_name}", conversation_path(conversation)  %></li>
+  <% end %>
+
+</ul>

@@ -7,6 +7,9 @@ gem 'pg'
 gem 'puma'
 gem 'rails', '5.1.4'
 gem 'redis'
+gem 'em-hiredis'
+gem 'turbolinks', '~> 5.0'
+gem 'actioncable'
 gem 'webpacker', '~> 3.0'
 gem 'devise'
 gem 'omniauth-facebook'
@@ -25,6 +28,7 @@ gem 'country_select'
 gem 'uglifier'
 # for simple form to render form select
 gem 'country_select'
+gem 'coffee-script'
 gem "coffee-rails"
 gem "gmaps4rails"
 gem "pundit"

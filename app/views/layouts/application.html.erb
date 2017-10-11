@@ -15,10 +15,11 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:700" rel="stylesheet">
 
   <%= csrf_meta_tags %>
-  <%= action_cable_meta_tag %>
+
   <%= stylesheet_link_tag 'application', media: 'all' %>
 
   <title><%= yield(:title_tag).blank? ? "Stay at Mamie's" : yield(:title_tag) %></title>
+  <%= action_cable_meta_tag %>
 
 </head>
 <body>

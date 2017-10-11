@@ -1,37 +1,14 @@
-<!-- <div class="comments-form">
-  <h2 class="title">Add your Review</h2>
-  <form id="comment-form">
-    <div class="form-group">
-      <label>Rating</label>
-      <select class="form-control" id="review">
-        <option value="five">5</option>
-        <option value="four">4</option>
-        <option value="three">3</option>
-        <option value="two">2</option>
-        <option value="one">1</option>
-      </select>
-    </div>
-    <div class="form-group has-feedback">
-      <label for="message4">Message</label>
-      <textarea class="form-control" rows="8" id="message4" placeholder="" name="message4" required=""></textarea>
-      <i class="fa fa-envelope-o form-control-feedback"></i>
-    </div>
-    <input type="submit" value="Submit" class="btn btn-default">
-  </form>
-</div>
- -->
-
-<%= simple_form_for([ profile, review ]) do |f| %>
-  <% if profile.errors.any? %>
-    <div id="error_explanation">
-      <ul>
-        <% profile.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
+  <%= simple_form_for([ profile, review ]) do |f| %>
+    <% if profile.errors.any? %>
+      <div id="error_explanation">
+        <ul>
+          <% profile.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <%= f.input :rating, error: 'Rating must be within 0-5' %>
+    <%= f.input :content, error: '25 characters minimum' %>
+    <%= f.submit "Submit", class: "btn btn-primary" %>
   <% end %>
-  <%= f.input :rating, error: 'Rating must be within 0-5' %>
-  <%= f.input :content, error: '25 characters minimum' %>
-  <%= f.submit "Submit", class: "btn btn-primary" %>
-<% end %>

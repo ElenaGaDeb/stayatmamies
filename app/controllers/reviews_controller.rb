@@ -16,6 +16,7 @@ class ReviewsController < ApplicationController
     @profile = Profile.find(params[:profile_id])
     @review.by_user_id = current_user.id
     @review.for_user_id = @profile.user.id
+    authorize @review
     if @review.save
       respond_to do |format|
         format.html { redirect_to profile_path(@profile) }

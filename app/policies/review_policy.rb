@@ -3,6 +3,7 @@ class ReviewPolicy < ApplicationPolicy
     def resolve
       scope
     end
+  end
 
     def index?
       return true
@@ -13,13 +14,14 @@ class ReviewPolicy < ApplicationPolicy
     end
 
     def new?
-      (user.profile.profile_type == 'student' && @apartment.user.profile.profile_type == 'host')
-      ||
-      (current_user.profile.profile_type == 'host' @profile.profile_type == 'student')
+      (user.profile.profile_type == 'student' && @apartment.user.profile.profile_type == 'host') || (user.profile.profile_type == 'host' && @profile.profile_type == 'student')
     end
 
     def create?
-      user.profile.profile_type == 'student' && @apartment.user.profile.profile_type == 'host'
+      if @apartment != nil
+      return user.profile.profile_type == 'student' && @apartment.user.profile.profile_type == 'host'
+      else
+      return user.profile.profile_type == 'host' && Profile.find(record.for_user_id).profile_type == 'student'
     end
-  end
+    end
 end

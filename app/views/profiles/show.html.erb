@@ -63,7 +63,7 @@
                 <% if @reviews_for.blank? %>
                   Be the first to leave a review on <%= @profile.first_name %>'s profile :)
                 <% else %>
-                  <% @reviews_for.each do |review| %>
+                  <% @reviews_for.reverse.each do |review| %>
                   <!-- comment start -->
                   <%= render 'reviews/show', review: review %>
                   <!-- comment end -->

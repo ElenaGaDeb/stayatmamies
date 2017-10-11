@@ -46,6 +46,7 @@ class ApartmentsController < ApplicationController
 
   def show
     @amenities = @apartment.amenities.group_by { |a| a.item_slug }
+    @booking = Booking.new
     @review = Review.new
     @user = @apartment.user
     @reviews_for = Review.reviews_for(@user) || 0

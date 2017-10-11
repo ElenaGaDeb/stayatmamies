@@ -12,6 +12,22 @@
           <% if @profile.user.apartment == nil && @profile.profile_type == "host" %>
           <%= link_to "Add your apartment", new_apartment_path %>
           <% end %>
+          <!-- bookings -->
+          <% if @profile.profile_type == "host" && @profile.user.apartment.bookings != nil %>
+
+          <% @profile.user.apartment.bookings.each do |booking| %>
+          <%= booking.user.profile.first_name %>
+          <%= booking.start_date %>
+          <%= booking.end_date %>
+          <%= booking.status %>
+
+
+          <% end %>
+
+
+
+
+          <% end %>
         </div>
       </aside>
       <% end %>
@@ -84,7 +100,6 @@
           </div>
         </div>
       </section>
-
     </div>
   </div>
 </section>

@@ -97,35 +97,23 @@
             <p><%= @apartment.deal %></p>
           </div>
           <div class="col-lg-4">
-          <!-- Bookings start -->
-           <div class="dark-translucent-bg section">
-              <div class="container">
-              <!-- filters start -->
-                <div class="sorting-filters text-center mb-20 d-flex justify-content-center">
-                  <form class="form-inline">
-                    <div class="form-group">
-                      <label>From:</label>
-                      <input type="date" class="form-control">
-                    </div>
-                    <div class="form-group ml-1">
-                      <label>To:</label>
-                      <input type="date" class="form-control">
-                    </div>
-                    <div class="form-group ml-1">
-                      <button type="submit" class="btn btn-lg btn-success btn-animated">Submit reservation request <i class="fa fa-check"></i></button>
-                    </div>
-                    </form>
-                </div>
-      <!-- filters end -->
-              </div>
-           </div>
-  <!-- section end -->
-</div>
-          <!-- bookings end  -->
+
+
+      <!-- booking form start -->
+
+        <div class="dark-translucent-bg section">
+          <div class="container">
+            <div class="sorting-filters text-center mb-20 d-flex justify-content-center">
+              <%= simple_form_for [@apartment, @booking] do |f| %>
+              <%= f.input :start_date, as: :date %>
+              <%= f.input :end_date, as: :date %>
+              <%= f.button :submit, class: "btn btn-primary"  %>
+              <% end %>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- main end -->
+
+      <!-- booking form end -->
 
     </div>
   </div>

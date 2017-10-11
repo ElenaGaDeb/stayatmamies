@@ -65,31 +65,9 @@
                   Be the first to leave a review on <%= @profile.first_name %>'s profile :)
                 <% else %>
                   <% @reviews_for.each do |review| %>
-
                   <!-- comment start -->
-                  <div class="comment clearfix">
-                    <!-- AVATAR PICTURE -->
-                    <div class="comment-avatar">
-                      <img class="img-circle" src="images/avatar.jpg" alt="avatar">
-                    </div>
-                    <header>
-                      <div class="comment-meta">
-                        <%= review.by_user.profile.first_name.capitalize %>
-                        | <%= review.created_at.strftime("%d %b. %Y") %> |
-                        <% review.rating.times do %>
-                        <i class="fa fa-star text-default"></i>
-                        <% end %>
-                      </div>
-                    </header>
-                    <div class="comment-content">
-                      <div class="comment-body clearfix">
-                        <p><%= review.content %></p>
-                        <!-- <a href="blog-post.html" class="btn-sm-link link-dark pull-right"><i class="fa fa-reply"></i>Reply</a> -->
-                      </div>
-                    </div>
-                  </div>
+                  <%= render 'reviews/show', review: review %>
                   <!-- comment end -->
-
                   <% end %>
                 <% end %>
 
@@ -118,7 +96,7 @@
               <!-- comments end -->
 
               <!-- comments form start -->
-              <%= render 'reviews/form' %>
+              <%= render 'reviews/form', profile: @profile, review: @review %>
               <!-- comments form end -->
             </div>
 

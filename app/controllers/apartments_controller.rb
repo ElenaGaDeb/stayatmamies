@@ -48,6 +48,7 @@ class ApartmentsController < ApplicationController
     @amenities = @apartment.amenities.group_by { |a| a.item_slug }
     @review = Review.new
     @user = @apartment.user
+    @reviews_for = Review.reviews_for(@user) || 0
     @apartment_coordinates = { lat: @apartment.latitude, lng: @apartment.longitude }
     authorize @apartment
   end

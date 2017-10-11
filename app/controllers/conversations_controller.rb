@@ -1,11 +1,24 @@
 class ConversationsController < ApplicationController
+  before_action :authenticate_user!
+
+  include Pundit
+  after_action :verify_authorized
+   # Uncomment when you *really understand* Pundit!
+  # rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
   def index
-    @conversations = Conversation.all
+    @conversations = policy_scope(Conversation)
+    authorize(@conversations)
+    # @conversations = policy_scope
     # only conversations with current user
+
   end
+
   def show
+
     # shwo one conversation selected/ on seperate page
     @conversation = Conversation.find(params[:id])
+    authorize(@conversation)
     @messages = @conversation.messages
     @new_message = Message.new
   end
@@ -20,6 +33,7 @@ class ConversationsController < ApplicationController
     @recipient = User.find(params[:recipient_id])
     @apartment = Apartment.find(params[:apartment_id])
     @conversation = Conversation.new(sender: @sender, recipient: @recipient, apartment: @apartment)
+    authorize(@conversation)
     if @conversation.save
       redirect_to conversation_path(@conversation)
     else
@@ -40,5 +54,10 @@ class ConversationsController < ApplicationController
   end
   def conversated?
     session[:conversations].include?(@conversation.id)
+  end
+
+  def user_not_authorized
+    flash[:alert] = "You are not authorized to perform this action."
+    redirect_to(root_path)
   end
 end

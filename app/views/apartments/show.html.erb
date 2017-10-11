@@ -59,6 +59,13 @@
         </div>
       </aside>
   <% end %>
+  <!-- temporary link for conversation -->
+  <%=
+    link_to "Discuss with #{@apartment.user.profile.first_name.capitalize}",
+      conversations_path({apartment_id: @apartment.id, recipient_id: @apartment.user.id}),
+      class: "btn btn-success",
+      method: "post"
+  %>
       <!-- main start -->
       <!-- ================ -->
       <div class="main col-12">

@@ -23,6 +23,7 @@ class ReviewsController < ApplicationController
         format.js  # <-- will render `app/views/reviews/create.js.erb`
       end
     else
+      fail
       respond_to do |format|
         format.html { redirect_to profile_path(@profile) }
         format.js

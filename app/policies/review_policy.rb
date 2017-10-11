@@ -18,10 +18,7 @@ class ReviewPolicy < ApplicationPolicy
     end
 
     def create?
-      if @apartment != nil
-      return user.profile.profile_type == 'student' && @apartment.user.profile.profile_type == 'host'
-      else
-      return user.profile.profile_type == 'host' && Profile.find(record.for_user_id).profile_type == 'student'
-    end
+        # (user.profile.profile_type == 'student' && User.find(record.for_user_id).profile.profile_type == 'host') || (user.profile.profile_type == 'host' && Profile.find(record.for_user_id).profile_type == 'student')
+        (user.profile.profile_type == 'student' && User.find(record.for_user_id).profile.profile_type == 'host') || (user.profile.profile_type == 'host' && User.find(record.for_user_id).profile.profile_type == 'student')
     end
 end

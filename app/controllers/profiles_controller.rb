@@ -33,7 +33,7 @@ class ProfilesController < ApplicationController
   def update
     authorize @profile
     if @profile.update(profile_params)
-        #redirect_to @profile_path(@profile)
+      redirect_to profile_path(@profile)
     else
       render :edit
     end
@@ -42,7 +42,7 @@ class ProfilesController < ApplicationController
   def show
     @profile = Profile.find(params[:id])
     @review = Review.new
-    @reviews_for = Review.reviews_for(@profile)
+    @reviews_for = Review.reviews_for(@profile.user)
     authorize @profile
   end
 

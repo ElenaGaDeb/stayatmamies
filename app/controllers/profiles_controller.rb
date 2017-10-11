@@ -42,7 +42,7 @@ class ProfilesController < ApplicationController
   def show
     @profile = Profile.find(params[:id])
     @review = Review.new
-    @reviews_for = Review.reviews_for(@profile)
+    @reviews_for = Review.reviews_for(@profile.user)
     authorize @profile
   end
 

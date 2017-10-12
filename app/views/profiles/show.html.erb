@@ -1,6 +1,7 @@
 <section class="main-container">
   <div class="container">
     <div class="row">
+
      <% if policy(@profile).edit? %>
      <aside class="col-lg-4 col-xl-3 ml-xl-auto">
       <div class="sidebar">
@@ -55,7 +56,7 @@
 
       <!-- page-title start -->
       <!-- ================ -->
-      <h1 class="page-title"><%= @profile.first_name.capitalize %>'s Profile</h1>
+      <h1 class="page-title text-center"><%= @profile.first_name.capitalize %>'s Profile</h1>
       <span>
         <i class="fa fa-star text-default"></i>
         <i class="fa fa-star text-default"></i>
@@ -63,7 +64,7 @@
         <i class="fa fa-star text-default"></i>
         <i class="fa fa-star"></i>
       </span>
-
+<p class="large text-center"><%= @profile.short_description %></p>
 
       <div class="separator-2"></div>
       <!-- page-title end -->
@@ -78,13 +79,13 @@
         </div>
         <div class="col-lg-8 col-xl-7 pv-30">
           <h2 class="mt-4">Description</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem debitis enim facilis porro quia in voluptates praesentium, cupiditate, dolorum. Facilis minus, quidem! Id perspiciatis labore praesentium voluptatibus assumenda odio, magni.</p>
-          <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non sint beatae delectus obcaecati eveniet nulla voluptate odio est laborum veniam? Natus nemo provident, voluptate molestias sint, nam dolor blanditiis minus!</p>
-          <h4 class="space-top">Specifications</h4>
+          <p><%= @profile.age%> years old, from<%= @profile.city_from.capitalize %></p>
+
+          <p><%= @profile.detailed_description %></p>
+          <h4 class="space-top">My personality</h4>
           <hr>
           <dl class="row">
-          <% if @characteristics.count != 0 %>
+            <% if @characteristics.count != 0 %>
             <% @characteristics.each  do |category| %>
             <dt class="col-sm-3 text-sm-right"><%= category.first %></dt>
             <dd class="col-sm-9">
@@ -105,37 +106,37 @@
     </div>
   </div>
 
-    <section class="pv-30 light-gray-bg">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8">
-            <h2 class="title"><%= @reviews_for.count %> reviews</h2>
-            <div class="separator-2"></div>
-            <!-- comments start -->
-            <div class="comments margin-clear space-top">
-              <% if @reviews_for.blank? %>
-              Be the first to leave a review on <%= @profile.first_name %>'s profile :)
-              <% else %>
-              <% @reviews_for.reverse.each do |review| %>
-              <!-- comment start -->
-              <%= render 'reviews/show', review: review %>
-              <!-- comment end -->
-              <% end %>
-              <% end %>
-            </div>
-            <!-- comments end -->
-
-            <!-- comments form start -->
-            <%= render 'reviews/form', profile: @profile, review: @review %>
-            <!-- comments form end -->
+  <section class="pv-30 light-gray-bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <h2 class="title"><%= @reviews_for.count %> reviews</h2>
+          <div class="separator-2"></div>
+          <!-- comments start -->
+          <div class="comments margin-clear space-top">
+            <% if @reviews_for.blank? %>
+            Be the first to leave a review on <%= @profile.first_name %>'s profile :)
+            <% else %>
+            <% @reviews_for.reverse.each do |review| %>
+            <!-- comment start -->
+            <%= render 'reviews/show', review: review %>
+            <!-- comment end -->
+            <% end %>
+            <% end %>
           </div>
+          <!-- comments end -->
 
-          <!-- sidebar start -->
-          <!-- ================ -->
-
-
+          <!-- comments form start -->
+          <%= render 'reviews/form', profile: @profile, review: @review %>
+          <!-- comments form end -->
         </div>
+
+        <!-- sidebar start -->
+        <!-- ================ -->
+
+
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
+</div>
 </div>

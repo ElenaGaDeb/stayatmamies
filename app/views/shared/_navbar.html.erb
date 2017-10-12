@@ -1,4 +1,9 @@
 <header class="header fixed fixed-desktop clearfix transparent-header-on">
+  <!-- empty box for dom select -->
+  <% if user_signed_in? %>
+  <div id="current-user"></div>
+  <% end %>
+        <!-- ... -->
   <div class="container">
     <div class="row">
       <div class="col-md-auto hidden-md-down pl-3">
@@ -60,7 +65,9 @@
 
                   <% if user_signed_in? %>
                   <li class="nav-item mega-menu mega-menu--wide">
-                    <%= link_to "Messages",conversations_path, class: "nav-link" %>
+                    <div class="nav_notif">
+                      <%= link_to "Messages",conversations_path, class: "nav-link", id: "message_navb" %>
+                    </div>
                   </li>
 
                   <li class="nav-item mega-menu mega-menu--wide">

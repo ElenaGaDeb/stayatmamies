@@ -56,19 +56,16 @@
       </aside>
       <% end %>
       <!-- temporary link for conversation -->
-      <%=
-      link_to "Discuss with #{@apartment.user.profile.first_name.capitalize}",
-      conversations_path({apartment_id: @apartment.id, recipient_id: @apartment.user.id}),
-      class: "btn btn-success",
-        method: "post"
-        %>
+
+
         <!-- main start -->
         <!-- ================ -->
         <div class="main col-12">
 
           <!-- page-title start -->
           <!-- ================ -->
-          <h1 class="page-title"><%= @apartment.user.profile.first_name.capitalize %>'s Apartment</h1>
+          <h1 class="page-title"><%= @apartment.user.profile.first_name.capitalize %>'s Apartment
+          <%= link_to '<i class="fa fa-comments-o fa-2x" aria-hidden="true"></i>'.html_safe, conversations_path({apartment_id: @apartment.id, recipient_id: @apartment.user.id}), method: "post" %></h1>
           <% if @reviews_for.count == nil || @reviews_for.count == 0%>
           <p>This user doesn't have a rating yet</p>
           <% else %>

@@ -23,5 +23,9 @@ def self.get(sender_id, recipient_id)
   def opposed_user(user)
     user == recipient ? sender : recipient
   end
+
+  def participates?(user)
+    user == recipient || user = sender
+  end
 end
 

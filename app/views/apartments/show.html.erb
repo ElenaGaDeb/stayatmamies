@@ -40,20 +40,22 @@
   <div class="container">
     <div class="row">
       <% if policy(@apartment).edit? %>
-      <aside class="col-lg-4 col-xl-3 ml-xl-auto">
-        <div class="sidebar">
+        <aside class="col-lg-4 col-xl-3 ml-xl-auto">
+          <div class="sidebar">
           <!-- <div class="block clearfix"> -->
-          <h3 class="title">My tools</h3>
-          <div class="separator-2"></div>
-          <%= link_to "Update my apartment's infos", edit_apartment_path(@apartment) %>
-          <br>
-          <% if policy(@apartment).destroy? %>
-          <%= link_to "Delete my apartment", apartment_path(@apartment),
-          method: :delete,
-          data: { confirm: "Are you sure?" } %>
-          <% end %>
-        </div>
-      </aside>
+            <h3 class="title">My tools</h3>
+            <div class="separator-2"></div>
+            <%= link_to "Update my apartment's infos", edit_apartment_path(@apartment) %>
+            <br>
+            <% if policy(@apartment).destroy? %>
+            <%= link_to "Delete my apartment", apartment_path(@apartment),
+            method: :delete,
+            data: { confirm: "Are you sure?" } %>
+            <% end %>
+          </div>
+        </aside>
+      <%end %>
+    </div>
 
 
 

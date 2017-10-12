@@ -33,6 +33,16 @@
             <% end %>
           <% end %>
         <% end %>
+
+        <% if @profile.profile_type == "student" && @profile.user.bookings != nil %>
+          <% @profile.user.bookings.each do |booking| %>
+            <%= booking.apartment.user.profile.first_name %>
+            <%= booking.start_date %>
+            <%= booking.end_date %>
+            <%= booking.status %>
+          <% end %>
+        <% end %>
+
       </div>
 
 

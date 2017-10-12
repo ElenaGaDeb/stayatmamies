@@ -27,6 +27,7 @@ class ProfilesController < ApplicationController
   end
 
   def edit
+    @profile_characteristics = @profile_characteristics
     authorize @profile
   end
 
@@ -41,6 +42,7 @@ class ProfilesController < ApplicationController
 
   def show
     @profile = Profile.find(params[:id])
+    # @characteristics = @profile.characteristics.group_by { |a| a.item_slug }
     @review = Review.new
     @reviews_for = Review.reviews_for(@profile.user) || 0
     authorize @profile
@@ -53,7 +55,19 @@ class ProfilesController < ApplicationController
   end
 
   def profile_params
-    params.require(:profile).permit(:username, :first_name, :age, :gender, :last_name, :profile_type, :short_description, :detailed_description, :city_from, :country_from, :phone_number, :photo)
+    params.require(:profile).permit(
+      :username,
+      :first_name,
+      :age, :gender,
+      :last_name,
+      :profile_type,
+      :short_description,
+      :detailed_description,
+      :city_from,
+      :country_from,
+      :phone_number,
+      :photo,
+      characteristic_ids: [])
   end
 
   def skip_pundit?

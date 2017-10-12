@@ -1,6 +1,6 @@
 class BookingsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_apartment, only: [:new, :create]
+  before_action :set_apartment, only: [:new, :create, :update]
 
   #include Pundit
   #after_action :verify_authorized, except: :index, unless: :skip_pundit?
@@ -26,6 +26,15 @@ class BookingsController < ApplicationController
      render :new
     end
   end
+
+  def update
+    @profile = current_user.profile
+    @booking = Booking.find(params[:id])
+    @booking.status = params[:booking][:status]
+    @booking.save
+    redirect_to profile_path(@profile)
+  end
+
 
   def show
     @booking = Booking.find(params[:id])

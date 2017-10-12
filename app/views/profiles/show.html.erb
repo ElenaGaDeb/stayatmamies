@@ -123,7 +123,9 @@
               <!-- comments end -->
 
               <!-- comments form start -->
-              <%= render 'reviews/form', profile: @profile, review: @review %>
+              <% unless @reviews_for.map { |r| r.by_user_id }.include?(current_user.id) %>
+                <%= render 'reviews/form', profile: @profile, review: @review %>
+              <% end %>
               <!-- comments form end -->
             </div>
 

@@ -150,25 +150,27 @@
           </div>
           <div class="tab-pane" id="h2tab3">
 
-
             <!-- comments start -->
             <div class="comments margin-clear space-top">
               <!-- comment start -->
-                <% if @reviews_for.blank? %>
-                  Be the first to leave a review on <%= @user.profile.first_name %>'s profile :)
-                <% else %>
-                  <% @reviews_for.each do |review| %>
-                  <!-- comment start -->
-                  <%= render 'reviews/show', review: review %>
-                  <!-- comment end -->
-                  <% end %>
+              <% if @reviews_for.blank? %>
+                Be the first to leave a review on <%= @user.profile.first_name %>'s profile :)
+              <% else %>
+                <% @reviews_for.each do |review| %>
+                <!-- comment start -->
+                <%= render 'reviews/show', review: review %>
+                <!-- comment end -->
                 <% end %>
-
-            <%= render 'reviews/form', profile: @user.profile, review: @review %>
+              <% end %>
+              <!-- FORM STARTS -->
+              <% unless @reviews_for.map { |r| r.by_user_id }.include?(current_user.id) %>
+                <%= render 'reviews/form', profile: @user.profile, review: @review %>
+              <% end %>
+              <!-- FORM ENDS -->
+            </div>
           </div>
         </div>
       </div>
-</div>
       <!-- sidebar start -->
       <!-- ================ -->
       <aside class="col-xs-12 col-sm-12 col-md-12 col-lg-4">

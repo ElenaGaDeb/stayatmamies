@@ -13,7 +13,7 @@
         <%= link_to "Add your apartment", new_apartment_path %>
         <% end %>
         <!-- bookings -->
-        <% if @profile.profile_type == "host" && @profile.user.apartment.bookings != nil %>
+        <% if @profile.profile_type == "host" && @profile.user.apartment %>
 
           <% @profile.user.apartment.bookings.each do |booking| %>
             <%= booking.user.profile.first_name %>

@@ -5,23 +5,23 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
     <% @apartment.photos.each do |photo| %>
-      <%if photo == @apartment.photos[0] %>
-      <div class="carousel-item active">
-        <%= cl_image_tag photo.path, width: 1840, height: 500, crop: :fill, class: "d-block img-fluid" %>
-        <div class="carousel-caption d-none d-md-block">
-          <h3><%= @apartment.name %></h3>
-          <p><%= @apartment.description %></p>
-        </div>
+    <%if photo == @apartment.photos[0] %>
+    <div class="carousel-item active">
+      <%= cl_image_tag photo.path, width: 1840, height: 500, crop: :fill, class: "d-block img-fluid" %>
+      <div class="carousel-caption d-none d-md-block">
+        <h3><%= @apartment.name %></h3>
+        <p><%= @apartment.description %></p>
       </div>
-      <% else %>
-      <div class="carousel-item">
-        <%= cl_image_tag photo.path, width: 1840, height: 500, crop: :fill, class: "d-block img-fluid" %>
-        <div class="carousel-caption d-none d-md-block">
-          <h3><%= @apartment.name %></h3>
-          <p><%= @apartment.description %></p>
-        </div>
+    </div>
+    <% else %>
+    <div class="carousel-item">
+      <%= cl_image_tag photo.path, width: 1840, height: 500, crop: :fill, class: "d-block img-fluid" %>
+      <div class="carousel-caption d-none d-md-block">
+        <h3><%= @apartment.name %></h3>
+        <p><%= @apartment.description %></p>
       </div>
-      <% end %>
+    </div>
+    <% end %>
     <% end %>
   </div>
   <!-- Left and right controls -->
@@ -39,165 +39,169 @@
 
   <div class="container">
     <div class="row">
-<% if policy(@apartment).edit? %>
-    <aside class="col-lg-4 col-xl-3 ml-xl-auto">
+      <% if policy(@apartment).edit? %>
+      <aside class="col-lg-4 col-xl-3 ml-xl-auto">
         <div class="sidebar">
           <!-- <div class="block clearfix"> -->
           <h3 class="title">My tools</h3>
           <div class="separator-2"></div>
-    <%= link_to "Update my apartment's infos", edit_apartment_path(@apartment) %>
-    <br>
-    <% if policy(@apartment).destroy? %>
-        <%= link_to "Delete my apartment", apartment_path(@apartment),
-        method: :delete,
-        data: { confirm: "Are you sure?" } %>
-<% end %>
+          <%= link_to "Update my apartment's infos", edit_apartment_path(@apartment) %>
+          <br>
+          <% if policy(@apartment).destroy? %>
+          <%= link_to "Delete my apartment", apartment_path(@apartment),
+          method: :delete,
+          data: { confirm: "Are you sure?" } %>
+          <% end %>
         </div>
       </aside>
-  <% end %>
-  <!-- temporary link for conversation -->
-  <%=
-    link_to "Discuss with #{@apartment.user.profile.first_name.capitalize}",
+      <% end %>
+      <!-- temporary link for conversation -->
+      <%=
+      link_to "Discuss with #{@apartment.user.profile.first_name.capitalize}",
       conversations_path({apartment_id: @apartment.id, recipient_id: @apartment.user.id}),
       class: "btn btn-success",
-      method: "post"
-  %>
-      <!-- main start -->
-      <!-- ================ -->
-      <div class="main col-12">
-
-        <!-- page-title start -->
+        method: "post"
+        %>
+        <!-- main start -->
         <!-- ================ -->
-        <h1 class="page-title"><%= @apartment.user.profile.first_name.capitalize %>'s Apartment</h1>
-        <span>
-          <i class="fa fa-star text-default"></i>
-          <i class="fa fa-star text-default"></i>
-          <i class="fa fa-star text-default"></i>
-          <i class="fa fa-star text-default"></i>
-          <i class="fa fa-star"></i>
-        </span>
+        <div class="main col-12">
+
+          <!-- page-title start -->
+          <!-- ================ -->
+          <h1 class="page-title"><%= @apartment.user.profile.first_name.capitalize %>'s Apartment</h1>
+          <% if @reviews_for.count == nil || @reviews_for.count == 0%>
+          <p>This user doesn't have a rating yet</p>
+          <% else %>
+          <% @reviews_for.average(:rating).round.times do %>
+          <i class="fa fa-star yellow-star"></i>
+          <% end %>
+
+          <% (5 - @reviews_for.average(:rating).round).times do %>
+          <i class="fa fa-star text-center black-star"></i>
+          <% end %>
+          <% end %>
 
 
-        <div class="separator-2"></div>
-        <!-- page-title end -->
+          <div class="separator-2"></div>
+          <!-- page-title end -->
 
-        <div class="row">
-          <div class="col-lg-4">
-          <% if  @apartment.user.profile.photo? %>
-            <%= cl_image_tag @apartment.user.profile.photo.path, width: 400, height: 400, crop: :fill %>
-            <% else %>
-            <%= image_tag "no-photo.png", width: 400, height: 400, crop: :fill %>
-            <% end %>
-          </div>
-          <div class="col-lg-4">
-            <h4>About Me</h4>
-            <h5><%= @apartment.user.profile.first_name.capitalize %> - <%= @apartment.user.profile.age%> years old - Originally from <%= @apartment.user.profile.city_from%> </h5>
-            <p><%= @apartment.user.profile.detailed_description %></p>
-            <h4>What you'll have to do in exchange for free housing</h4>
-            <p><%= @apartment.deal %></p>
-          </div>
-          <div class="col-lg-4">
-
-
-      <!-- booking form start -->
-
-        <div class="dark-translucent-bg section">
-          <div class="container">
-            <div class="sorting-filters text-center mb-20 d-flex justify-content-center">
-              <%= simple_form_for [@apartment, @booking] do |f| %>
-              <%= f.input :start_date, as: :date %>
-              <%= f.input :end_date, as: :date %>
-              <%= f.button :submit, class: "btn btn-primary"  %>
+          <div class="row">
+            <div class="col-lg-4">
+              <% if  @apartment.user.profile.photo? %>
+              <%= cl_image_tag @apartment.user.profile.photo.path, width: 400, height: 400, crop: :fill %>
+              <% else %>
+              <%= image_tag "no-photo.png", width: 400, height: 400, crop: :fill %>
               <% end %>
             </div>
+            <div class="col-lg-4">
+              <h4>About Me</h4>
+              <h5><%= @apartment.user.profile.first_name.capitalize %> - <%= @apartment.user.profile.age%> years old - Originally from <%= @apartment.user.profile.city_from%> </h5>
+              <p><%= @apartment.user.profile.detailed_description %></p>
+              <h4>What you'll have to do in exchange for free housing</h4>
+              <p><%= @apartment.deal %></p>
+            </div>
+            <div class="col-lg-4">
+
+
+              <!-- booking form start -->
+
+              <div class="dark-translucent-bg section">
+                <div class="container">
+                  <div class="sorting-filters text-center mb-20 d-flex justify-content-center">
+                    <%= simple_form_for [@apartment, @booking] do |f| %>
+                    <%= f.input :start_date, as: :date %>
+                    <%= f.input :end_date, as: :date %>
+                    <%= f.button :submit, class: "btn btn-primary"  %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+
+              <!-- booking form end -->
+
+            </div>
           </div>
-        </div>
+        </section>
+        <section class="pv-30 light-gray-bg">
+          <div class="container-show">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+                <h3 class="title">More info</h3>
+                <div class="separator-2"></div>
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs style-4" id="myTab" role="tablist">
+                  <li class="nav-item"><a class="show-nav-link nav-link active" href="#h2tab2" role="tab" data-toggle="tab"><i class="fa fa-files-o pr-1"></i>More about the housing</a></li>
+                  <li class="nav-item"><a class="show-nav-link nav-link" href="#h2tab3" role="tab" data-toggle="tab"><i class="fa fa-star pr-1"></i><%= @reviews_for.count %> Reviews</a></li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content padding-top-clear padding-bottom-clear">
+                  <div class="tab-pane active" id="h2tab2">
+                    <dl class="row">
+                      <% if @amenities.count != 0 %>
+                      <% @amenities.each  do |category| %>
+                      <dt class="col-sm-3 text-sm-right"><%= category.first %></dt>
+                      <dd class="col-sm-9">
+                        <% category.last.each do |amenity| %>
+                        - <%= amenity.name %>
+                        <%end %>
+                      </dd>
+                      <% end %>
+                      <% else %>
+                      <dt>This user hasn't added any more info yet</dt>
+                      <% end %>
+                    </dl>
+                    <hr>
+                  </div>
+                  <div class="tab-pane" id="h2tab3">
 
-      <!-- booking form end -->
 
-    </div>
-  </div>
-</section>
-<section class="pv-30 light-gray-bg">
-  <div class="container-show">
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
-        <h3 class="title">More info</h3>
-        <div class="separator-2"></div>
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs style-4" id="myTab" role="tablist">
-          <li class="nav-item"><a class="show-nav-link nav-link active" href="#h2tab2" role="tab" data-toggle="tab"><i class="fa fa-files-o pr-1"></i>More about the housing</a></li>
-          <li class="nav-item"><a class="show-nav-link nav-link" href="#h2tab3" role="tab" data-toggle="tab"><i class="fa fa-star pr-1"></i><%= @reviews_for.count %> Reviews</a></li>
-        </ul>
-        <!-- Tab panes -->
-        <div class="tab-content padding-top-clear padding-bottom-clear">
-          <div class="tab-pane active" id="h2tab2">
-            <dl class="row">
-            <% if @amenities.count != 0 %>
-              <% @amenities.each  do |category| %>
-                <dt class="col-sm-3 text-sm-right"><%= category.first %></dt>
-                <dd class="col-sm-9">
-                  <% category.last.each do |amenity| %>
-                    - <%= amenity.name %>
-                  <%end %>
-                </dd>
-              <% end %>
-            <% else %>
-              <dt>This user hasn't added any more info yet</dt>
-            <% end %>
-            </dl>
-            <hr>
+                    <!-- comments start -->
+                    <div class="comments margin-clear space-top">
+                      <!-- comment start -->
+                      <% if @reviews_for.blank? %>
+                      Be the first to leave a review on <%= @user.profile.first_name %>'s profile :)
+                      <% else %>
+                      <% @reviews_for.each do |review| %>
+                      <!-- comment start -->
+                      <%= render 'reviews/show', review: review %>
+                      <!-- comment end -->
+                      <% end %>
+                      <% end %>
+
+                      <%= render 'reviews/form', profile: @user.profile, review: @review %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- sidebar start -->
+              <!-- ================ -->
+              <aside class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+                <div class="sidebar">
+                  <!-- <div class="block clearfix"> -->
+                  <h3 class="title">Map</h3>
+                  <div class="separator-2"></div>
+                  <img id="map-index" src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @apartment.latitude %>,<%= @apartment.longitude %>&key=AIzaSyDT8rAZ6WBaIZiWYB0_9YfTxYLKeq01GY8&zoom=14&size=600x400&markers=color:red%7C<%=@apartment.latitude%>,<%=@apartment.longitude %>" />
+                </div>
+              </aside>
+              <!-- sidebar end -->
+
+            </div>
           </div>
-          <div class="tab-pane" id="h2tab3">
+        </section>
 
 
-            <!-- comments start -->
-            <div class="comments margin-clear space-top">
-              <!-- comment start -->
-                <% if @reviews_for.blank? %>
-                  Be the first to leave a review on <%= @user.profile.first_name %>'s profile :)
-                <% else %>
-                  <% @reviews_for.each do |review| %>
-                  <!-- comment start -->
-                  <%= render 'reviews/show', review: review %>
-                  <!-- comment end -->
-                  <% end %>
-                <% end %>
+        <% content_for :after_js do %>
+        <script>
+          $('#myTab a').click(function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+          })
 
-            <%= render 'reviews/form', profile: @user.profile, review: @review %>
-          </div>
-        </div>
-      </div>
-</div>
-      <!-- sidebar start -->
-      <!-- ================ -->
-      <aside class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
-        <div class="sidebar">
-          <!-- <div class="block clearfix"> -->
-          <h3 class="title">Map</h3>
-          <div class="separator-2"></div>
-          <img id="map-index" src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @apartment.latitude %>,<%= @apartment.longitude %>&key=AIzaSyDT8rAZ6WBaIZiWYB0_9YfTxYLKeq01GY8&zoom=14&size=600x400&markers=color:red%7C<%=@apartment.latitude%>,<%=@apartment.longitude %>" />
-        </div>
-      </aside>
-      <!-- sidebar end -->
-
-    </div>
-  </div>
-</section>
-
-
-<% content_for :after_js do %>
-<script>
-  $('#myTab a').click(function (e) {
-    e.preventDefault()
-    $(this).tab('show')
-  })
-
-  $(".carousel-control-next").click(function() {
-    var c = $("#myCarousel")
-    c.next();
-    console.log('HEY', c);
-  });
+          $(".carousel-control-next").click(function() {
+            var c = $("#myCarousel")
+            c.next();
+            console.log('HEY', c);
+          });
 //   $('.carousel').carousel()
 //   $('.carousel').carousel({
 //   interval: 2000

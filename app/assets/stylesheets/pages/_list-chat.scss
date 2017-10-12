@@ -1,0 +1,26 @@
+#msg-index {
+  h3 {
+    text-align: center;
+    margin-top: 20px;
+  }
+  .pannel {
+    border: 1px solid #dce0e0;
+    border-radius: 5px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    .list-layout {
+      margin: 0;
+    }
+    .pannel-body {
+      padding: 20px;
+      .thread-body {
+        a {
+          text-decoration: none;
+        }
+        a:hover {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}

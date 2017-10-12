@@ -1,83 +1,75 @@
-<h1>My conversations</h1>
-
-<ul>
-  <% @conversations.each do |conversation| %>
-    <li><%= link_to "Chat with #{conversation.opposed_user(current_user).profile.first_name}", conversation_path(conversation)  %></li>
-  <% end %>
-</ul>
-
-
-<div class="pannel">
-  <ul class="list-layout">
-    <li class="pannel-body thread">
-      <div class="row">
-        <div class="col-sm-9 col-md-3 thread-author" data-reactid="19">
-          <div class="row row-table" data-reactid="20">
-            <div class="thread-avatar col-md-5" data-reactid="21">
-              <a class="" href="/users/show/29395643" data-reactid="22">
-                <div style="height:52px;width:52px;display:block;" class="_e296pg" data-reactid="23">
-                  <img class="_12r18es" src="https://a0.muscache.com/im/pictures/88b9cc3e-ca1e-4b6d-b676-d0f613b14c70.jpg?aki_policy=profile_small" height="52" width="52" alt="Message from Adriana" title="Message from Adriana" data-reactid="24">
+<div class="container">
+  <div id="msg-index">
+    <h3>My Messages</h3>
+    <div class="pannel">
+      <!-- loop for list -->
+      <% @conversations.each do |conversation| %>
+      <!-- set important variables -->
+        <% opposed_user = conversation.opposed_user(current_user) %>
+        <% last_msg = conversation.messages.last %>
+        <!-- list container -->
+        <ul class="list-layout">
+          <li class="pannel-body thread">
+            <div class="row">
+              <div class="col-sm-12 col-md-4 col-lg-3 thread-author">
+                <div class="row justify-center">
+                  <div class="thread-avatar col-sm-4">
+                    <%= link_to profile_path(opposed_user) do %>
+                      <div>
+                        <% sender_photo = opposed_user.profile.photo %>
+                        <% if sender_photo %>
+                            <%= cl_image_tag sender_photo.path, width: 80, height: 80, radius:
+                            :max, crop: :fill %>
+                          <% else %>
+                            <%= image_tag "no-photo.jpg", class: "rounded-circle", width: '80px'  %>
+                        <% end %>
+                      </div>
+                    <% end %>
+                  </div>
+                  <div class="col-sm-8 thread-name text-truncate">
+                    <div><%= opposed_user.profile.first_name.capitalize %></div>
+                    <% if last_msg %>
+                      <%= time_tag last_msg.created_at, last_msg.created_at.strftime('%e %b') %>
+                    <% end %>
+                  </div>
                 </div>
-              </a>
-            </div>
-            <div class="col-sm-7 thread-name text-truncate" data-reactid="25">
-              <div data-reactid="26">Adriana</div>
-              <time class="thread-date" data-reactid="27">Aug 24</time>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-7 col-md-5 col-lg-6 thread-body" data-reactid="28">
-          <a href="/z/q/384082655" class="thread-link link-reset text-muted" data-reactid="29">
-            <span class="thread-subject" data-reactid="30">Great!</span>
-            <div class="thread__listing text-muted show-lg" data-reactid="31">
-              <!-- react-text: 32 -->Roma, Lazio, Italy<!-- /react-text -->
-              <!-- react-text: 33 --> (Aug 21 - 24, 2017)<!-- /react-text -->
-            </div>
-          </a>
-        </div>
-        <div class="col-sm-7 col-md-4 col-lg-3 thread-label" data-reactid="34">
-          <div class="row" data-reactid="35">
-            <div class="col-sm-12 col-md-6" data-reactid="36">
-              <span data-reactid="37">
-                <!-- react-empty: 38 -->
-                <span class="thread-status label label-green label-success thread-status--has-tooltip" id="thread-384082655-status" data-reactid="39">
-                  Accepted
-                </span>
-              </span>
-              <div class="hide-sm" data-reactid="40">
-                €159.67
+              </div>
+              <div class="col-sm-12 col-md-5 col-lg-7 thread-body">
+                <%= link_to conversation_path(conversation), class: "thread-link" do %>
+                <!-- add class when clicked link-reset text-muted -->
+                  <span class="thread-subject">
+                    <% if last_msg %>
+                      <%= last_msg.content %>
+                    <% end %>
+                  </span>
+                  <div class="thread__listing">
+                    <%= conversation.apartment.name %>
+                    <%= "#{conversation.apartment.country}, #{conversation.apartment.city}" %>
+                  </div>
+                <% end %>
+              </div>
+              <div class="col-sm-12 col-md-3 col-lg-2 thread-label">
+                <div class="row">
+                  <div class="col-sm-12 col-md-6">
+                    <span>
+                      <span class="thread-status">
+                        <div class="status">
+                          <% if conversation.bookings.last %>
+                            <%= conversation.apartment.bookings.first.status %>
+                          <% else %>
+                            No bookings
+
+                          <% end %>
+                        </div>
+                      </span>
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="col-sm-6 options hide-sm" data-reactid="41">
-              <ul class="thread-actions list-unstyled" data-reactid="42">
-                <li class="space-1" data-reactid="43">
-                  <div class="thread-action thread-action-star" data-reactid="44">
-                    <button class="btn-link btn-link--icon link-icon" data-reactid="45">
-                      <i class="icon icon-star-alt icon-gray" data-reactid="46"></i>
-                      <!-- react-text: 47 -->
-                      <!-- /react-text -->
-                      <span class="link-icon__text" data-reactid="48">
-                        <span data-reactid="49">Star</span>
-                      </span>
-                    </button>
-                  </div>
-                </li>
-                <li data-reactid="50">
-                  <div class="thread-action thread-action-archive" data-reactid="51">
-                    <button class="btn-link btn-link--icon link-icon" data-reactid="52">
-                      <i class="icon icon-archive icon-gray" data-reactid="53"></i>
-                      <!-- react-text: 54 --> <!-- /react-text -->
-                      <span class="link-icon__text" data-reactid="55">
-                        <span data-reactid="56">Archive</span>
-                      </span>
-                    </button>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </li>
-  </ul>
+          </li>
+        </ul>
+      <% end %>
+    </div>
+  </div>
 </div>

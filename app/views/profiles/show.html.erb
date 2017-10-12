@@ -58,11 +58,17 @@
       <!-- ================ -->
       <h1 class="page-title text-center"><%= @profile.first_name.capitalize %>'s Profile</h1>
       <span>
-        <i class="fa fa-star text-default"></i>
-        <i class="fa fa-star text-default"></i>
-        <i class="fa fa-star text-default"></i>
-        <i class="fa fa-star text-default"></i>
-        <i class="fa fa-star"></i>
+      <% if @reviews_for.count == nil || @reviews_for.count == 0%>
+        <p>This user doesn't have a rating yet</p>
+      <% else %>
+          <% @reviews_for.average(:rating).round.times do %>
+            <i class="fa fa-star yellow-star"></i>
+          <% end %>
+
+          <% (5 - @reviews_for.average(:rating).round).times do %>
+            <i class="fa fa-star text-center black-star"></i>
+          <% end %>
+        <% end %>
       </span>
       <p class="large text-center"><%= @profile.short_description %></p>
 
@@ -84,7 +90,7 @@
           <p><%= @profile.detailed_description %></p>
           <h4 class="space-top">My personality</h4>
           <hr>
-          <dl class="row">
+          <dl class="row inline">
             <% if @characteristics.count != 0 %>
             <% @characteristics.each  do |char| %>
             <dd class="col-sm-9">

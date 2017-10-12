@@ -1,5 +1,21 @@
 .nav-item {
   padding: 10px;
+  .nav_notif {
+    position: relative;
+    display: inline-block !important;
+    vertical-align: top !important;
+    #message_navb {
+      position: relative;
+      #notification_dot {
+        fill: #008489 !important;
+        height: 6px !important;
+        opacity: 1 !important;
+        position: absolute !important;
+        top: 40% !important;
+        padding-left: 3px;
+      }
+    }
+  }
   .nav-link {
     color: #565451 !important;
     margin-top: 35px;

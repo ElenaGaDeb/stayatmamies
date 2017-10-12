@@ -86,33 +86,6 @@
         </div>
       </div>
     </div>
-    <section class="pv-30 light-gray-bg">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8">
-            <h2 class="title"><%= @reviews_for.count %> reviews</h2>
-            <div class="separator-2"></div>
-            <!-- comments start -->
-            <div class="comments margin-clear space-top">
-              <% if @reviews_for.blank? %>
-              Be the first to leave a review on <%= @profile.first_name %>'s profile :)
-              <% else %>
-              <% @reviews_for.each do |review| %>
-              <!-- comment start -->
-              <%= render 'reviews/show', review: review %>
-              <!-- comment end -->
-              <% end %>
-              <% end %>
-            </div>
-            <!-- comments end -->
-
-            <!-- comments form start -->
-            <%= render 'reviews/form', profile: @profile, review: @review %>
-            <!-- comments form end -->
-          </div>
-
-        </div>
-      </div>
       <section class="pv-30 light-gray-bg">
         <div class="container">
           <div class="row">

@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 Review.destroy_all
+Booking.destroy_all
+Conversation.destroy_all
 ApartmentAmenity.destroy_all
 Amenity.destroy_all
 Apartment.destroy_all
@@ -74,11 +76,11 @@ other.each do | amenity |
   Amenity.create!(category: "other", name: amenity, item_slug: "Other")
 end
 
-# time = 1
-# 22.times do |x|
-#   ApartmentAmenity.create!(apartment:appart1, amenity: Amenity.find(time))
-#   time += 1
-# end
+characteristics = ["shy", "talkative", "nice", "hot-headed", "patient", "annoying", "driven", "funny"]
+
+characteristics.each do |characteristic|
+  Characteristic.create!(name: characteristic)
+end
 
 u2 = User.create!(
   email: "jeanne45@edhec.edu",
@@ -153,4 +155,4 @@ profile4 = Profile.create!(user: u4,
   short_description: "Looking for an apartment in Europe!"
 )
 
-conversation_1 = Conversation.create!(sender: u1, recipient: u2, apartment:appart2)
+# conversation_1 = Conversation.create!(sender: u1, recipient: u2, apartment:appart2)

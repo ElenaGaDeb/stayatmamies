@@ -42,7 +42,7 @@ class ProfilesController < ApplicationController
 
   def show
     @profile = Profile.find(params[:id])
-    # @characteristics = @profile.characteristics.group_by { |a| a.item_slug }
+    @characteristics = @profile.characteristics
     @review = Review.new
     @reviews_for = Review.reviews_for(@profile.user) || 0
     authorize @profile

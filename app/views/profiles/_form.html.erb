@@ -17,6 +17,25 @@
 <%= f.input :gender %>
 <%= f.input :short_description %>
 <%= f.input :detailed_description %>
+
+<% Characteristic.all.each do |characteristic| %>
+  <div class="category-item-list">
+    <% available_id = @profile.characteristics.ids %>
+    <div class="form-group check_boxes optional apartment_amenities">
+      <label class="control-label check_boxes optional"></label>
+      <input type="hidden" name="apartment[amenity_ids][]" value="" />
+      <label for="apartment_amenity_ids_<%= amenity.id %>">
+        <% if available_id.include? characteristic.id  %>
+          <input class="check_boxes optional" type="checkbox" value="<%= characteristic.id %>" checked="checked"  name="profile[characteristic_ids][]" id="profile_characteristic_ids_<% characteristic.id %>" />
+        <% else %>
+          <input class="check_boxes optional" type="checkbox" value="<%= characteristic.id %>" name="profile[characteristic_ids][]" id="profile_characteristic_ids_<% characteristic.id %>" />
+        <% end %>
+        <%= characteristic.name %>
+      </label>
+    </div>
+  </div>
+<% end %>
+
 <%= f.input :photo, as: :attachinary %>
 <%= f.submit "Save your profile", class: "btn btn-primary" %>
 <% end %>

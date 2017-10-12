@@ -13,7 +13,11 @@ class MessagesController < ApplicationController
     @message.conversation = @conversation
     @message.user = current_user
     if @message.save
-      ActionCable.server.broadcast "conversation_#{@conversation.id}_channel",
+      ActionCable.server.broadcast "notifications_#{current_user.id}_channel",
+        content:  @message.content,
+        by_user_id: @message.by_user_id,
+        conversation_id: @message.conversation_id
+      ActionCable.server.broadcast "notifications_#{@message.for_user.id}_channel",
         content:  @message.content,
         by_user_id: @message.by_user_id,
         conversation_id: @message.conversation_id

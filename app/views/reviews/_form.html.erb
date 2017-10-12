@@ -1,14 +1,5 @@
-  <%= simple_form_for([ profile, review ]) do |f| %>
-    <% if profile.errors.any? %>
-      <div id="error_explanation">
-        <ul>
-          <% profile.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-    <%= f.input :rating, error: 'Rating must be within 0-5' %>
-    <%= f.input :content, error: '25 characters minimum' %>
-    <%= f.submit "Submit", class: "btn btn-primary" %>
-  <% end %>
+<%= simple_form_for([ profile, review ], remote: true) do |f| %>
+  <%= f.input :rating, collection: [1,2,3,4,5] %>
+  <%= f.input :content, error: '25 characters minimum' %>
+  <%= f.submit "Submit", class: "btn btn-primary" %>
+<% end %>

@@ -1,4 +1,4 @@
 class ProfileCharacteristic < ApplicationRecord
   belongs_to :profile
-  has_many :characteristics
+  belongs_to :characteristic
 end

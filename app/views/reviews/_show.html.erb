@@ -1,21 +1,24 @@
 <div class="comment clearfix">
   <!-- AVATAR PICTURE -->
   <div class="comment-avatar">
-    <img class="img-circle" src="http://via.placeholder.com/30x30" alt="avatar">
+    <% if  review.by_user.profile.photo? %>
+    <%= cl_image_tag review.by_user.profile.photo.path, width: 50, height: 50, crop: :fill, class:"img-circle" %>
+    <% else %>
+    <%= image_tag "no-photo.png", width: 50, height: 50, crop: :fill, class:"img-circle" %>
+    <% end %>
+ </div>
+<header>
+  <div class="comment-meta">
+    <%= review.by_user.profile.first_name.capitalize %>
+    | <%= review.created_at.strftime("%d %b. %Y") %> |
+    <% review.rating.times do %>
+    <i class="fa fa-star text-default"></i>
+    <% end %>
   </div>
-  <header>
-    <div class="comment-meta">
-      <%= review.by_user.profile.first_name.capitalize %>
-      | <%= review.created_at.strftime("%d %b. %Y") %> |
-      <% review.rating.times do %>
-        <i class="fa fa-star text-default"></i>
-      <% end %>
-    </div>
-  </header>
-  <div class="comment-content">
-    <div class="comment-body clearfix">
-      <p><%= review.content %></p>
-      <!-- <a href="blog-post.html" class="btn-sm-link link-dark pull-right"><i class="fa fa-reply"></i>Reply</a> -->
-    </div>
+</header>
+<div class="comment-content">
+  <div class="comment-body clearfix">
+    <p><%= review.content %></p>
   </div>
+</div>
 </div>

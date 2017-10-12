@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 Review.destroy_all
+Booking.destroy_all
+Conversation.destroy_all
 ApartmentAmenity.destroy_all
 Amenity.destroy_all
 Apartment.destroy_all
@@ -35,8 +37,8 @@ profile1 = Profile.create!(
 appart1 = Apartment.create!(
   user: u1,
   name: 'sunny beedroom in Paris',
-  description: 'appartement dans paris cherche jeune fille calme',
-  deal: '3 soirs de libres par semaine + marché dimanche',
+  description: 'Apartment in Paris, looking for someone fairly calm',
+  deal: '3 evenings a week + the market on Sunday',
   street: 'rue Freycinet',
   city: 'Paris',
   zip_code: 75116,
@@ -74,11 +76,18 @@ other.each do | amenity |
   Amenity.create!(category: "other", name: amenity, item_slug: "Other")
 end
 
-# time = 1
-# 22.times do |x|
-#   ApartmentAmenity.create!(apartment:appart1, amenity: Amenity.find(time))
-#   time += 1
-# end
+characteristics =
+ ["shy", "talkative", "nice", "hot-headed", "patient", "annoying", "driven", "funny"]
+# ["Accessible","Active", "Adaptable", "Balanced", "Benevolent", "Calm", "Caring", "Challenging",
+#  "Charismatic", "Charming", "Cheerful", "Clean", "Clear-headed", "Decisive", "Dedicated",
+#  "Disciplined", "Discreet", "Educated", "Efficient", "Fair", "Faithful",
+#  "Gentle", "Genuine", "Hearty", "Helpful", "Imaginative", "Kind", "Lovable",
+#  "Loyal", "Methodical", "Meticulous", "Open", "Optimistic", "Peaceful", "Perceptive",
+#  "Sharing", "Tolerant", "Warm"]
+
+characteristics.each do |characteristic|
+  Characteristic.create!(name: characteristic)
+end
 
 u2 = User.create!(
   email: "jeanne45@edhec.edu",
@@ -96,7 +105,7 @@ profile2 = Profile.create!(
   gender: "female",
   phone_number: '0610203040',
   country_from: "France",
-  detailed_description: "Je suis Jeanne, et j'adore jouer au Scrabble!",
+  detailed_description: "I am Jeanne, I have 2 kids and used to have an incredible husband. I also have a cat! Fun fact, I love playing Scrabble! ",
   short_description: "Looking for a Scrabble Partner"
 )
 
@@ -104,7 +113,7 @@ appart2 = Apartment.create!(
   user: u2,
   name: 'Big beedroom in Paris',
   description: 'Looking for someone to live with me in Paris, next to Champ de Mars',
-  deal: '2 scrabble par semaine',
+  deal: '2 Scrabbles a week',
   street: '2 Allée Adrienne Lecouvreur',
   city: 'Paris',
   zip_code: 75007,
@@ -153,4 +162,11 @@ profile4 = Profile.create!(user: u4,
   short_description: "Looking for an apartment in Europe!"
 )
 
-conversation_1 = Conversation.create!(sender: u1, recipient: u2, apartment:appart2)
+booking1 = Booking.create!(
+  start_date: Sun, 15 Oct 2017,
+  end_date: Tue, 17 Oct 2017,
+  status: "pending",
+  apartment: appart2,
+  user: u4,
+)
+# conversation_1 = Conversation.create!(sender: u1, recipient: u2, apartment:appart2)

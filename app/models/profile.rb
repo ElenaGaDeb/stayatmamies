@@ -1,6 +1,9 @@
 class Profile < ApplicationRecord
   belongs_to :user
-  has_many :profile_characteristics
+  has_many :characteristics, through: :profile_characteristics
+  accepts_nested_attributes_for :characteristics
+
+
   has_attachment :photo
 
  # validates :username, uniqueness: true, presence: true

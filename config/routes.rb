@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :profiles, only: [:edit, :new, :show, :update, :create]
 
   resources :apartments do
-    resources :bookings, only: [:create, :new, :show]
+    resources :bookings, only: [:create, :new, :show, :update]
   end
 
   devise_for :users,

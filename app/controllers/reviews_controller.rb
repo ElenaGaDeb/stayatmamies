@@ -24,7 +24,11 @@ class ReviewsController < ApplicationController
         format.js  # <-- will render `app/views/reviews/create.js.erb`
       end
     else
-      redirect_to profile_path(@profile), notice: 'Review must have more than 25 chars'
+      respond_to do |format|
+        # format.html { redirect_to profile_path(@profile), notice: 'Review must have more than 25 chars' }
+        format.html { render 'profiles/show' }
+        format.js  # <-- will render `app/views/reviews/create.js.erb`
+      end
     end
   end
 

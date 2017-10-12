@@ -208,3 +208,5 @@ ActiveRecord::Schema.define(version: 20171010082747) do
   add_foreign_key "reviews", "users", column: "by_user_id"
   add_foreign_key "reviews", "users", column: "for_user_id"
 end
+
+

@@ -17,19 +17,19 @@
         <% if @profile.profile_type == "host" && @profile.user.apartment.bookings != nil %>
 
         <% @profile.user.apartment.bookings.each do |booking| %>
-        <%= booking.user.profile.first_name %>
-        <%= booking.start_date %>
-        <%= booking.end_date %>
-        <%= booking.status %>
+          <%= booking.user.profile.first_name %>
+          <%= booking.start_date %>
+          <%= booking.end_date %>
+          <%= booking.status %>
         <% if  booking.status == 'pending' %>
-        <%= simple_form_for([booking.apartment, booking]) do |f| %>
-        <%= f.hidden_field :status, value: 'Accepted' %>
-        <%= f.button :submit, 'Accept', method: :patch %>
+          <%= simple_form_for([booking.apartment, booking]) do |f| %>
+          <%= f.hidden_field :status, value: 'Accepted' %>
+          <%= f.button :submit, 'Accept', method: :patch %>
         <% end %>
 
         <%= simple_form_for([booking.apartment, booking]) do |f| %>
-        <%= f.hidden_field :status, value: 'Rejected' %>
-        <%= f.button :submit, 'Reject', method: :put %>
+          <%= f.hidden_field :status, value: 'Rejected' %>
+          <%= f.button :submit, 'Reject', method: :put %>
         <% end %>
         <% end %>
         <% end %>
@@ -64,7 +64,7 @@
         <i class="fa fa-star text-default"></i>
         <i class="fa fa-star"></i>
       </span>
-<p class="large text-center"><%= @profile.short_description %></p>
+      <p class="large text-center"><%= @profile.short_description %></p>
 
       <div class="separator-2"></div>
       <!-- page-title end -->

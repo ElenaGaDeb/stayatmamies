@@ -5,26 +5,7 @@
         <div id="inbox" class="tab-pane active">
 
 
-         <div class="col-xs-8 col-sd-8">
-            <!-- message box headings -->
-            <div class="current-conversation">
-              <h3 class="text-center">Chat with <%= @conversation.opposed_user(@user).profile.first_name %></h3>
-            </div>
-            <!-- message list (box showing messages) -->
-            <div id="messages-list" data-conversation-id="<%= @conversation.id %>" data-current-user-id="<%= current_user.id %>">
-              <ul>
-                  <% @conversation.messages.each do |message| %>
-                  <%= render 'messages/message', user: current_user, message: message %>
-                  <% end %>
-              </ul>
-            </div>
-            <!-- text area box and submit buttom -->
-            <%= form_for [@conversation, @new_message], remote: true do |f| %>
-              <%= f.hidden_field :user_id, value: current_user.id %>
-              <%= f.text_area :content, class: "form-control" %>
-              <%= f.submit "Send", id: "send_message", class: "btn buton-profile" %>
-            <% end %>
-          </div>
+         <%= render 'conversation', conversation: @conversation, user: @current_user, new_message: @new_message %>
 
         </div>
       </div>

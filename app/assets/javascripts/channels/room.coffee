@@ -14,7 +14,7 @@ $ ->
           if $('#messages-list').data('conversation-id') == data.conversation_id
             message_template = """
               <li>
-                <div class='row'>
+                <div class='row #{if $('#messages-list').data('current-user-id') == data.by_user_id then 'float-right' else 'float-left'}'>
                   <div class='#{if $('#messages-list').data('current-user-id') == data.by_user_id then 'message-sent' else 'message-received'}'>
                     #{data.content}
                   </div>

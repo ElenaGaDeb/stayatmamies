@@ -18,7 +18,7 @@
 <%= f.input :short_description %>
 <%= f.input :detailed_description %>
 
-<% Characteristic.all.each do |characteristic| %>
+<% Characteristic.all.uniq { |c| c.name }.each do |characteristic| %>
     <div class="form-group check_boxes optional apartment_amenities">
       <label class="control-label check_boxes optional"></label>
       <input type="hidden" value="" />

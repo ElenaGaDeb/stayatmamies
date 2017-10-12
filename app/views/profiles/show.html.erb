@@ -86,12 +86,9 @@
           <hr>
           <dl class="row">
             <% if @characteristics.count != 0 %>
-            <% @characteristics.each  do |category| %>
-            <dt class="col-sm-3 text-sm-right"><%= category.first %></dt>
+            <% @characteristics.each  do |char| %>
             <dd class="col-sm-9">
-              <% category.last.each do |characteristic| %>
-              - <%= characteristic.name %>
-              <%end %>
+              <%= char.name %>
             </dd>
             <% end %>
             <% else %>

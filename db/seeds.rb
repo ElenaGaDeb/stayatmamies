@@ -10,6 +10,8 @@ Booking.destroy_all
 Conversation.destroy_all
 ApartmentAmenity.destroy_all
 Amenity.destroy_all
+ProfileCharacteristic.destroy_all
+Characteristic.destroy_all
 Apartment.destroy_all
 Profile.destroy_all
 User.destroy_all
@@ -76,14 +78,12 @@ other.each do | amenity |
   Amenity.create!(category: "other", name: amenity, item_slug: "Other")
 end
 
-characteristics =
- ["shy", "talkative", "nice", "hot-headed", "patient", "annoying", "driven", "funny"]
-# ["Accessible","Active", "Adaptable", "Balanced", "Benevolent", "Calm", "Caring", "Challenging",
-#  "Charismatic", "Charming", "Cheerful", "Clean", "Clear-headed", "Decisive", "Dedicated",
-#  "Disciplined", "Discreet", "Educated", "Efficient", "Fair", "Faithful",
-#  "Gentle", "Genuine", "Hearty", "Helpful", "Imaginative", "Kind", "Lovable",
-#  "Loyal", "Methodical", "Meticulous", "Open", "Optimistic", "Peaceful", "Perceptive",
-#  "Sharing", "Tolerant", "Warm"]
+characteristics = ["Accessible","Active", "Adaptable", "Balanced", "Benevolent", "Calm", "Caring", "Challenging",
+ "Charismatic", "Charming", "Cheerful", "Clean", "Clear-headed", "Decisive", "Dedicated",
+ "Disciplined", "Discreet", "Educated", "Efficient", "Fair", "Faithful",
+ "Gentle", "Genuine", "Hearty", "Helpful", "Imaginative", "Kind", "Lovable",
+ "Loyal", "Methodical", "Meticulous", "Open", "Optimistic", "Peaceful", "Perceptive",
+ "Sharing", "Tolerant", "Warm"]
 
 characteristics.each do |characteristic|
   Characteristic.create!(name: characteristic)
@@ -163,8 +163,8 @@ profile4 = Profile.create!(user: u4,
 )
 
 booking1 = Booking.create!(
-  start_date: Sun, 15 Oct 2017,
-  end_date: Tue, 17 Oct 2017,
+  start_date: Date.parse('2017-11-18'),
+  end_date: Date.parse('2017-11-25'),
   status: "pending",
   apartment: appart2,
   user: u4,

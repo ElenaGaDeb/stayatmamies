@@ -15,6 +15,8 @@ ul {
   border: 1px solid lightgrey;
   // box-shadow: 3px 3px 3px lightgrey;
   border-radius: 5px;
+  display: flex;
+  flex-direction : column;
 }
 .new_message {
   margin-top: 20px;
@@ -22,9 +24,11 @@ ul {
 textarea.form-control {
   margin-bottom: 10px;
 }
+#send_message:hover {
+  background-color: grey;
+}
 
 .message-sent {
-  position: relative;
   background-color: #D9EDF7;
   border-color: #BCE8F1;
   border-top-left-radius: 20px;
@@ -32,9 +36,9 @@ textarea.form-control {
   border-bottom-left-radius: 20px;
   margin: 5px 20px;
   padding: 10px;
-  float: right;
-  // font-weight: bold;
   font-size: 1.2em;
+  margin-left: auto;
+
 }
 
 
@@ -46,9 +50,9 @@ textarea.form-control {
   border-bottom-right-radius: 20px;
   margin: 5px 20px;
   padding: 10px;
-  float: left;
-  // font-weight: bold;
   font-size: 1.2em;
+  align-self: flex-start;
+
 }
 .toggle-window {
   &:hover{

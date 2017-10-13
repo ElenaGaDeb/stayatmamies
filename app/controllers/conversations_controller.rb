@@ -19,7 +19,15 @@ class ConversationsController < ApplicationController
     # shwo one conversation selected/ on seperate page
     @conversation = Conversation.find(params[:id])
     authorize(@conversation)
-    @messages = @conversation.messages
+
+    @conversation.messages.where(read:false).each do |msg|
+      if msg.for_user == current_user
+        msg.read = true
+        msg.save!
+      end
+    end
+
+    # @messages = @conversation.messages
     @new_message = Message.new
   end
   def new

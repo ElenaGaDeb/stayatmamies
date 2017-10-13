@@ -24,7 +24,9 @@ ul {
 textarea.form-control {
   margin-bottom: 10px;
 }
-
+#send_message:hover {
+  background-color: grey;
+}
 
 .message-sent {
   background-color: #D9EDF7;

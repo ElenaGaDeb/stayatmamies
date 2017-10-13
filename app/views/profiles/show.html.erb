@@ -38,21 +38,18 @@
 
             <p><%= @profile.detailed_description %></p>
             <h2 class="space-top">My personality</h2>
-            <hr>
-            <dl class="row">
-            <% if @characteristics.count != 0 %>
-              <% @characteristics.each  do |char| %>
-                <dd class="col-sm-9 inline">
-                <%= char.name %>
-                </dd>
+            <div class="row">
+            <ul class="multi-column">
+              <% if @characteristics.count != 0 %>
+                <% @characteristics.each  do |char| %>
+                  <li> <%= char.name %></li>
+                <% end %>
+              <% else %>
+                <p>This user hasn't added any more info yet</p>
               <% end %>
-            <% else %>
-              <dt>This user hasn't added any more info yet</dt>
-            <% end %>
-            </dl>
-            <hr>
+            </ul>
             </div>
-
+</div>
 
       <!-- My tools  -->
             <div class="col-lg-4">

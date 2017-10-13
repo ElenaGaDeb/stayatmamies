@@ -64,6 +64,7 @@
               <% if @profile.profile_type == "host" && @profile.user == current_user %>
                 <div class="separator-2 mt-20 clearfix"></div>
                 <!-- Bookings -->
+                  <% if @profile.user.apartment != nil%>
                   <h2>Your Booking Requests</h2>
                   <% @profile.user.apartment.bookings.each do |booking| %>
                     <ul class="list-unstyled small list-icons text-left">
@@ -85,6 +86,7 @@
                     <% end %>
                   <% end %>
               <%end %>
+              <% end %>
 
 <!-- Bookings Sudents -->
               <% if @profile.profile_type == "student" && @profile.user == current_user %>

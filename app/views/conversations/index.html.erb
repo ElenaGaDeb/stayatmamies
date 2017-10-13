@@ -52,13 +52,12 @@
                 <div class="row">
                   <div class="col-sm-12 col-md-6">
                     <span>
-                      <span class="thread-status">
-                        <div class="status">
-                          <% if conversation.bookings.last %>
-                            <%= conversation.apartment.bookings.first.status %>
+                      <span class="thread-unread">
+                        <div class="unread">
+                          <% if conversation.messages.last.read %>
+                            <%= link_to "Send new messages", conversation_path(conversation), class: "thread-link" %>
                           <% else %>
-                            No bookings
-
+                            <%= link_to  "#{conversation.messages.where(read:false).count} New messages", conversation_path(conversation), class: "thread-link" %>
                           <% end %>
                         </div>
                       </span>

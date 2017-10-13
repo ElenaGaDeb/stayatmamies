@@ -1,114 +1,145 @@
-<section class="main-container">
+<div class="main-container">
   <div class="container">
     <div class="row">
+    <% if policy(@profile).edit? %>
 
-     <% if policy(@profile).edit? %>
-     <aside class="col-lg-4 col-xl-3 ml-xl-auto">
-      <div class="sidebar">
         <!-- <div class="block clearfix"> -->
-        <h3 class="title">My tools</h3>
-        <div class="separator-2"></div>
-        <%= link_to "Update my profile's info", edit_profile_path(@profile) %>
-        <br>
-        <% if @profile.user.apartment == nil && @profile.profile_type == "host" %>
-        <%= link_to "Add your apartment", new_apartment_path %>
-        <% end %>
-        <!-- bookings -->
-        <% if @profile.profile_type == "host" && @profile.user.apartment %>
 
-        <% @profile.user.apartment.bookings.each do |booking| %>
-          <%= booking.user.profile.first_name %>
-          <%= booking.start_date %>
-          <%= booking.end_date %>
-          <%= booking.status %>
-        <% if  booking.status == 'pending' %>
-          <%= simple_form_for([booking.apartment, booking]) do |f| %>
-          <%= f.hidden_field :status, value: 'Accepted' %>
-          <%= f.button :submit, 'Accept', method: :patch %>
-        <% end %>
-
-        <%= simple_form_for([booking.apartment, booking]) do |f| %>
-          <%= f.hidden_field :status, value: 'Rejected' %>
-          <%= f.button :submit, 'Reject', method: :put %>
-        <% end %>
-        <% end %>
-        <% end %>
-        <% end %>
-
-        <% if @profile.profile_type == "student" && @profile.user.bookings != nil %>
-        <% @profile.user.bookings.each do |booking| %>
-        <%= booking.apartment.user.profile.first_name %>
-        <%= booking.start_date %>
-        <%= booking.end_date %>
-        <%= booking.status %>
-        <% end %>
-        <% end %>
-
-      </div>
-
-
-    </aside>
-    <% end %>
-
-    <!-- main start -->
-    <!-- ================ -->
-    <div class="main col-12">
-
-      <!-- page-title start -->
-      <!-- ================ -->
-      <h1 class="page-title text-center"><%= @profile.first_name.capitalize %>'s Profile</h1>
-      <span>
+      <div class="main col-12">
+      <h1 class="page-title"><%= @profile.first_name.capitalize %>'s Profile</h1>
       <% if @reviews_for.count == nil || @reviews_for.count == 0%>
         <p>This user doesn't have a rating yet</p>
       <% else %>
-          <% @reviews_for.average(:rating).round.times do %>
-            <i class="fa fa-star yellow-star"></i>
-          <% end %>
-
-          <% (5 - @reviews_for.average(:rating).round).times do %>
-            <i class="fa fa-star text-center black-star"></i>
-          <% end %>
+        <% @reviews_for.average(:rating).round.times do %>
+        <i class="fa fa-star yellow-star"></i>
         <% end %>
-      </span>
+
+        <% (5 - @reviews_for.average(:rating).round).times do %>
+        <i class="fa fa-star text-center black-star"></i>
+        <% end %>
+      <% end %>
+
       <p class="large text-center"><%= @profile.short_description %></p>
-
       <div class="separator-2"></div>
-      <!-- page-title end -->
 
-      <div class="row">
-        <div class="col-lg-4">
-          <% if  @profile.photo? %>
-          <%= cl_image_tag @profile.photo.path, width: 400, height: 400, crop: :fill %>
-          <% else %>
-          <%= image_tag "no-photo.png", width: 400, height: 400, crop: :fill %>
-          <% end %>
-        </div>
-        <div class="col-lg-8 col-xl-7 pv-30">
-          <h2 class="mt-4">Description</h2>
-          <p><%= @profile.age%> years old, from<%= @profile.city_from.capitalize %></p>
 
-          <p><%= @profile.detailed_description %></p>
-          <h4 class="space-top">My personality</h4>
-          <hr>
-          <dl class="row inline">
-            <% if @characteristics.count != 0 %>
-            <% @characteristics.each  do |char| %>
-            <dd class="col-sm-9">
-              <%= char.name %>
-            </dd>
-            <% end %>
+        <div class="container">
+          <div class="row">
+            <!-- Profile photo -->
+            <div class="col-lg-4">
+            <% if  @profile.photo? %>
+                <%= cl_image_tag @profile.photo.path, width: 400, height: 400, crop: :fill %>
             <% else %>
-            <dt>This user hasn't added any more info yet</dt>
+                <%= image_tag "no-photo.png", width: 400, height: 400, crop: :fill %>
             <% end %>
-          </dl>
-          <hr>
+            </div>
+     <!-- Profile photo end  -->
+
+      <!-- About me  -->
+            <div class="col-lg-4">
+            <h2 class="mt-4">Description</h2>
+            <p><%= @profile.age%> years old, from<%= @profile.city_from.capitalize %></p>
+
+            <p><%= @profile.detailed_description %></p>
+            <h4 class="space-top">My personality</h4>
+            <hr>
+            <dl class="row inline">
+            <% if @characteristics.count != 0 %>
+              <% @characteristics.each  do |char| %>
+                <dd class="col-sm-9">
+                <%= char.name %>
+                </dd>
+              <% end %>
+            <% else %>
+              <dt>This user hasn't added any more info yet</dt>
+            <% end %>
+            </dl>
+            <hr>
+            </div>
 
 
-        </div>
+      <!-- My tools  -->
+            <div class="col-lg-4">
+              <div class="pv-30 ph-20 white-bg feature-box bordered text-center">
+                <h3 class="title">My tools</h3>
+
+                <div class="separator-2"></div>
+
+              <!-- Update profil  -->
+                <%= link_to "Update my profile's info", edit_profile_path(@profile) %>
+                <br>
+                <% if @profile.user.apartment == nil && @profile.profile_type == "host" %>
+                  <%= link_to "Add your apartment", new_apartment_path %>
+                <% end %>
+
+
+                <!-- Bookings -->
+                <h4>Your Booking Requests</h4>
+                <!-- Bookings Hosts -->
+                <% if @profile.user.apartment == nil && @profile.profile_type == "host" %>
+                  <%= link_to "Add your apartment", new_apartment_path %>
+                <% end %>
+
+                <% if @profile.profile_type == "host" && @profile.user.apartment %>
+                  <% @profile.user.apartment.bookings.each do |booking| %>
+
+                    <div class="separator-2 mt-20 clearfix"></div>
+
+                <ul class="list-unstyled small list-icons text-left">
+                  <li><strong class="text-default"> Requested by </strong> <span class="pull-right"> <%= booking.user.profile.first_name %> </span></li>
+                  <li><strong class="text-default">From:</strong> <span class="pull-right"> <%= booking.start_date %> </span></li>
+                  <li><strong class="text-default">To:</strong> <span class="pull-right"><%= booking.end_date %> </span></li>
+                  <li><strong class="text-default">Booking is </strong> <span class="pull-right"><%= booking.status %> </span></li>
+
+                  <% if  booking.status == 'pending' %>
+                    <%= simple_form_for([booking.apartment, booking]) do |f| %>
+                      <%= f.hidden_field :status, value: 'Accepted' %>
+                      <%= f.button :submit, 'Accept', method: :patch %>
+                    <% end %>
+
+                    <%= simple_form_for([booking.apartment, booking]) do |f| %>
+                      <%= f.hidden_field :status, value: 'Rejected' %>
+                      <%= f.button :submit, 'Reject', method: :put %>
+                    <% end %>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+          <% end %>
+<!-- Bookings Sudents -->
+          <% if @profile.profile_type == "student" && @profile.user.bookings %>
+            <% @profile.user.bookings.each do |booking| %>
+            <div class="separator-2 mt-20 clearfix"></div>
+              <% if  booking.status == 'Accepted' %>
+
+                <ul class="list-unstyled small list-icons text-left">
+                  <li><strong class="text-default">Your apartment </strong> <span class="pull-right"><%= booking.apartment.name %></span></li>
+                  <li><strong  class="text-default">Your host:</strong> <span class="pull-right"><%= booking.apartment.user.profile.first_name %></span></li>
+                  <li><strong  class="text-default">Start-date</strong> <span class="pull-right"><%= booking.start_date %></span></li>
+                  <li><strong class="text-default">End-date</strong> <span class="pull-right"><%= booking.end_date %></span></li>
+                  <li><strong  class="text-default">Your booking is </strong> <span class="pull-right"><%= booking.status %></span></li>
+                </ul>
+
+              <% else %>
+                <ul class="list-unstyled small list-icons text-left">
+                  <li><strong class="text-default">You requested </strong> <span class="pull-right"><%= booking.apartment.name %></span></li>
+                  <li><strong  class="text-default">Host:</strong> <span class="pull-right"><%= booking.apartment.user.profile.first_name %></span></li>
+                  <li><strong  class="text-default">Requested start-date</strong> <span class="pull-right"><%= booking.start_date %></span></li>
+                  <li><strong class="text-default">Requested end-date</strong> <span class="pull-right"><%= booking.end_date %></span></li>
+                  <li><strong  class="text-default">Your booking is </strong> <span class="pull-right"><%= booking.status %></span></li>
+                </ul>
+              <% end %>
+            <% end %>
+          <% end %>
       </div>
     </div>
+  </div>
+</div>
+        <!-- bookings --
 
-      <section class="pv-30 light-gray-bg">
+
+       <!-- reviews start -->
+        <div class="pv-30 light-gray-bg">
         <div class="container">
           <div class="row">
             <div class="col-lg-8">
@@ -138,10 +169,12 @@
           <!-- sidebar start -->
           <!-- ================ -->
 
-
-
+          <% end %>
+        </div>
       </div>
     </div>
-  </section>
-</div>
-</div>
+     <!-- reviews end -->
+
+
+
+

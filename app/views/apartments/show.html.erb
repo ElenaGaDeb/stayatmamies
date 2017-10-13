@@ -102,7 +102,7 @@
 
 
             <!-- booking form start -->
-
+          <% if current_user.profile %>
             <% if @current_user.profile.profile_type == "student" %>
 
             <div class="pv-30 ph-20 white-bg feature-box bordered text-center">
@@ -118,7 +118,7 @@
               <!-- booking form end -->
             </div>
             <% end %>
-
+<% end %>
           </div>
         </div>
       </section>

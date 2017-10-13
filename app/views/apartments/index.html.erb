@@ -78,7 +78,7 @@
                 <h2><%= apartment.name  %></h2>
               </div>
               <% if apartment.user.profile.photo? %>
-              <%= cl_image_tag apartment.user.profile.photo.path, height: 100, width: 100, crop: :fill, class: "card-user" %>
+              <%= cl_image_tag apartment.user.profile.photo.path, height: 70, width: 70, crop: :fill, class: "card-user" %>
               <% end %>
               <%= link_to "", apartment_path(apartment), class: "card-link"%>
             </div>

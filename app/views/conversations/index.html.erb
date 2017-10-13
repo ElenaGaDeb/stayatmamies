@@ -5,10 +5,11 @@
       <!-- loop for list -->
       <% last_conv = @conversations.last %>
       <% @conversations.each do |conversation| %>
-      <!-- check if conversation with 0 msg -->
-        <% unless conversation.messages.count < 1 %>
+        <% opposed_user = conversation.opposed_user(current_user) %>
+        <!-- check if conversation with 0 msg $ no profile ppl -->
+        <% unless conversation.messages.count < 1 || opposed_user.profile.nill? %>
           <!-- set important variables -->
-          <% opposed_user = conversation.opposed_user(current_user) %>
+
           <% last_msg = conversation.messages.last %>
           <!-- list container -->
           <ul class="list-layout">

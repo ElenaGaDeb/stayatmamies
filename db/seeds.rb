@@ -300,41 +300,27 @@ appart9 = Apartment.create!(
   bathrooms: 2,
 )
 
-# conversation_1 = Conversation.create!(
-#   sender: u4,
-#   recipient: u5,
-#   apartment:appart5)
 
-# conversation_2 = Conversation.create!(
-#   sender: u6,
-#   recipient: u2,
-#   apartment:appart2)
+booking1 = Booking.create!(
+  start_date: Date.parse('2017-11-18'),
+  end_date: Date.parse('2017-11-25'),
+  status: "pending",
+  apartment: appart5,
+  user: u4,
+)
 
-# conversation_3 = Conversation.create!(
-#   sender: u3,
-#   recipient: u2,
-#   apartment:appart2)
+booking2 = Booking.create!(
+  start_date: Date.parse('2017-12-12'),
+  end_date: Date.parse('2017-12-28'),
+  status: "approved",
+  apartment: appart2,
+  user: u6,
+)
 
-# booking1 = Booking.create!(
-#   start_date: Date.parse('2017-11-18'),
-#   end_date: Date.parse('2017-11-25'),
-#   status: "pending",
-#   apartment: appart5,
-#   user: u4,
-# )
-
-# booking2 = Booking.create!(
-#   start_date: Date.parse('2017-12-12'),
-#   end_date: Date.parse('2017-12-28'),
-#   status: "approved",
-#   apartment: appart2,
-#   user: u6,
-# )
-
-# booking3 = Booking.create!(
-#   start_date: Date.parse('2017-12-12'),
-#   end_date: Date.parse('2017-12-20'),
-#   status: "denied",
-#   apartment: appart2,
-#   user: u3,
-# )
+booking3 = Booking.create!(
+  start_date: Date.parse('2017-12-12'),
+  end_date: Date.parse('2017-12-20'),
+  status: "denied",
+  apartment: appart2,
+  user: u3,
+)

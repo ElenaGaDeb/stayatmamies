@@ -1,6 +1,6 @@
 $ ->
   messages = $('#messages-list')
-  if $('#current-user').size() > 0
+  if $('#current-user').length > 0
     App.messages = App.cable.subscriptions.create {
         channel: "RoomChannel"
       },
@@ -29,9 +29,10 @@ $ ->
             $('#message_navb').append notification_dot
 
 $ ->
-  if $('#inbox').size() > 0
+  if $('#inbox').length > 0
     submit_message()
     scroll_bottom()
+
 submit_message = () ->
   $('#message_content').on 'keydown', (event) ->
     if event.keyCode is 13

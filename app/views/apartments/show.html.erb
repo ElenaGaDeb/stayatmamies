@@ -67,7 +67,6 @@
 
       <!-- page-title start -->
       <!-- ================ -->
-
       <h1 class="page-title"><%= @apartment.user.profile.first_name.capitalize %>'s Apartment
         <%= link_to '<i class="fa fa-comments-o fa-2x" aria-hidden="true"></i>'.html_safe, conversations_path({apartment_id: @apartment.id, recipient_id: @apartment.user.id}), method: "post" %></h1>
         <% if @reviews_for.count == nil || @reviews_for.count == 0%>
@@ -104,6 +103,8 @@
 
             <!-- booking form start -->
 
+            <% if @current_user.profile.profile_type == "student" %>
+
             <div class="pv-30 ph-20 white-bg feature-box bordered text-center">
               <div class="container">
                 <div class="sorting-filters text-center mb-20 d-flex justify-content-center">
@@ -114,9 +115,9 @@
                   <% end %>
                 </div>
               </div>
+              <!-- booking form end -->
             </div>
-
-            <!-- booking form end -->
+            <% end %>
 
           </div>
         </div>

@@ -42,3 +42,10 @@
 //     max-width: 100%;
 //   }
 // }
+
+.multi-column {
+   column-count: 3;
+   column-gap: 20px;
+   column-fill: auto;
+   list-style-position: inside;
+}

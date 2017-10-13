@@ -49,14 +49,12 @@
               <% end %>
             </ul>
             </div>
-</div>
+          </div>
 
       <!-- My tools  -->
             <div class="col-lg-4">
               <div class="pv-30 ph-20 white-bg feature-box bordered text-center">
-                <h3 class="title">My tools</h3>
-
-                <div class="separator-2"></div>
+                <h3 class="title"><i class="fa fa-wrench" aria-hidden="true"></i></h3>
 
               <!-- Update profil  -->
                   <% if policy(@profile).edit? %>
@@ -67,15 +65,14 @@
                     <% end %>
                   <% end %>
 
-
+                <div class="separator-2 mt-20 clearfix"></div>
                 <!-- Bookings -->
-                <h4>Your Booking Requests</h4>
+                <h2>Your Booking Requests</h2>
                 <!-- Bookings Hosts -->
 
                 <% if @profile.profile_type == "host" && @profile.user.apartment %>
                   <% @profile.user.apartment.bookings.each do |booking| %>
 
-                    <div class="separator-2 mt-20 clearfix"></div>
 
                     <ul class="list-unstyled small list-icons text-left">
                     <li><strong class="text-default"> Requested by </strong> <span class="pull-right"> <%= booking.user.profile.first_name %> </span></li>
@@ -127,39 +124,43 @@
     </div>
   </div>
 </div>
-
+</div>
+</div>
+</div>
+</div>
         <div class="pv-30 light-gray-bg">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-8">
-              <h2 class="title"><%= @reviews_for.count %> reviews</h2>
-              <div class="separator-2"></div>
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8">
+                <h2 class="title"><%= @reviews_for.count %> reviews</h2>
+                <div class="separator-2"></div>
               <!-- comments start -->
-              <div class="comments margin-clear space-top">
-                <% if @reviews_for.blank? %>
-                  Be the first to leave a review on <%= @profile.first_name %>'s profile :)
-                <% else %>
-                  <% @reviews_for.reverse.each do |review| %>
+                  <div class="comments margin-clear space-top">
+                    <% if @reviews_for.blank? %>
+                      <p>Be the first to leave a review on <%= @profile.first_name %>'s profile :)</p>
+                    <% else %>
+                      <% @reviews_for.reverse.each do |review| %>
                   <!-- comment start -->
-                  <%= render 'reviews/show', review: review %>
+                        <%= render 'reviews/show', review: review %>
                   <!-- comment end -->
-                  <% end %>
-                <% end %>
-              </div>
+                      <% end %>
+                    <% end %>
+                  </div>
               <!-- comments end -->
 
               <!-- comments form start -->
-              <% unless @reviews_for.map { |r| r.by_user_id }.include?(current_user.id) %>
-                <%= render 'reviews/form', profile: @profile, review: @review %>
-              <% end %>
+                  <% unless @reviews_for.map { |r| r.by_user_id }.include?(current_user.id) %>
+                    <%= render 'reviews/form', profile: @profile, review: @review %>
+                  <% end %>
               <!-- comments form end -->
-            </div>
+                </div>
 
           <!-- sidebar start -->
-          <!-- ================ -->
-
+          <!-- =============== -->
           <% end %>
+            </div>
         </div>
-      </div>
-    </div>
 
+
+
+</div>

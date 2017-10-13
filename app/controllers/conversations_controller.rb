@@ -20,6 +20,7 @@ class ConversationsController < ApplicationController
     @conversation = Conversation.find(params[:id])
     authorize(@conversation)
     @messages = @conversation.messages
+    @messages.map { |msg| msg.read = true if msg.for_user == current_user }
     @new_message = Message.new
   end
   def new

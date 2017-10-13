@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171012143200) do
+ActiveRecord::Schema.define(version: 20171013080112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,6 +119,7 @@ ActiveRecord::Schema.define(version: 20171012143200) do
     t.text "content"
     t.bigint "for_user_id"
     t.bigint "by_user_id"
+    t.boolean "read", default: false, null: false
     t.index ["by_user_id"], name: "index_messages_on_by_user_id"
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
     t.index ["for_user_id"], name: "index_messages_on_for_user_id"
@@ -208,5 +209,3 @@ ActiveRecord::Schema.define(version: 20171012143200) do
   add_foreign_key "reviews", "users", column: "by_user_id"
   add_foreign_key "reviews", "users", column: "for_user_id"
 end
-
-

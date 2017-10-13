@@ -12,9 +12,10 @@ $ ->
       received: (data) ->
         unless data.content.blank?
           if $('#messages-list').data('conversation-id') == data.conversation_id
-            message_template = """
-              <li>
-                <div class='row #{if $('#messages-list').data('current-user-id') == data.by_user_id then 'float-right' else 'float-left'}'>
+            message_template =
+            """
+             <li>
+                <div class="row">
                   <div class='#{if $('#messages-list').data('current-user-id') == data.by_user_id then 'message-sent' else 'message-received'}'>
                     #{data.content}
                   </div>
@@ -24,14 +25,13 @@ $ ->
             $('#messages-list > ul').append message_template
             scroll_bottom()
           else
-
-
             notification_dot = """<svg id="notification_dot"><circle cx="3" cy="3" r="3"></circle></svg>"""
             $('#message_navb').append notification_dot
 
 $ ->
-  submit_message()
-  scroll_bottom()
+  if $('#inbox').size() > 0
+    submit_message()
+    scroll_bottom()
 submit_message = () ->
   $('#message_content').on 'keydown', (event) ->
     if event.keyCode is 13

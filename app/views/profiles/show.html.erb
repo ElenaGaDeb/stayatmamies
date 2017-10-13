@@ -17,42 +17,47 @@
 <div class="separator-2"></div>
 
 
-        <div class="container">
-          <div class="row">
-
-              <div class="col-lg-4">
-                <% if  @profile.photo? %>
-                <%= cl_image_tag @profile.photo.path, width: 400, height: 400, crop: :fill %>
-                <% else %>
-                <%= image_tag "no-photo.png", width: 400, height: 400, crop: :fill %>
-                <% end %>
-              </div>
-              <div class="col-lg-4">
-
-                <h4>About Me</h4>
-                my username: @<%= @profile.username %>
-                <h5><%= @profile.first_name.capitalize %> - <%= @profile.age%> years old - Originally from <%= @profile.city_from%> </h5>
-                <h3><%= @profile.short_description %></h3>
-
-                <p><%= @profile.detailed_description %></p>
-              </div>
-
-            <div class="col-lg-4">
-            <div class="pv-30 ph-20 white-bg feature-box bordered text-center">
-            <h3 class="title">My tools</h3>
-        <div class="separator-2"></div>
-        <%= link_to "Update my profile's info", edit_profile_path(@profile) %>
-        <br>
-        <br>
-        <h4>Your Booking Requests</h4>
-        <% if @profile.user.apartment == nil && @profile.profile_type == "host" %>
-        <%= link_to "Add your apartment", new_apartment_path %>
+<div class="container">
+  <div class="row">
+<!-- Profile photo -->
+    <div class="col-lg-4">
+      <% if  @profile.photo? %>
+        <%= cl_image_tag @profile.photo.path, width: 400, height: 400, crop: :fill %>
+        <% else %>
+        <%= image_tag "no-photo.png", width: 400, height: 400, crop: :fill %>
         <% end %>
+    </div>
+<!-- About me  -->
+    <div class="col-lg-4">
+      <h4>About Me</h4>
+      my username: @<%= @profile.username %>
+      <h5><%= @profile.first_name.capitalize %> - <%= @profile.age%> years old - Originally from <%= @profile.city_from%> </h5>
+      <h3><%= @profile.short_description %></h3>
 
-        <% if @profile.profile_type == "host" && @profile.user.apartment %>
+      <p><%= @profile.detailed_description %></p>
+    </div>
+<!-- My tools  -->
+    <div class="col-lg-4">
+      <div class="pv-30 ph-20 white-bg feature-box bordered text-center">
+        <h3 class="title">My tools</h3>
 
-          <% @profile.user.apartment.bookings.each do |booking| %>
-          <div class="separator-2 mt-20 clearfix"></div>
+        <div class="separator-2"></div>
+<!-- Update profil  -->
+          <%= link_to "Update my profile's info", edit_profile_path(@profile) %>
+          <br>
+          <br>
+<!-- Bookings -->
+          <h4>Your Booking Requests</h4>
+<!-- Bookings Hosts -->
+          <% if @profile.user.apartment == nil && @profile.profile_type == "host" %>
+            <%= link_to "Add your apartment", new_apartment_path %>
+          <% end %>
+
+          <% if @profile.profile_type == "host" && @profile.user.apartment %>
+            <% @profile.user.apartment.bookings.each do |booking| %>
+
+              <div class="separator-2 mt-20 clearfix"></div>
+
                 <ul class="list-unstyled small list-icons text-left">
                   <li><strong class="text-default"> Requested by </strong> <span class="pull-right"> <%= booking.user.profile.first_name %> </span></li>
                   <li><strong class="text-default">From:</strong> <span class="pull-right"> <%= booking.start_date %> </span></li>
@@ -70,35 +75,48 @@
                       <%= f.button :submit, 'Reject', method: :put %>
                     <% end %>
                   <% end %>
-
-          <% end %>
-        <% end %>
-
                 </ul>
-            </div>
-            </div>
-            </div>
-            </div>
-            </div>
+              </div>
+            <% end %>
+          <% end %>
+<!-- Bookings Sudents -->
+          <% if @profile.profile_type == "student" && @profile.user.bookings %>
+            <% @profile.user.bookings.each do |booking| %>
+            <div class="separator-2 mt-20 clearfix"></div>
+              <% if  booking.status == 'Accepted' %>
+
+                <ul class="list-unstyled small list-icons text-left">
+                  <li><strong class="text-default">Your apartment </strong> <span class="pull-right"><%= booking.apartment.name %></span></li>
+                  <li><strong  class="text-default">Your host:</strong> <span class="pull-right"><%= booking.apartment.user.profile.first_name %></span></li>
+                  <li><strong  class="text-default">Start-date</strong> <span class="pull-right"><%= booking.start_date %></span></li>
+                  <li><strong class="text-default">End-date</strong> <span class="pull-right"><%= booking.end_date %></span></li>
+                  <li><strong  class="text-default">Your booking is </strong> <span class="pull-right"><%= booking.status %></span></li>
+                </ul>
+
+              <% else %>
+                <ul class="list-unstyled small list-icons text-left">
+                  <li><strong class="text-default">You requested </strong> <span class="pull-right"><%= booking.apartment.name %></span></li>
+                  <li><strong  class="text-default">Host:</strong> <span class="pull-right"><%= booking.apartment.user.profile.first_name %></span></li>
+                  <li><strong  class="text-default">Requested start-date</strong> <span class="pull-right"><%= booking.start_date %></span></li>
+                  <li><strong class="text-default">Requested end-date</strong> <span class="pull-right"><%= booking.end_date %></span></li>
+                  <li><strong  class="text-default">Your booking is </strong> <span class="pull-right"><%= booking.status %></span></li>
+                </ul>
+              <% end %>
+            <% end %>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>
         <!-- bookings -->
 
 
-        <% if @profile.profile_type == "student" && @profile.user.bookings %>
-          <% @profile.user.bookings.each do |booking| %>
-            <%= booking.apartment.name %>
-            <%= booking.apartment.user.profile.first_name %>
-            <%= booking.start_date %>
-            <%= booking.end_date %>
-            <%= booking.status %>
-          <% end %>
-        <% end %>
+
 
       </div>
-
-
     </div>
-    </div>
-    <% end %>
+  </div>
+<% end %>
 
 
 

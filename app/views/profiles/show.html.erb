@@ -18,8 +18,6 @@
         <i class="fa fa-star text-center black-star"></i>
         <% end %>
       <% end %>
-
-      <p class="large text-center"><%= @profile.short_description %></p>
       <div class="separator-2"></div>
 
 
@@ -37,16 +35,16 @@
 
       <!-- About me  -->
             <div class="col-lg-4">
-            <h2 class="mt-4">Description</h2>
-            <p><%= @profile.age%> years old, from<%= @profile.city_from.capitalize %></p>
+            <h2 class="space-top">Description</h2>
+            <p><%= @profile.age%> years old</p>
 
             <p><%= @profile.detailed_description %></p>
-            <h4 class="space-top">My personality</h4>
+            <h2 class="space-top">My personality</h2>
             <hr>
-            <dl class="row inline">
+            <dl class="row">
             <% if @characteristics.count != 0 %>
               <% @characteristics.each  do |char| %>
-                <dd class="col-sm-9">
+                <dd class="col-sm-9 inline">
                 <%= char.name %>
                 </dd>
               <% end %>

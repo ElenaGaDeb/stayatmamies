@@ -59,7 +59,7 @@
     <div class="container">
       <div class="row justify-content-lg-center">
         <div class="col-lg-8">
-          <h2 class="text-center title" id="the-apartments">The <strong>Apartments</strong></h2>
+          <h2 class="text-center title">The <strong>Apartments</strong></h2>
           <div class="separator"></div>
         </div>
       </div>
@@ -79,7 +79,7 @@
                 <p><%= apartment.description %></p>
               </div>
               <% if apartment.user.profile.photo? %>
-              <%= cl_image_tag apartment.user.profile.photo.path, class: "card-user" %>
+              <%= cl_image_tag apartment.user.profile.photo.path, height: 100, width: 100, crop: :fill, class: "card-user" %>
               <% end %>
               <%= link_to "", apartment_path(apartment), class: "card-link"%>
             </div>

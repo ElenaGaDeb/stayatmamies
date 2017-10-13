@@ -157,17 +157,19 @@
                     <div class="comments margin-clear space-top">
                       <!-- comment start -->
                       <% if @reviews_for.blank? %>
-                      Be the first to leave a review on <%= @user.profile.first_name %>'s profile :)
+                        Be the first to leave a review on <%= @user.profile.first_name %>'s profile :)
                       <% else %>
-                      <% @reviews_for.each do |review| %>
-                      <!-- comment start -->
-                      <%= render 'reviews/show', review: review %>
-                      <!-- comment end -->
-                      <% end %>
+                        <% @reviews_for.each do |review| %>
+                          <!-- comment start -->
+                          <%= render 'reviews/show', review: review %>
+                          <!-- comment end -->
+                        <% end %>
                       <% end %>
                       <!-- FORM STARTS -->
-                      <% unless @reviews_for.map { |r| r.by_user_id }.include?(current_user.id) %>
-                      <%= render 'reviews/form', profile: @user.profile, review: @review %>
+                      <% if current_user %>
+                        <% unless @cannot_review %>
+                          <%= render 'reviews/form', profile: @user.profile, review: @review %>
+                        <% end %>
                       <% end %>
                       <!-- FORM ENDS -->
                     </div>

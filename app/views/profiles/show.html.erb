@@ -1,51 +1,76 @@
 <div class="main-container">
   <div class="container">
     <div class="row">
+
      <% if policy(@profile).edit? %>
 
         <!-- <div class="block clearfix"> -->
 
 <div class="main col-12">
 <h1 class="page-title"><%= @profile.first_name.capitalize %>'s Profile</h1>
-                  <span>
-                  <i class="fa fa-star text-default"></i>
-                  <i class="fa fa-star text-default"></i>
-                  <i class="fa fa-star text-default"></i>
-                  <i class="fa fa-star text-default"></i>
-                  <i class="fa fa-star"></i>
-                  </span>
+          <% (5 - @reviews_for.average(:rating).round).times do %>
+            <i class="fa fa-star text-center black-star"></i>
+          <% end %>
+        <% end %>
+      </span>
+      <p class="large text-center"><%= @profile.short_description %></p>
 <div class="separator-2"></div>
 
 
 <div class="container">
   <div class="row">
 <!-- Profile photo -->
-    <div class="col-lg-4">
-      <% if  @profile.photo? %>
-        <%= cl_image_tag @profile.photo.path, width: 400, height: 400, crop: :fill %>
-        <% else %>
-        <%= image_tag "no-photo.png", width: 400, height: 400, crop: :fill %>
-        <% end %>
-    </div>
-<!-- About me  -->
-    <div class="col-lg-4">
-      <h4>About Me</h4>
-      my username: @<%= @profile.username %>
-      <h5><%= @profile.first_name.capitalize %> - <%= @profile.age%> years old - Originally from <%= @profile.city_from%> </h5>
-      <h3><%= @profile.short_description %></h3>
+          <div class="row">
+        <div class="col-lg-4">
+          <% if  @profile.photo? %>
+          <%= cl_image_tag @profile.photo.path, width: 400, height: 400, crop: :fill %>
+          <% else %>
+          <%= image_tag "no-photo.png", width: 400, height: 400, crop: :fill %>
+          <% end %>
+        </div>
+     <!-- Profile photo end  -->
+      
+      <!-- About me  -->
+        <div class="col-lg-8 col-xl-7 pv-30">
+          <h2 class="mt-4">Description</h2>
+          <p><%= @profile.age%> years old, from<%= @profile.city_from.capitalize %></p>
 
-      <p><%= @profile.detailed_description %></p>
-    </div>
+          <p><%= @profile.detailed_description %></p>
+          <h4 class="space-top">My personality</h4>
+          <hr>
+          <dl class="row inline">
+            <% if @characteristics.count != 0 %>
+            <% @characteristics.each  do |char| %>
+            <dd class="col-sm-9">
+              <%= char.name %>
+            </dd>
+            <% end %>
+            <% else %>
+            <dt>This user hasn't added any more info yet</dt>
+            <% end %>
+          </dl>
+          <hr>
+
+
+        </div>
+      </div>
+
+    
 <!-- My tools  -->
     <div class="col-lg-4">
       <div class="pv-30 ph-20 white-bg feature-box bordered text-center">
         <h3 class="title">My tools</h3>
 
         <div class="separator-2"></div>
+
 <!-- Update profil  -->
-          <%= link_to "Update my profile's info", edit_profile_path(@profile) %>
-          <br>
-          <br>
+        <%= link_to "Update my profile's info", edit_profile_path(@profile) %>
+        <br>
+        <% if @profile.user.apartment == nil && @profile.profile_type == "host" %>
+        <%= link_to "Add your apartment", new_apartment_path %>
+        <% end %>
+        
+        
 <!-- Bookings -->
           <h4>Your Booking Requests</h4>
 <!-- Bookings Hosts -->
@@ -103,22 +128,17 @@
                 </ul>
               <% end %>
             <% end %>
-          <% end %>
+          <% end %>   
       </div>
     </div>
   </div>
 </div>
         <!-- bookings -->
 
-
-
-
       </div>
     </div>
   </div>
 <% end %>
-
-
 
 
             </div>
@@ -148,7 +168,9 @@
               <!-- comments end -->
 
               <!-- comments form start -->
-              <%= render 'reviews/form', profile: @profile, review: @review %>
+              <% unless @reviews_for.map { |r| r.by_user_id }.include?(current_user.id) %>
+                <%= render 'reviews/form', profile: @profile, review: @review %>
+              <% end %>
               <!-- comments form end -->
             </div>
 

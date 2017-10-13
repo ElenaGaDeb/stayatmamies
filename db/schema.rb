@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171010082747) do
+ActiveRecord::Schema.define(version: 20171012143200) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,7 +88,9 @@ ActiveRecord::Schema.define(version: 20171010082747) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "conversation_id"
     t.index ["apartment_id"], name: "index_bookings_on_apartment_id"
+    t.index ["conversation_id"], name: "index_bookings_on_conversation_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
@@ -193,6 +195,7 @@ ActiveRecord::Schema.define(version: 20171010082747) do
   add_foreign_key "apartment_amenities", "apartments"
   add_foreign_key "apartments", "users"
   add_foreign_key "bookings", "apartments"
+  add_foreign_key "bookings", "conversations"
   add_foreign_key "bookings", "users"
   add_foreign_key "conversations", "apartments"
   add_foreign_key "conversations", "conversations", column: "recipient_id"

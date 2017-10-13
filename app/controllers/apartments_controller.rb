@@ -1,5 +1,5 @@
 class ApartmentsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :show]
   before_action :set_apartment, only: [:show, :edit, :update, :destroy]
 
   include Pundit
@@ -51,6 +51,7 @@ class ApartmentsController < ApplicationController
     @user = @apartment.user
     @reviews_for = Review.reviews_for(@user) || 0
     @apartment_coordinates = { lat: @apartment.latitude, lng: @apartment.longitude }
+    @cannot_review = @reviews_for.map { |r| r.by_user_id }.include?(current_user.id)
     authorize @apartment
   end
 

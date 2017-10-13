@@ -105,20 +105,28 @@
           <% if current_user.profile %>
             <% if @current_user.profile.profile_type == "student" %>
 
-            <div class="pv-30 ph-20 white-bg feature-box bordered text-center">
-              <div class="container">
-                <div class="sorting-filters text-center mb-20 d-flex justify-content-center">
-                  <%= simple_form_for [@apartment, @booking] do |f| %>
-                  <%= f.input :start_date, as: :date %>
-                  <%= f.input :end_date, as: :date %>
-                  <%= f.button :submit, class: "btn btn-primary"  %>
-                  <% end %>
+              <div class="pv-30 ph-20 white-bg feature-box bordered text-center">
+                <div class="container">
+                  <div class="sorting-filters text-center mb-20 d-flex justify-content-center">
+                    <%= simple_form_for [@apartment, @booking] do |f| %>
+                    <%= f.input :start_date, as: :date %>
+                    <%= f.input :end_date, as: :date %>
+                    <%= f.button :submit, class: "btn btn-primary"  %>
+                    <% end %>
+                  </div>
                 </div>
-              </div>
               <!-- booking form end -->
-            </div>
+              </div>
             <% end %>
-<% end %>
+            <% else %>
+            <div class="pv-30 ph-20 white-bg feature-box bordered text-center">
+                <div class="container">
+                <p>You have to be a student to be able to book an apartment</p>
+                <p>Please create your <%= link_to "profile", new_profile_path %></p>
+
+                </div>
+                </div>
+          <% end %>
           </div>
         </div>
       </section>

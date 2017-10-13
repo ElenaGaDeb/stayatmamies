@@ -13,19 +13,17 @@
 .alert-warning {
   background: $red;
 }
-
 .alert {
-  position: fixed;
-  top: 90px;
+  position: relative;
+  top: 0px;
   left: 0;
   right: 0;
   z-index: 7000;
   text-align: center;
   color: white;
-  height: 50px;
+  height: 60px;
+  margin: 0px;
 }
-
-
 @media (max-width: 476px) {
   .alert {
   position: fixed;

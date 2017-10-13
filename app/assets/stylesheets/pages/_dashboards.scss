@@ -3,17 +3,29 @@ ul {
   list-style: none;
 }
 #inbox {
-  padding: 0 50px;
   padding-top: 50px;
+  padding-bottom: 50px;
+}
+#chat-profile {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  text-align: center;
+  img {
+    margin: auto;
+    width: 150px;
+    margin-bottom: 10%;
+  }
+  .host-name {
+    font-weight: bold;
+  }
 }
 #messages-list {
   background-color: #f5f5f5;
-  padding: 15px;
+  padding: 25px;
   height: 385px;
   overflow-y: auto;
   overflow-x: hidden;
-  border: 1px solid lightgrey;
-  // box-shadow: 3px 3px 3px lightgrey;
+  border: 1px solid $theme-blue-dark;
   border-radius: 5px;
   display: flex;
   flex-direction : column;
@@ -23,9 +35,7 @@ ul {
 }
 textarea.form-control {
   margin-bottom: 10px;
-}
-#send_message:hover {
-  background-color: grey;
+  border: 1px solid $theme-blue-dark;
 }
 
 .message-sent {
@@ -38,9 +48,7 @@ textarea.form-control {
   padding: 10px;
   font-size: 1.2em;
   margin-left: auto;
-
 }
-
 
 .message-received {
   background-color: #FFF;
@@ -54,11 +62,7 @@ textarea.form-control {
   align-self: flex-start;
 
 }
-.toggle-window {
-  &:hover{
-    color: red;
-  }
-}
+
 .panel{
   border-radius: 5px;
   .panel-heading {
@@ -73,21 +77,7 @@ textarea.form-control {
   width: 100%;
   padding: 0 25%;
 }
-.user-list {
-  min-height: 400px;
-  padding: 20px;
-  border: 1px solid lightgrey;
-  border-radius: 5px;
-  // box-shadow: 3px 3px 3px lightgrey;
-}
-.user-list a {
-  padding-left: 20px;
-  color: red;
-  font-weight: bold;
-}
-.opposed_user {
-  width: 80%;
-}
+
 .msg-avatar {
   width: 30px;
   height: 30px;
@@ -95,46 +85,19 @@ textarea.form-control {
 .current-conversation {
 }
 .current-conversation h3 {
-  border: 1px solid lightgrey;
-  // box-shadow: 3px 3px 3px lightgrey;
+  border: 1px solid $theme-blue-dark;
   border-radius: 5px;
   font-size: 1.2em;
-  color: darkgrey;
+  color: $theme-font-color;
   padding: 20px;
 }
 .inbox-card {
   margin-bottom: 10px;
-  border: 1px solid lightgrey;
-  // box-shadow: 3px 3px 3px lightgrey;
+  border: 1px solid $theme-blue-dark;
   padding: 15px 30px;
   border-radius: 5px;
   position: relative;
 }
-
-.avatar-info {
-  width: 85px;
-  height: 85px;
-  flex: 1 1 50%;
-}
-.inline-infos {
-  display: inline-block;
-  flex: 1 1 50%;
-}
-.info-link {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  z-index: 2;
-  background: black;
-  opacity: 0;
-  border-radius: 5px;
-  &:hover {
-    opacity: 0.1;
-  }
-}
-
 .msg_inline {
   display: flex;
 }

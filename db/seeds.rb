@@ -246,6 +246,8 @@ appart7 = Apartment.create!(
   country: 'France',
   bedrooms: 3,
   bathrooms: 2,
+  latitude: 43.300000,
+  longitude: 5.400000
 )
 
 u8 = User.create!(
@@ -298,6 +300,8 @@ appart9 = Apartment.create!(
   country: 'France',
   bedrooms: 4,
   bathrooms: 2,
+  latitude: 47.74099,
+  longitude: -2.69023
 )
 
 

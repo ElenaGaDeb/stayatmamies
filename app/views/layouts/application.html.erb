@@ -3,27 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="HtmlCoder">
-  <meta name="copyright" content="HtmlCoder">
-  <meta name="generator" content="Documenter v2.0 http://rxa.li/documenter">
-  <meta name="date" content="2014-07-20T00:00:00+02:00">
-
-  <!-- Web Fonts -->
-  <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Raleway:700,400,300' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'>
-    <!-- Bootstrap core CSS -->
-  <link href="/theme/html/template/bootstrap/css/bootstrap.css" rel="stylesheet">
-
-  <!-- Font Awesome CSS -->
-  <link href="/theme/html/template/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
-
-  <!-- Fontello CSS -->
-  <link href="/theme/html/template/fonts/fontello/css/fontello.css" rel="stylesheet">
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
   <%= csrf_meta_tags %>
 
@@ -50,12 +29,6 @@
   <%= render 'shared/footer' unless @skip_footer %>
 </div>
 
-  <script src="/theme/html/template/js/google-code-prettify/prettify.js"></script>
-  <script src="/theme/html/template/js/jquery.js"></script>
-  <script src="/theme/html/template/js/jquery.scrollTo.js"></script>
-  <script src="/theme/html/template/js/jquery.easing.js"></script>
-  <script>document.createElement('section');var duration='500',easing='swing';</script>
-  <script src="/theme/html/template/js/script.js"></script>
   <%= yield(:after_js) %>
 </body>
 </html>

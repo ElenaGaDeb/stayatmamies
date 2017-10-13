@@ -1,4 +1,4 @@
-//= require jquery3
+//= require jquery2
 //= require jquery_ujs
 //= require popper
 //= require bootstrap
@@ -9,4 +9,4 @@
 //= require jquery-fileupload/basic
 //= require cloudinary/jquery.cloudinary
 //= require attachinary
-// require_tree .
+//= require_tree .

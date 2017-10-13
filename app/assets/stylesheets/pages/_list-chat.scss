@@ -1,7 +1,33 @@
 #msg-index {
+  .host-name {
+    font-weight: bold;
+  }
+  .thread-subject {
+    color: #817E7C;
+  }
+  .thread-listing {
+    font-size: 80%;
+  }
+  .time-tag {
+    font-size: 80%;
+  }
   h3 {
     text-align: center;
     margin-top: 20px;
+  }
+  hr {
+    margin-bottom: 0;
+    margin-top: 0;
+    margin-right: 10%;
+    margin-left: 10%;
+
+  }
+  a {
+    text-decoration: none;
+    color: $theme-font-color;
+  }
+  a:hover {
+    color: $theme-dark-gray;
   }
   .pannel {
     border: 1px solid #dce0e0;
@@ -13,14 +39,6 @@
     }
     .pannel-body {
       padding: 20px;
-      .thread-body {
-        a {
-          text-decoration: none;
-        }
-        a:hover {
-          font-weight: bold;
-        }
-      }
     }
   }
 }

@@ -3,6 +3,7 @@
     <h3>My Messages</h3>
     <div class="pannel">
       <!-- loop for list -->
+      <% last_conv = @conversations.last %>
       <% @conversations.each do |conversation| %>
       <!-- set important variables -->
         <% opposed_user = conversation.opposed_user(current_user) %>
@@ -26,48 +27,49 @@
                       </div>
                     <% end %>
                   </div>
-                  <div class="col-sm-8 thread-name text-truncate">
-                    <div><%= opposed_user.profile.first_name.capitalize %></div>
+                  <div class="col-sm-8 thread-name">
+                    <div class="host-name"><%= opposed_user.profile.first_name.capitalize %></div>
                     <% if last_msg %>
-                      <%= time_tag last_msg.created_at, last_msg.created_at.strftime('%e %b') %>
+                      <%= time_tag last_msg.created_at, last_msg.created_at.strftime('%e %b'), id: "time-tag" %>
                     <% end %>
                   </div>
                 </div>
               </div>
-              <div class="col-sm-12 col-md-5 col-lg-6 thread-body">
+              <div class="col-sm-12 col-md-5 col-lg-6 thread-body ">
                 <%= link_to conversation_path(conversation), class: "thread-link" do %>
                 <!-- add class when clicked link-reset text-muted -->
-                  <span class="thread-subject">
+                  <div class="thread-subject text-truncate">
                     <% if last_msg %>
                       <%= last_msg.content %>
                     <% end %>
-                  </span>
-                  <div class="thread__listing">
+                  </div>
+                  <div class="thread-listing text-truncate">
                     <%= conversation.apartment.name %>
                     <%= "#{conversation.apartment.country}, #{conversation.apartment.city}" %>
                   </div>
                 <% end %>
               </div>
               <div class="col-sm-12 col-md-3 col-lg-3 thread-label">
-                <div class="row">
-                  <div class="col-sm-12 col-md-6">
-                    <span>
-                      <span class="thread-unread">
-                        <div class="unread">
-                          <% if conversation.messages.last.read || conversation.messages.last.by_user == current_user %>
-                            <%= link_to "Send new messages", conversation_path(conversation), class: "thread-link" %>
-                          <% else %>
-                            <%= link_to  "#{conversation.messages.where(read:false).count}", conversation_path(conversation), class: "thread-link" %>
-                          <% end %>
-                        </div>
-                      </span>
-                    </span>
+                <div class="row align-middle">
+                  <div class="unread">
+                    <% count = conversation.messages.where(read:false).count %>
+                    <% if conversation.messages.last.read || conversation.messages.last.by_user == current_user %>
+                      <%= link_to "Send new messages", conversation_path(conversation), class: "thread-link" %>
+                    <% else %>
+                      <% count > 1 ? message = "messages" : message = "message" %>
+                      <%= link_to conversation_path(conversation), class: "thread-link" do %>
+                        <p class="text-center"><strong><%= count %></strong> new <%= message %></p>
+                      <% end %>
+                    <% end %>
                   </div>
                 </div>
               </div>
             </div>
           </li>
         </ul>
+        <% unless last_conv == conversation  %>
+          <hr>
+        <% end %>
       <% end %>
     </div>
   </div>

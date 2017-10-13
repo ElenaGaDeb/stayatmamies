@@ -1,15 +1,26 @@
 <div class="container">
-  <div class="col-xs-12">
-    <div class="tabs container">
-      <div class="tab-content">
-        <div id="inbox" class="tab-pane active">
-
-
-         <%= render 'conversation', conversation: @conversation, user: @current_user, new_message: @new_message %>
-
-        </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-4">
+      <div id="chat-profile">
+        <% sender_photo = @opposed_user.profile.photo %>
+        <% if sender_photo %>
+          <%= cl_image_tag sender_photo.path, width: 200, height: 200, radius: :max, crop: :cover %>
+        <% else %>
+           <%= image_tag "no-photo.jpg", class: "rounded-circle", width: '80px'  %>
+        <% end %>
+        <p class="host-name"><%= @opposed_user.profile.first_name %></p>
+        <p><%= "From #{@opposed_user.profile.city_from.capitalize}"%></p>
+        <p><%= @opposed_user.profile.detailed_description %></p>
       </div>
     </div>
+
+
+    <div class="col-xs-12 col-sm-8">
+        <div id="inbox">
+         <%= render 'conversation', conversation: @conversation, user: @current_user, new_message: @new_message %>
+        </div>
+    </div>
+
   </div>
 </div>
 

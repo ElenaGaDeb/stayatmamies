@@ -1,35 +1,39 @@
-<div class="container text-center">
-<%= simple_form_for(@profile) do |f| %>
-<% if @profile.errors.any? %>
-<div id="error_explanation">
-  <ul>
-    <% @profile.errors.full_messages.each do |message| %>
-    <li><%= message %></li>
-    <% end %>
-  </ul>
-</div>
-<% end %>
-<%= f.input :username, label: 'Username', error: 'Username is mandatory, please specify one' %>
-<%= f.input :profile_type, collection: ["student", "host",] %>
-<%= f.input :first_name, label: 'First name', error: 'First name is mandatory, please specify one' %>
-<%= f.input :last_name, label: 'Last name', error: 'Last name is mandatory, please specify one'  %>
-<%= f.input :age, label: 'Age', error: 'should be a number ! '  %>
-<%= f.input :city_from, label: 'City', error: 'City is mandatory, please specify one'%>
-<%= f.input :gender, label: 'Gender' %>
-<%= f.input :short_description %>
-<%= f.input :detailed_description %>
+<div class="container text-center form">
+  <h1>Your Profile</h1>
+  <div class="row justify-content-center">
+    <div class="col-md-4">
+      <%= simple_form_for(@profile) do |f| %>
+        <% if @profile.errors.any? %>
+          <div id="error_explanation">
+            <ul>
+              <% @profile.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <%= f.input :username, label: 'Username', error: 'Username is mandatory, please specify one' %>
+        <%= f.input :profile_type, collection: ["student", "host",] %>
+        <%= f.input :first_name, label: 'First name', error: 'First name is mandatory, please specify one' %>
+        <%= f.input :last_name, label: 'Last name', error: 'Last name is mandatory, please specify one'  %>
+        <%= f.input :age, label: 'Age', error: 'should be a number ! '  %>
+        <%= f.input :city_from, label: 'City', error: 'City is mandatory, please specify one'%>
+        <%= f.input :gender, label: 'Gender' %>
+        <%= f.input :short_description %>
+        <%= f.input :detailed_description %>
 
-    <div class="form-check form-check-inline">
-<label>Your character traits (pick all that applies)</label>
-      <label class="control-label check_boxes optional"></label>
+        <div class="form-check form-check-inline">
+          <label>Your character traits (pick all that applies)</label>
+          <label class="control-label check_boxes optional"></label>
 
-    <%= f.association :characteristics,label: false, as: :check_boxes, input_html: {style: 'margin: 10px;'} %>
+          <%= f.association :characteristics,label: false, as: :check_boxes, input_html: {style: 'margin: 10px;'} %>
+            </div>
+
+          <label>Your picture</label> <br>
+          <%= f.input :photo, as: :attachinary, label: false %>
+          <%= f.submit "Save your profile", class: "btn btn-primary" %>
+      <% end %>
     </div>
 
-<label>Your picture</label> <br>
-<%= f.input :photo, as: :attachinary, label: false %>
-<%= f.submit "Save your profile", class: "btn btn-primary" %>
-<% end %>
-
+  </div>
 </div>
-

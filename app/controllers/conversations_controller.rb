@@ -31,8 +31,8 @@ class ConversationsController < ApplicationController
   end
   def new
     if current_user.profile.nil?
-      redirect_to new_profile_path
       flash[:alert] = "You mush have a profile"
+      redirect_to new_profile_path
     else
     # start new conversation with someone
       @conversation = Conversation.new

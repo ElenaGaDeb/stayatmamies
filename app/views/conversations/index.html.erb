@@ -7,7 +7,7 @@
       <% @conversations.each do |conversation| %>
         <% opposed_user = conversation.opposed_user(current_user) %>
         <!-- check if conversation with 0 msg $ no profile ppl -->
-        <% unless conversation.messages.count < 1 || opposed_user.profile.nill? %>
+        <% unless conversation.messages.count < 1 || opposed_user.profile.nil? %>
           <!-- set important variables -->
 
           <% last_msg = conversation.messages.last %>

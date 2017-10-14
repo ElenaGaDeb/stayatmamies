@@ -1,115 +1,121 @@
 <div class="main-container">
   <div class="container">
     <div class="row">
-        <div class="main col-12">
-          <h1 class="page-title"><%= @profile.first_name.capitalize %>'s Profile</h1>
-            <% if @reviews_for.count == nil || @reviews_for.count == 0%>
-              <p>This user doesn't have a rating yet</p>
-            <% else %>
-              <% @reviews_for.average(:rating).round.times do %>
-                <i class="fa fa-star yellow-star"></i>
-              <% end %>
-              <% (5 - @reviews_for.average(:rating).round).times do %>
-                <i class="fa fa-star text-center black-star"></i>
-              <% end %>
-            <% end %>
+      <div class="main col-12">
+        <h1 class="page-title"><%= @profile.first_name.capitalize %>'s Profile</h1>
+        <% if @reviews_for.count == nil || @reviews_for.count == 0%>
+        <p>This user doesn't have a rating yet</p>
+        <% else %>
+        <% @reviews_for.average(:rating).round.times do %>
+        <i class="fa fa-star yellow-star"></i>
+        <% end %>
+        <% (5 - @reviews_for.average(:rating).round).times do %>
+        <i class="fa fa-star text-center black-star"></i>
+        <% end %>
+        <% end %>
 
         <div class="separator-2"></div>
 
-          <div class="row">
-            <!-- Profile photo -->
-            <div class="col-lg-4">
-              <% if  @profile.photo? %>
-                <%= cl_image_tag @profile.photo.path, width: 400, height: 400, crop: :fill %>
-              <% else %>
-                <%= image_tag "no-photo.png", width: 400, height: 400, crop: :fill %>
-              <% end %>
-            </div>
-     <!-- Profile photo end  -->
+        <div class="row">
+          <!-- Profile photo -->
+          <div class="col-lg-4">
+            <% if  @profile.photo? %>
+            <%= cl_image_tag @profile.photo.path, width: 400, height: 400, crop: :fill %>
+            <% else %>
+            <%= image_tag "no-photo.png", width: 400, height: 400, crop: :fill %>
+            <% end %>
+          </div>
+          <!-- Profile photo end  -->
 
-      <!-- About me  -->
-            <div class="col-lg-4">
-              <h2 class="mt-4">Description</h2>
-              <p><%= @profile.age%> years old</p>
+          <!-- About me  -->
+          <div class="col-lg-4">
+            <h2 class="mt-4">Description</h2>
+            <p><%= @profile.age%> years old</p>
 
-              <p><%= @profile.detailed_description %></p>
-              <h2 class="space-top">My personality</h2>
-              <div class="row">
-                <% if @characteristics.count != 0 %>
-                  <ul class="multi-column">
-                    <% @characteristics.each  do |char| %>
-                      <li> <%= char.name %></li>
-                    <% end %>
-                  </ul>
-                <% else %>
-                  <p>This user hasn't added any more info yet</p>
+            <p><%= @profile.detailed_description %></p>
+            <h2 class="space-top">My personality</h2>
+            <div class="row">
+              <% if @characteristics.count != 0 %>
+              <ul class="multi-column">
+                <% @characteristics.each  do |char| %>
+                <li> <%= char.name %></li>
                 <% end %>
-              </div>
+              </ul>
+              <% else %>
+              <p>This user hasn't added any more info yet</p>
+              <% end %>
             </div>
+          </div>
 
-      <!-- My tools  -->
-            <div class="col-lg-4">
-              <!-- Update profil  -->
-              <% if policy(@profile).edit? %>
-                <div class="pv-30 ph-20 white-bg feature-box bordered text-center">
-                  <h3 class="title"><i class="fa fa-wrench" aria-hidden="true"></i></h3>
-                  <p><%= link_to "Update my profile's info", edit_profile_path(@profile) %></p>
-                  <% if @profile.user.apartment == nil && @profile.profile_type == "host" %>
-                    <%= link_to "Add your apartment", new_apartment_path %>
-                  <% end %>
+          <!-- My tools  -->
+          <div class="col-lg-4">
+            <!-- Update profil  -->
+            <% if policy(@profile).edit? %>
+            <div class="pv-30 ph-20 white-bg feature-box bordered text-center">
+              <h3 class="title"><i class="fa fa-wrench" aria-hidden="true"></i></h3>
+              <p><%= link_to "Update my profile's info", edit_profile_path(@profile) %></p>
+              <% if @profile.user.apartment == nil && @profile.profile_type == "host" %>
+              <%= link_to "Add your apartment", new_apartment_path %>
+              <% end %>
               <% end %>
 
-                <!-- Bookings Hosts -->
-            <% if current_user.profile %>
+              <!-- Bookings Hosts -->
+              <% if current_user.profile %>
               <% if @profile.profile_type == "host" && @profile.user == current_user %>
-                <div class="separator-2 mt-20 clearfix"></div>
-                <!-- Bookings -->
-                  <% if @profile.user.apartment != nil%>
-                  <h2>Your Booking Requests</h2>
-                  <% @profile.user.apartment.bookings.each do |booking| %>
-                    <ul class="list-unstyled small list-icons text-left">
-                      <li><strong class="text-default"> Requested by </strong> <span class="pull-right"> <%= booking.user.profile.first_name %> </span></li>
-                      <li><strong class="text-default">From:</strong> <span class="pull-right"> <%= booking.start_date %> </span></li>
-                      <li><strong class="text-default">To:</strong> <span class="pull-right"><%= booking.end_date %> </span></li>
-                      <li><strong class="text-default">Booking is </strong> <span class="pull-right"><%= booking.status %> </span></li>
-                    </ul>
-                    <% if  booking.status == 'pending' %>
-                      <%= simple_form_for([booking.apartment, booking]) do |f| %>
-                        <%= f.hidden_field :status, value: 'Accepted' %>
-                        <%= f.button :submit, 'Accept', method: :patch, :class => 'btn btn-success' %>
-                      <% end %>
-
-                      <%= simple_form_for([booking.apartment, booking]) do |f| %>
-                        <%= f.hidden_field :status, value: 'Rejected' %>
-                        <%= f.button :submit, 'Reject', method: :put, :class => 'btn btn-danger' %>
-                      <% end %>
-                    <% end %>
+              <div class="separator-2 mt-20 clearfix"></div>
+              <!-- Bookings -->
+              <% if @profile.user.apartment != nil%>
+              <h2>Your Booking Requests</h2>
+              <% @profile.user.apartment.bookings.each do |booking| %>
+              <ul class="list-unstyled small list-icons text-left">
+                <li><strong class="text-default"> Requested by </strong> <span class="pull-right"> <%= booking.user.profile.first_name %> </span></li>
+                <li><strong class="text-default">From:</strong> <span class="pull-right"> <%= booking.start_date %> </span></li>
+                <li><strong class="text-default">To:</strong> <span class="pull-right"><%= booking.end_date %> </span></li>
+                <li><strong class="text-default">Booking is </strong> <span class="pull-right"><%= booking.status %> </span></li>
+              </ul>
+              <div class=row>
+                <div class="col">
+                  <% if  booking.status == 'pending' %>
+                  <%= simple_form_for([booking.apartment, booking]) do |f| %>
+                  <%= f.hidden_field :status, value: 'Accepted' %>
+                  <%= f.button :submit, 'Accept', method: :patch, :class => 'btn btn-success' %>
                   <% end %>
+                </div>
+                <div class="col">
+                  <%= simple_form_for([booking.apartment, booking]) do |f| %>
+                  <%= f.hidden_field :status, value: 'Rejected' %>
+                  <%= f.button :submit, 'Reject', method: :put, :class => 'btn btn-danger' %>
+                  <% end %>
+                  <% end %>
+                </div>
+              </div>
+
+              <% end %>
               <%end %>
               <% end %>
 
               <!-- Bookings Sudents -->
               <% if @profile.profile_type == "student" && @profile.user == current_user %>
-                <% @profile.user.bookings.each do |booking| %>
-                  <div class="separator-2 mt-20 clearfix"></div>
-                  <% if  booking.status == 'Accepted' %>
-                    <ul class="list-unstyled small list-icons text-left">
-                      <li><strong class="text-default">Your apartment </strong> <span class="pull-right"><%= booking.apartment.name %></span></li>
-                      <li><strong  class="text-default">Your host:</strong> <span class="pull-right"><%= booking.apartment.user.profile.first_name %></span></li>
-                      <li><strong  class="text-default">Start-date</strong> <span class="pull-right"><%= booking.start_date %></span></li>
-                      <li><strong class="text-default">End-date</strong> <span class="pull-right"><%= booking.end_date %></span></li>
-                      <li><strong  class="text-default">Your booking is </strong> <span class="pull-right"><%= booking.status %></span></li>
-                    </ul>
-                  <% else %>
-                    <ul class="list-unstyled small list-icons text-left">
-                      <li><strong class="text-default">You requested </strong> <span class="pull-right"><%= booking.apartment.name %></span></li>
-                      <li><strong  class="text-default">Host:</strong> <span class="pull-right"><%= booking.apartment.user.profile.first_name %></span></li>
-                      <li><strong  class="text-default">Requested start-date</strong> <span class="pull-right"><%= booking.start_date %></span></li>
-                      <li><strong class="text-default">Requested end-date</strong> <span class="pull-right"><%= booking.end_date %></span></li>
-                      <li><strong  class="text-default">Your booking is </strong> <span class="pull-right"><%= booking.status %></span></li>
-                    </ul>
-                  <% end %>
-                <% end %>
+              <% @profile.user.bookings.each do |booking| %>
+              <div class="separator-2 mt-20 clearfix"></div>
+              <% if  booking.status == 'Accepted' %>
+              <ul class="list-unstyled small list-icons text-left">
+                <li><strong class="text-default">Your apartment </strong> <span class="pull-right"><%= booking.apartment.name %></span></li>
+                <li><strong  class="text-default">Your host:</strong> <span class="pull-right"><%= booking.apartment.user.profile.first_name %></span></li>
+                <li><strong  class="text-default">Start-date</strong> <span class="pull-right"><%= booking.start_date %></span></li>
+                <li><strong class="text-default">End-date</strong> <span class="pull-right"><%= booking.end_date %></span></li>
+                <li><strong  class="text-default">Your booking is </strong> <span class="pull-right"><%= booking.status %></span></li>
+              </ul>
+              <% else %>
+              <ul class="list-unstyled small list-icons text-left">
+                <li><strong class="text-default">You requested </strong> <span class="pull-right"><%= booking.apartment.name %></span></li>
+                <li><strong  class="text-default">Host:</strong> <span class="pull-right"><%= booking.apartment.user.profile.first_name %></span></li>
+                <li><strong  class="text-default">Requested start-date</strong> <span class="pull-right"><%= booking.start_date %></span></li>
+                <li><strong class="text-default">Requested end-date</strong> <span class="pull-right"><%= booking.end_date %></span></li>
+                <li><strong  class="text-default">Your booking is </strong> <span class="pull-right"><%= booking.status %></span></li>
+              </ul>
+              <% end %>
+              <% end %>
               <% end %>
               <% end %>
             </div>
@@ -119,36 +125,36 @@
     </div>
   </div>
 
-<div class="pv-30 light-gray-bg">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8">
-        <h2 class="title"><%= @reviews_for.count %> reviews</h2>
-        <div class="separator-2"></div>
-              <!-- comments start -->
-        <div class="comments margin-clear space-top">
-          <% if @reviews_for.blank? %>
+  <div class="pv-30 light-gray-bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <h2 class="title"><%= @reviews_for.count %> reviews</h2>
+          <div class="separator-2"></div>
+          <!-- comments start -->
+          <div class="comments margin-clear space-top">
+            <% if @reviews_for.blank? %>
             <p>Be the first to leave a review on <%= @profile.first_name %>'s profile :)</p>
-          <% else %>
+            <% else %>
             <% @reviews_for.reverse.each do |review| %>
-                  <!-- comment start -->
-              <%= render 'reviews/show', review: review %>
-                  <!-- comment end -->
+            <!-- comment start -->
+            <%= render 'reviews/show', review: review %>
+            <!-- comment end -->
             <% end %>
-          <% end %>
-        </div>
-              <!-- comments end -->
+            <% end %>
+          </div>
+          <!-- comments end -->
 
-              <!-- COMMENTS FORM starts -->
-        <% unless @cannot_review %>
+          <!-- COMMENTS FORM starts -->
+          <% unless @cannot_review %>
           <%= render 'reviews/form', profile: @profile, review: @review %>
-        <% end %>
-              <!-- comments form end -->
+          <% end %>
+          <!-- comments form end -->
+        </div>
+
+        <!-- sidebar start -->
+        <!-- =============== -->
+
       </div>
-
-          <!-- sidebar start -->
-          <!-- =============== -->
-
     </div>
   </div>
-</div>

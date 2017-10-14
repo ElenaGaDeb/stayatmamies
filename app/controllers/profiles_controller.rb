@@ -45,7 +45,7 @@ class ProfilesController < ApplicationController
     @characteristics = @profile.characteristics
     @review = Review.new
     @reviews_for = Review.reviews_for(@profile.user) || 0
-    @cannot_review = (@reviews_for.map { |r| r.by_user_id }.include?(current_user.id)) || (current_user.id == @profile.id)
+    @cannot_review = (@reviews_for.map { |r| r.by_user_id }.include?(current_user.id)) || current_user.id == @profile.id
     authorize @profile
   end
 

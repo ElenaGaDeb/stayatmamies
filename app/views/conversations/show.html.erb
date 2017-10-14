@@ -5,7 +5,7 @@
         <% unless @opposed_user.profile.nil? %>
           <% receiver_photo = @opposed_user.profile.photo %>
           <% if receiver_photo %>
-            <%= link_to link_to profile_path(@opposed_user) do %>
+            <%= link_to link_to profile_path(@opposed_user.profile) do %>
               <%= cl_image_tag receiver_photo.path %>
             <% end %>
           <% else %>

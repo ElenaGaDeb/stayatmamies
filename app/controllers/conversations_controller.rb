@@ -17,8 +17,8 @@ class ConversationsController < ApplicationController
   def show
     # shwo one conversation selected/ on seperate page
     @conversation = Conversation.find(params[:id])
+    @opposed_user = @conversation.opposed_user(current_user)
     authorize(@conversation)
-    get_oppose_user(@conversation)
     @conversation.messages.where(read:false).each do |msg|
       if msg.for_user == current_user
         msg.read = true
@@ -60,9 +60,6 @@ class ConversationsController < ApplicationController
     @conversation.destroy
   end
   private
-  def get_oppose_user(conversation)
-    @opposed_user = conversation.opposed_user(current_user)
-  end
   def add_to_conversations
     session[:conversations] ||= []
     session[:conversations] << @conversation.id

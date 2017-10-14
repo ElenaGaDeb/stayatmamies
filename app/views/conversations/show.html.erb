@@ -4,12 +4,12 @@
       <div id="chat-profile">
         <% unless @opposed_user.profile.nil? %>
           <% receiver_photo = @opposed_user.profile.photo %>
-          <% if receiver_photo %>
-            <%= link_to link_to profile_path(@opposed_user.profile) do %>
-              <%= cl_image_tag receiver_photo.path %>
+          <%= link_to profile_path(@opposed_user.profile) do %>
+            <% if receiver_photo %>
+                <%= cl_image_tag receiver_photo.path %>
+            <% else %>
+               <%= image_tag "no-photo.jpg", class: "rounded-circle", width: '80px'  %>
             <% end %>
-          <% else %>
-             <%= image_tag "no-photo.jpg", class: "rounded-circle", width: '80px'  %>
           <% end %>
           <p class="host-name"><%= @opposed_user.profile.first_name.capitalize %></p>
           <p><%= "From #{@opposed_user.profile.city_from.capitalize}"%></p>

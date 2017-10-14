@@ -12,8 +12,11 @@ ul {
   text-align: center;
   img {
     margin: auto;
-    width: 150px;
+    width: 200px;
     margin-bottom: 10%;
+    height:200px;
+    border-radius:10%;
+    object-fit: cover;
   }
   .host-name {
     font-weight: bold;
@@ -29,14 +32,15 @@ ul {
   border-radius: 5px;
   display: flex;
   flex-direction : column;
+  textarea.form-control {
+    margin-bottom: 10px;
+    border: 1px solid $theme-blue-dark;
+  }
 }
 .new_message {
   margin-top: 20px;
 }
-textarea.form-control {
-  margin-bottom: 10px;
-  border: 1px solid $theme-blue-dark;
-}
+
 
 .message-sent {
   background-color: #D9EDF7;

@@ -1,7 +1,7 @@
 <div class="container text-center form">
   <h1>Your Profile</h1>
   <div class="row justify-content-center">
-    <div class="col-md-4">
+    <div class="col-md-6">
       <%= simple_form_for(@profile) do |f| %>
         <% if @profile.errors.any? %>
           <div id="error_explanation">
@@ -12,22 +12,79 @@
             </ul>
           </div>
         <% end %>
-        <%= f.input :username, label: 'Username', error: 'Username is mandatory, please specify one' %>
-        <%= f.input :profile_type, collection: ["student", "host",] %>
-        <%= f.input :first_name, label: 'First name', error: 'First name is mandatory, please specify one' %>
-        <%= f.input :last_name, label: 'Last name', error: 'Last name is mandatory, please specify one'  %>
-        <%= f.input :age, label: 'Age', error: 'should be a number ! '  %>
+
+
+        <div class="row">
+          <div class="col col-lg-6">
+            <%= f.input :username, label: 'Username', error: 'Username is mandatory, please specify one' %>
+          </div>
+          <div class="col col-lg-6">
+             <%= f.input :profile_type, collection: ["student", "host",], prompt: "Host or Student ?"%>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col col-lg-6">
+            <%= f.input :first_name, label: 'First name', error: 'First name is mandatory, please specify one' %>
+          </div>
+          <div class="col col-lg-6">
+            <%= f.input :last_name, label: 'Last name', error: 'Last name is mandatory, please specify one'  %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-lg-6">
+            <%= f.input :age, label: 'Age', error: 'should be a number ! '  %>
+          </div>
+          <div class="col col-lg-6">
+            <%= f.input :gender, collection: ["male", "female",], label: 'Gender' %>
+          </div>
+        </div>
+
+
+
         <%= f.input :city_from, label: 'City', error: 'City is mandatory, please specify one'%>
-        <%= f.input :gender, label: 'Gender' %>
+
         <%= f.input :short_description %>
-        <%= f.input :detailed_description %>
+        <%= f.text_area :detailed_description, class: "form-control"%>
 
         <div class="form-check form-check-inline">
-          <label>Your character traits (pick all that applies)</label>
+          <h3>Your character traits</h3>
+          <p>(pick all that applies)</p>
           <label class="control-label check_boxes optional"></label>
 
-          <%= f.association :characteristics,label: false, as: :check_boxes, input_html: {style: 'margin: 10px;'} %>
-            </div>
+
+
+
+        <div class="category-item-list">
+          <% Characteristic.all.each do |characteristic| %>
+            <% available_id = @profile.characteristics.ids %>
+            <input type="hidden" name="profile[characteristic_ids][]" value="">
+            <% if available_id.include? characteristic.id  %>
+              <label class="category-choice activated" for="profile_characteristic_ids_<%= characteristic.id %>">
+                <input style="margin: 10px;" class="check_boxes optional" type="checkbox" value="<%= characteristic.id %>" checked="checked" name="profile[characteristic_ids][]" id="profile_characteristic_ids_<%= characteristic.id %>">
+                    <%= characteristic.name %>
+                </label>
+            <% else %>
+              <label class="category-choice" for="profile_characteristic_ids_<%= characteristic.id %>">
+                <input style="margin: 10px;" class="check_boxes optional" type="checkbox" value="<%= characteristic.id %>" name="profile[characteristic_ids][]" id="profile_characteristic_ids_<%= characteristic.id %>">
+                  <%= characteristic.name %>
+              </label>
+            <% end %>
+          <% end %>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
 
           <label>Your picture</label> <br>
           <%= f.input :photo, as: :attachinary, label: false %>

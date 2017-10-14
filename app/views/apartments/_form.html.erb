@@ -1,7 +1,7 @@
 <div class="container">
-  <div class="row justify-content-md-center" id="content">
+  <div class="row justify-content-center" id="content">
     <div class="col col-lg-6">
-      <div class="form_for_apart">
+      <div class="form">
         <h1>My Apartment</h1>
         <%= simple_form_for (@apartment) do |f| %>
           <%= f.input :name, placeholder: "nick name for your apartment"%>
@@ -29,26 +29,29 @@
             <% Amenity.all.group_by { |a| a.item_slug }.each do |category| %>
               <div class="category">
                 <h3><%= category.first %></h3>
+
+
                 <div class="category-item-list">
                   <% category.last.each do |amenity| %>
                     <% available_id = @apartment.amenities.ids %>
-                    <div class="form-group check_boxes optional apartment_amenities">
-                      <label class="control-label check_boxes optional"></label>
-                      <input type="hidden" name="apartment[amenity_ids][]" value="" />
-                        <label for="apartment_amenity_ids_<%= amenity.id %>">
-                          <% if available_id.include? amenity.id  %>
-                            <input class="check_boxes optional" type="checkbox" value="<%= amenity.id %>" checked="checked"  name="apartment[amenity_ids][]" id="apartment_amenity_ids_<% amenity.id %>" />
-                          <% else %>
-                            <input class="check_boxes optional" type="checkbox" value="<%= amenity.id %>" name="apartment[amenity_ids][]" id="apartment_amenity_ids_<% amenity.id %>" />
-                          <% end %>
+                    <input type="hidden" name="apartment[amenity_ids][]" value="" />
+                    <% if available_id.include? amenity.id  %>
+                      <label class="category-choice activated" for="apartment_amenity_ids_<%= amenity.id %>">
+                        <input style="margin: 10px;" class="hidden" type="check_boxes optional" value="<%= amenity.id %>" checked="checked" name="profile[amenity_ids][]" id="profile_amenity_ids_<%= amenity.id %>" />
                           <%= amenity.name %>
-                        </label>
-                      </div>
+                      </label>
+                    <% else %>
+                      <label class="category-choice" for="apartment_amenity_ids_<%= amenity.id %>">
+                        <input class="check_boxes optional" type="checkbox" value="<%= amenity.id %>" name="apartment[amenity_ids][]" id="apartment_amenity_ids_<% amenity.id %>" />
+                        <%= amenity.name %>
+                      </label>
                     <% end %>
-                  </div>
+                  <% end %>
+                </div>
+
                 </div>
               <% end %>
-                    <%= f.input :photos, as: :attachinary %>
+            <%= f.input :photos, as: :attachinary %>
             <%= f.submit "Save my apartment", class: "btn btn-primary"  %>
           <% end %>
         </div>

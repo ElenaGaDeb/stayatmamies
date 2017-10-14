@@ -1,4 +1,4 @@
-.form_for_apart {
+.form {
   background-color: white;
   margin-top: 20px;
   padding: 20px;
@@ -7,14 +7,40 @@
     text-align: center;
     font-weight: bold;
     font-size: 25px;
-    margin-bottom: 50px;
-    margin-top:0;
+    margin-bottom: 20px;
+    margin-top:20px;
+  }
+  h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top:20px;
   }
   .btn {
     width: 100%;
     padding: 10px;
     font-weight: bold;
   }
+  .category-item-list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 20px 0;
+  }
+  .category-choice {
+    flex: 0 0 30%;
+    background: $light-gray;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    opacity: 1;
+    .hidden {
+      display: none;
+    }
+  }
+  // .activated {
+  //   background: $theme-blue-light;
+  //   font-weight: bold;
+  // }
 }
 
 

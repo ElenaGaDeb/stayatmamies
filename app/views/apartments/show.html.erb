@@ -93,6 +93,12 @@
 
 
             <!-- booking form start -->
+            <% if @apartment.user.profile && @apartment.user != current_user %>
+              <div class="pv-30 ph-20 white-bg feature-box bordered text-center">
+              <%= link_to "Go to their profile page", profile_path(@apartment.user.profile) %>
+              </div>
+          <% end %>
+
           <% if current_user.profile %>
             <% if @current_user.profile.profile_type == "student" %>
 

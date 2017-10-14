@@ -88,7 +88,7 @@
               <%end %>
               <% end %>
 
-<!-- Bookings Sudents -->
+              <!-- Bookings Sudents -->
               <% if @profile.profile_type == "student" && @profile.user == current_user %>
                 <% @profile.user.bookings.each do |booking| %>
                   <div class="separator-2 mt-20 clearfix"></div>
@@ -139,8 +139,8 @@
         </div>
               <!-- comments end -->
 
-              <!-- comments form start -->
-        <% unless @reviews_for.map { |r| r.by_user_id }.include?(current_user.id) %>
+              <!-- COMMENTS FORM starts -->
+        <% unless @cannot_review %>
           <%= render 'reviews/form', profile: @profile, review: @review %>
         <% end %>
               <!-- comments form end -->

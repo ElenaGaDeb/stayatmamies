@@ -76,12 +76,12 @@
                     <% if  booking.status == 'pending' %>
                       <%= simple_form_for([booking.apartment, booking]) do |f| %>
                         <%= f.hidden_field :status, value: 'Accepted' %>
-                        <%= f.button :submit, 'Accept', method: :patch %>
+                        <%= f.button :submit, 'Accept', method: :patch, :class => 'btn btn-success' %>
                       <% end %>
 
                       <%= simple_form_for([booking.apartment, booking]) do |f| %>
                         <%= f.hidden_field :status, value: 'Rejected' %>
-                        <%= f.button :submit, 'Reject', method: :put %>
+                        <%= f.button :submit, 'Reject', method: :put, :class => 'btn btn-danger' %>
                       <% end %>
                     <% end %>
                   <% end %>

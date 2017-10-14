@@ -74,14 +74,14 @@
                     <div class="dropdown">
                     <% if current_user.profile %>
                       <% if current_user.profile.photo? %>
-                        <%= cl_image_tag current_user.profile.photo.path, class: "avatar dropdown-toggle", "data-toggle" => "dropdown" %>
+                        <%= cl_image_tag current_user.profile.photo.path, width: 50, height: 50, crop: :fill, class: "avatar dropdown-toggle", "data-toggle" => "dropdown" %>
                         <% else %>
                        <% avatar_url = current_user.facebook_picture_url || "http://placehold.it/30x30" %>
-                      <%= image_tag avatar_url, class: "avatar dropdown-toggle", "data-toggle" => "dropdown" %>
+                      <%= image_tag avatar_url, width: 50, height: 50, crop: :fill, class: "avatar dropdown-toggle", "data-toggle" => "dropdown" %>
                       <% end %>
                     <% else %>
                       <% avatar_url = current_user.facebook_picture_url || "http://placehold.it/30x30" %>
-                      <%= image_tag avatar_url, class: "avatar dropdown-toggle", "data-toggle" => "dropdown" %>
+                      <%= image_tag avatar_url, width: 50, height: 50, crop: :fill, class: "avatar dropdown-toggle", "data-toggle" => "dropdown" %>
                     <% end %>
                       <ul class="dropdown-menu dropdown-menu-right">
                         <% if current_user.profile %>

@@ -81,6 +81,11 @@
             <% else %>
             <%= image_tag "no-photo.png", width: 400, height: 400, crop: :fill %>
             <% end %>
+            <% if @apartment.user.profile && @apartment.user != current_user %>
+              <div class="pv-30 ph-20 white-bg feature-box bordered text-center">
+                <%= link_to "Go to their profile page", profile_path(@apartment.user.profile) %>
+              </div>
+          <% end %>
           </div>
           <div class="col-lg-4">
             <h2>About Me</h2>
@@ -91,8 +96,9 @@
           </div>
           <div class="col-lg-4">
 
-
             <!-- booking form start -->
+
+
           <% if current_user.profile %>
             <% if @current_user.profile.profile_type == "student" %>
 

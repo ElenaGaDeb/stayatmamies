@@ -49,6 +49,12 @@
 
           <!-- My tools  -->
           <div class="col-lg-4">
+          <% if current_user.profile && @profile.user != current_user && @profile.profile_type != "student"%>
+            <div class="pv-30 ph-20 white-bg feature-box bordered text-center">
+            <%= link_to "Go to their apartment page", apartment_path(@profile.user.apartment) %>
+            </div>
+          <% end %>
+
             <!-- Update profil  -->
             <% if policy(@profile).edit? %>
             <div class="pv-30 ph-20 white-bg feature-box bordered text-center">

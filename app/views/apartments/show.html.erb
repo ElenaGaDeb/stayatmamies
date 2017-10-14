@@ -164,19 +164,19 @@
                   <div class="comments margin-clear space-top">
                     <!-- comment start -->
                     <% if @reviews_for.blank? %>
-                    Be the first to leave a review on <%= @user.profile.first_name %>'s profile :)
+                      Be the first to leave a review on <%= @user.profile.first_name %>'s profile :)
                     <% else %>
-                    <% @reviews_for.each do |review| %>
-                    <!-- comment start -->
-                    <%= render 'reviews/show', review: review %>
-                    <!-- comment end -->
-                    <% end %>
+                      <% @reviews_for.each do |review| %>
+                      <!-- comment start -->
+                      <%= render 'reviews/show', review: review %>
+                      <!-- comment end -->
+                      <% end %>
                     <% end %>
                     <!-- FORM STARTS -->
                     <% if current_user %>
-                    <% unless @cannot_review %>
-                    <%= render 'reviews/form', profile: @user.profile, review: @review %>
-                    <% end %>
+                      <% unless @cannot_review %>
+                      <%= render 'reviews/form', profile: @user.profile, review: @review %>
+                      <% end %>
                     <% end %>
                     <!-- FORM ENDS -->
                   </div>
@@ -213,11 +213,11 @@
           c.next();
           console.log('HEY', c);
         });
-//   $('.carousel').carousel()
-//   $('.carousel').carousel({
-//   interval: 2000
-// })
-  // $('.carousel').carousel('next')
-</script>
+  //   $('.carousel').carousel()
+  //   $('.carousel').carousel({
+  //   interval: 2000
+  // })
+    // $('.carousel').carousel('next')
+  </script>
 <% end %>
 

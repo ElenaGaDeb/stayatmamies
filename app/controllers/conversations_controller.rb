@@ -60,10 +60,7 @@ class ConversationsController < ApplicationController
     @conversation.destroy
   end
   private
-<<<<<<< HEAD
 
-=======
->>>>>>> c1b946ec04724c579a53d80892419ce8fc12081b
   def add_to_conversations
     session[:conversations] ||= []
     session[:conversations] << @conversation.id
